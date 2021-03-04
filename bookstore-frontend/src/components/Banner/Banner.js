@@ -4,10 +4,8 @@ import {Carousel} from "antd";
 class Banner extends React.Component {
     render() {
         const contentStyle = {
-            color: '#fff',
-            textAlign: 'center',
             background: '#364d79',
-            paddingTop: '150%'
+            paddingTop: '60%'
         };
         return (
             <Carousel autoplay>

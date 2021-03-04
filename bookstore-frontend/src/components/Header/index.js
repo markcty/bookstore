@@ -50,7 +50,7 @@ class BookstoreHeader extends React.Component {
                     </Col>
                     <Col>
                         <Search placeholder="input search text" allowClear
-                                style={{marginLeft: 100, marginTop: 8, width: 300}}
+                                style={{marginTop: 8, width: 600}}
                         />
                     </Col>
                     <Col>
