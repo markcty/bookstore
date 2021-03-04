@@ -4,6 +4,8 @@ import React from "react";
 import 'antd/dist/antd.css';
 import Home from "./pages/Home"
 
+const {Footer} = Layout;
+
 class App extends React.Component {
     // constructor(props) {
     //     super(props);
@@ -14,6 +16,7 @@ class App extends React.Component {
             <Layout>
                 <BookstoreHeader/>
                 <Home/>
+                <Footer style={{textAlign: 'center'}}>Created by markcty</Footer>
             </Layout>
         );
     }

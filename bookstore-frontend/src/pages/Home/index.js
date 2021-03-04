@@ -13,8 +13,8 @@ class Home extends React.Component {
             paddingTop: '150%'
         };
         return (
-            <Content>
-                <Row justify={"center"} align={"middle"} style={{paddingTop: 64}}
+            <Content style={{backgroundColor: "white"}}>
+                <Row justify={"center"} align={"middle"} style={{paddingTop: 80}}
                      gutter={[16, 32]}>
                     <Col xs={22} sm={16} md={13} lg={13} xl={13}>
                         <Banner/>
@@ -50,7 +50,6 @@ class Home extends React.Component {
                                 <div style={bookCardStyle}/>
                             </Col>
                         </Row>
-
                     </Col>
                 </Row>
             </Content>

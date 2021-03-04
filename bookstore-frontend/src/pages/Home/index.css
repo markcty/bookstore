@@ -1,7 +1,3 @@
-/*.popularBooksContainer {*/
-/*    margin-left: 64px !important;*/
-/*    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 4px 0 rgba(0, 0, 0, 0.19);*/
-/*    padding-bottom: 16px;*/
-/*    padding-left: 16px;*/
-/*    padding-right: 16px;*/
-/*}*/
+.popularBooksContainer {
+    padding-bottom: 32px;
+}
