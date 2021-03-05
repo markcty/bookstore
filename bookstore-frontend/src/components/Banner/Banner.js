@@ -1,11 +1,12 @@
 import React from "react";
 import {Carousel} from "antd";
 
-class Banner extends React.Component {
+export default class Banner extends React.Component {
     render() {
         const contentStyle = {
             background: '#364d79',
-            paddingTop: '60%'
+            paddingTop: '60%',
+            borderRadius: '8px'
         };
         return (
             <Carousel autoplay>
@@ -25,5 +26,3 @@ class Banner extends React.Component {
         )
     }
 }
-
-export default Banner;

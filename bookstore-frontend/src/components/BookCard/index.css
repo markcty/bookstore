@@ -1,0 +1,50 @@
+/******************************************
+Book stuff
+*******************************************/
+
+.book {
+    display: inline-block;
+    /*box-shadow: 0 3px 5px #aaa;*/
+    border-radius: 8px;
+    padding: 10px 10px 0 10px;
+    /*vertical-align: top;*/
+    /*transition: height 1s;*/
+    transition: 0.5s;
+}
+
+.book:hover {
+    box-shadow: 0 0 15px #aaa;
+    transition: 0.5s;
+}
+
+.cover {
+    border: 2px solid gray;
+    height: 80%;
+    overflow: hidden;
+}
+
+.cover img {
+    width: 100%;
+}
+
+.title {
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-size: 1.3em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.author {
+    color: #AAAAAA;
+    white-space: nowrap;
+    font-size: 1em
+}
+
+.price {
+    color: #9BB6AA;
+    font-size: 1.4em;
+    padding-right: 8px;
+}
