@@ -26,7 +26,8 @@ export default class App extends React.Component {
                             <Home/>
                         </Route>
                     </Switch>
-                    <Footer style={{textAlign: 'center'}}>Created by markcty</Footer>
+                    <Footer style={{textAlign: 'center', height: 50, marginTop: -50, paddingTop: 14}}>Created by
+                        markcty</Footer>
                 </Layout>
             </Router>
         );

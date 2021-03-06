@@ -9,7 +9,7 @@ const {Content} = Layout;
 export default class Home extends React.Component {
     render() {
         return (
-            <Content style={{backgroundColor: "white", paddingTop: 80, paddingBottom: 32}}>
+            <Content style={{backgroundColor: "white", paddingTop: 80, paddingBottom: 80, minHeight: "100vh"}}>
                 <Row justify={"center"} align={"middle"}
                      gutter={[16, 32]}>
                     <Col xs={23} sm={16} md={13} lg={16} xl={16}>

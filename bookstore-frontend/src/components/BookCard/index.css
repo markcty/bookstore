@@ -17,20 +17,67 @@ Book stuff
     transition: 0.5s;
 }
 
+figure.sixteen-nine-img {
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding-top: 56.25%;
+    position: relative;
+}
+
+figure.sixteen-nine-img img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+
+
+/*!* Position child elements relative to this element *!*/
+/*.coverContainer {*/
+/*    position: relative;*/
+/*}*/
+
+/*!* Create a pseudo element that uses padding-bottom to take up space *!*/
+/*.coverContainer::after {*/
+/*    display: block;*/
+/*    content: "";*/
+/*    !* 16:9 aspect ratio *!*/
+/*    padding-bottom: 141%;*/
+/*}*/
+
+/*!* Image is positioned absolutely relative to the parent element *!*/
+/*.coverContainer img {*/
+/*    !* Image should match parent box size *!*/
+/*    position: absolute;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
+
 .cover {
     border: 2px solid gray;
-    height: 80%;
     overflow: hidden;
+    width: 100%;
 }
 
 .cover img {
-    width: 100%;
+    /*padding-top: 141%;*/
+    width: 184px;
+    height: 260px;
+    /*width: 100%;*/
+    object-fit: cover;
+    /*height: 400px;*/
+    /*width: 283px;*/
 }
+
 
 .title {
     margin-top: 8px;
     margin-bottom: 0;
-    font-size: 1.3em;
+    font-size: 1.1em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -40,7 +87,7 @@ Book stuff
 .author {
     color: #AAAAAA;
     white-space: nowrap;
-    font-size: 1em
+    font-size: 0.9em
 }
 
 .price {
