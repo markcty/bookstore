@@ -1,14 +1,15 @@
 import React from "react";
-import {Col, PageHeader, Row} from "antd";
-import {HeartTwoTone} from "@ant-design/icons";
-import BookCard from "../BookCard";
+import {Col, Row} from "antd";
+import "./index.css"
+import BookCard from "../../components/BookCard";
+import {Content} from "antd/es/layout/layout";
 import {Link} from "react-router-dom";
 
-export default class PopularBookList extends React.Component {
+export default class Books extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            popularBooks: [
+            books: [
                 {
                     id: 1,
                     title: "Frankenstein",
@@ -48,34 +49,24 @@ export default class PopularBookList extends React.Component {
         }
     }
 
-    componentDidMount() {
-        // fetch('https://fakestoreapi.com/products')
-        //     .then(res => res.json())
-        //     .then(books => this.setState({popularBooks: books.slice(0, 8)}));
-    }
-
     render() {
-        const {popularBooks} = this.state;
+        const {books} = this.state;
         return (
-            <Row className={"popularBooksContainer"} gutter={[32, 16]}>
-                <Col span={24}>
-                    <PageHeader
-                        title={
-                            <>
-                                <HeartTwoTone twoToneColor="#eb2f96" style={{marginLeft: 8, marginRight: 12}}/>
-                                <span>Popular Books</span>
-                            </>
-                        }
-                        style={{padding: 0, marginTop: 8}}
-                    />
-                </Col>
-                {popularBooks.map(book => (
-                        <Col key={book.id} xs={24} sm={12} md={6} lg={6} xl={6}>
-                            <Link to={`/book/${book.id}`}> <BookCard {...book}/> </Link>
-                        </Col>
-                    )
-                )}
-            </Row>
+            <Content className={"page"}>
+                <Row justify={"center"}>
+                    <Col xs={24} sm={20} md={18} lg={16} xl={14}>
+                        <Row className={"bookCards"} gutter={[32, 16]}>
+                            {books.map(book => {
+                                return (
+                                    <Col key={book.id} xs={12} sm={12} md={6} lg={6} xl={6}>
+                                        <Link to={`/book/${book.id}`}> <BookCard {...book}/> </Link>
+                                    </Col>
+                                );
+                            })}
+                        </Row>
+                    </Col>
+                </Row>
+            </Content>
         )
     }
 }

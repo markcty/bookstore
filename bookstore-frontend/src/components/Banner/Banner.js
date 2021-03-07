@@ -1,28 +1,21 @@
 import React from "react";
 import {Carousel} from "antd";
+import poster1 from "./poster1.jpg";
+import poster2 from "./poster2.jpeg";
+import "./index.css";
 
 export default class Banner extends React.Component {
     render() {
-        const contentStyle = {
-            background: '#364d79',
-            paddingTop: '60%',
-            borderRadius: '8px'
-        };
         return (
-            <Carousel autoplay>
-                <div>
-                    <div style={contentStyle}/>
+            <Carousel>
+                <div className={"posterContainer"}>
+                    <img className={"poster"} src={poster1} alt={" "}/>
                 </div>
-                <div>
-                    <div style={contentStyle}/>
-                </div>
-                <div>
-                    <div style={contentStyle}/>
-                </div>
-                <div>
-                    <div style={contentStyle}/>
+                <div className={"posterContainer"}>
+                    <img className={"poster"} src={poster2} alt={" "}/>
                 </div>
             </Carousel>
+
         )
     }
 }

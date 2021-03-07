@@ -5,6 +5,8 @@ import 'antd/dist/antd.css';
 import Home from "./pages/Home"
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Cart from "./pages/Cart";
+import Books from "./pages/Books";
+import Book from "./pages/Book";
 
 const {Footer} = Layout;
 
@@ -19,12 +21,13 @@ export default class App extends React.Component {
                 <Layout>
                     <BookstoreHeader/>
                     <Switch>
-                        <Route path={"/cart"}>
-                            <Cart/>
-                        </Route>
-                        <Route path={"/"}>
-                            <Home/>
-                        </Route>
+                        <Route path={"/cart"} component={Cart}/>
+
+                        <Route path={"/books"} component={Books}/>
+
+                        <Route path={"/book/:id"} component={Book}/>
+
+                        <Route path={"/"} component={Home}/>
                     </Switch>
                     <Footer style={{textAlign: 'center', height: 50, marginTop: -50, paddingTop: 14}}>Created by
                         markcty</Footer>

@@ -38,9 +38,14 @@ export default class BookstoreHeader extends React.Component {
                             <img alt="" src={logo} className={'logo'}/>
                         </Link>
                     </Col>
-                    <Col xs={0} sm={0} md={2}><span
-                        style={{fontSize: '1.2em', whiteSpace: 'nowrap'}}>Book Store</span></Col>
-                    <Col>
+                    <Col xs={0} sm={0} md={2}>
+                        <span
+                            style={{fontSize: '1.2em', whiteSpace: 'nowrap'}}>
+                            Book Store
+                        </span>
+                    </Col>
+
+                    <Col span={4}>
                         <Menu
                             className={'menu'}
                             style={{background: 'none', height: 54}}
@@ -51,7 +56,7 @@ export default class BookstoreHeader extends React.Component {
                                 <Link to={"/"}>Home</Link>
                             </Menu.Item>
                             <Menu.Item key="/teams">
-                                All Books
+                                <Link to={"/books"}>All Books</Link>
                             </Menu.Item>
                         </Menu>
                     </Col>
