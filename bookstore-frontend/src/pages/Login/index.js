@@ -1,10 +1,21 @@
 import React from "react";
 import "./index.css";
 import {Content} from "antd/es/layout/layout";
-import {Button, Col, Form, Input, Row} from 'antd';
+import {Col, Form, Input, Row} from 'antd';
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
 
 export default class Login extends React.Component {
+    constructor(props) {
+        super(props);
+        this.form = React.createRef();
+        this.login = this.login.bind(this);
+    }
+
+    login() {
+        console.log("hello");
+        this.form.current.submit();
+    }
+
     render() {
         const onFinish = (values) => {
             console.log('Received values of form: ', values);
@@ -27,6 +38,7 @@ export default class Login extends React.Component {
                                 }}
                                 onFinish={onFinish}
                                 style={{width: "80%"}}
+                                ref={this.form}
                             >
                                 <Form.Item
                                     name="username"
@@ -55,12 +67,14 @@ export default class Login extends React.Component {
                                         placeholder="Password"
                                     />
                                 </Form.Item>
-                                <Form.Item>
-                                    <Button type="primary" htmlType="submit" className="login-form-button">
-                                        Log in
-                                    </Button>
-                                </Form.Item>
                             </Form>
+                        </Col>
+                        <Col span={24}
+                             style={{display: "flex", justifyContent: "center", marginTop: 32}}
+                        >
+                            <h2 className={"loginButton"} onClick={this.login}>
+                                Pay
+                            </h2>
                         </Col>
                     </Row>
                 </div>

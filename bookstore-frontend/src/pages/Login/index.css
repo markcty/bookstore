@@ -2,9 +2,9 @@
     background: #fbfbfb;
     border-radius: 8px;
     box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
-    height: 240px;
+    height: 300px;
     margin: 6rem auto 8.1rem auto;
-    width: 329px;
+    width: 400px;
 }
 
 .login-form {
@@ -23,9 +23,20 @@
     width: 100%;
 }
 
-#card-content {
-    padding: 12px 44px;
-    padding-bottom: 48px;
+.loginButton {
+    background-color: #7DC855;
+    border-radius: 6px;
+    font-size: 1.4em;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-align: center;
+    padding: 6px 15px;
+    transition: all .5s;
+    width: 130px;
+}
+
+.loginButton:hover {
+    background-color: #64af3d;
 }
 
 /*#card-title {*/
