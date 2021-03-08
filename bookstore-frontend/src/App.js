@@ -13,10 +13,6 @@ import Login from "./pages/Login";
 const {Footer} = Layout;
 
 export default class App extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
-
     render() {
         return (
             <Router>

@@ -64,7 +64,7 @@ export default class BookstoreHeader extends React.Component {
                         </Menu>
                     </Col>
                     {/*search large*/}
-                    <Col xs={0} md={8} lg={8}>
+                    <Col xs={0} md={8} lg={10}>
                         <Search placeholder="search" allowClear
                                 style={{marginTop: 8}}
                         />
@@ -84,13 +84,13 @@ export default class BookstoreHeader extends React.Component {
                         </Popover>
                     </Col>
                     {/*cart icon*/}
-                    <Col span={1}>
+                    <Col>
                         <Link to={"/cart"}>
-                            <ShoppingCartOutlined style={{fontSize: "1.7em", marginTop: 12, color: "#3c3636"}}/>
+                            <ShoppingCartOutlined style={{fontSize: "1.7em", marginTop: 12, color: "#64af3d"}}/>
                         </Link>
                     </Col>
                     {/*avatar*/}
-                    <Col span={2}>
+                    <Col>
                         <Dropdown overlay={loginMenu} placement="bottomRight">
                             <div style={{cursor: "pointer", whiteSpace: "nowrap"}}>
                                 <Avatar
@@ -98,9 +98,9 @@ export default class BookstoreHeader extends React.Component {
                                         <Image src={avatar} preview={false}/>
                                     }
                                 />
-                                <span style={{marginLeft: 8}}>
-                                    {this.state.username}
-                                </span>
+                                {/*<span style={{marginLeft: 8}}>*/}
+                                {/*    {this.state.username}*/}
+                                {/*</span>*/}
                             </div>
                         </Dropdown>
                     </Col>

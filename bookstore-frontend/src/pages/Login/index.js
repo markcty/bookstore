@@ -73,7 +73,7 @@ export default class Login extends React.Component {
                              style={{display: "flex", justifyContent: "center", marginTop: 32}}
                         >
                             <h2 className={"loginButton"} onClick={this.login}>
-                                Pay
+                                Login
                             </h2>
                         </Col>
                     </Row>
