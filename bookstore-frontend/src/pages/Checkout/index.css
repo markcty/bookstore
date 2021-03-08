@@ -1,0 +1,15 @@
+.payButton {
+    background-color: #7DC855;
+    border-radius: 6px;
+    font-size: 1.4em;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-align: center;
+    padding: 6px 15px;
+    transition: all .5s;
+    width: 130px;
+}
+
+.payButton:hover {
+    background-color: #64af3d;
+}

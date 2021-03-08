@@ -7,7 +7,7 @@ import "./index.css";
 export default class Banner extends React.Component {
     render() {
         return (
-            <Carousel>
+            <Carousel autoplay>
                 <div className={"posterContainer"}>
                     <img className={"poster"} src={poster1} alt={" "}/>
                 </div>
@@ -15,7 +15,6 @@ export default class Banner extends React.Component {
                     <img className={"poster"} src={poster2} alt={" "}/>
                 </div>
             </Carousel>
-
         )
     }
 }

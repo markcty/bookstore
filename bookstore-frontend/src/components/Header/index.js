@@ -1,9 +1,9 @@
 import React from "react";
-import {Avatar, Col, Dropdown, Image, Input, Layout, Menu, Row} from "antd";
+import {Avatar, Col, Dropdown, Image, Input, Layout, Menu, Popover, Row} from "antd";
 import logo from "../../assets/logo.svg";
 import avatar from "./avatar.JPG"
 import "./index.css"
-import {ShoppingCartOutlined} from '@ant-design/icons';
+import {SearchOutlined, ShoppingCartOutlined} from '@ant-design/icons';
 import {Link} from "react-router-dom";
 
 const {Header} = Layout;
@@ -32,20 +32,23 @@ export default class BookstoreHeader extends React.Component {
         );
         return (
             <Header className={'desktopHeader'}>
-                <Row className={'headerContainer'} justify={'center'} gutter={16} wrap={false}>
-                    <Col>
+                <Row className={'headerContainer'} justify={"center"} gutter={16} wrap={false}>
+                    {/*logo*/}
+                    <Col span={1}>
                         <Link to={"/"}>
                             <img alt="" src={logo} className={'logo'}/>
                         </Link>
                     </Col>
-                    <Col xs={0} sm={0} md={2}>
+                    {/*bookstore*/}
+                    <Col xs={0} sm={0} md={0} lg={2}>
                         <span
-                            style={{fontSize: '1.2em', whiteSpace: 'nowrap'}}>
+                            style={{fontSize: '1.2em', whiteSpace: 'nowrap'}}
+                        >
                             Book Store
                         </span>
                     </Col>
-
-                    <Col span={4}>
+                    {/*menu*/}
+                    <Col sm={16} md={9} lg={7} xl={4}>
                         <Menu
                             className={'menu'}
                             style={{background: 'none', height: 54}}
@@ -60,17 +63,34 @@ export default class BookstoreHeader extends React.Component {
                             </Menu.Item>
                         </Menu>
                     </Col>
-                    <Col>
-                        <Search placeholder="input search text" allowClear
-                                style={{marginTop: 8, width: "40vw"}}
+                    {/*search large*/}
+                    <Col xs={0} md={8} lg={8}>
+                        <Search placeholder="search" allowClear
+                                style={{marginTop: 8}}
                         />
                     </Col>
-                    <Col>
+                    {/*search small*/}
+                    <Col xs={1} md={0}>
+                        <Popover
+                            content={(
+                                <Input.Search
+                                    placeholder="search"
+                                    onSearch={(e) => this.props.history.push('/search?q=' + e)}
+                                />
+                            )}
+                            placement="bottom"
+                        >
+                            <SearchOutlined style={{fontSize: "1.4em", marginTop: 14}}/>
+                        </Popover>
+                    </Col>
+                    {/*cart icon*/}
+                    <Col span={1}>
                         <Link to={"/cart"}>
                             <ShoppingCartOutlined style={{fontSize: "1.7em", marginTop: 12, color: "#3c3636"}}/>
                         </Link>
                     </Col>
-                    <Col>
+                    {/*avatar*/}
+                    <Col span={2}>
                         <Dropdown overlay={loginMenu} placement="bottomRight">
                             <div style={{cursor: "pointer", whiteSpace: "nowrap"}}>
                                 <Avatar

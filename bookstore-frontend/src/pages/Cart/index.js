@@ -3,8 +3,10 @@ import {Col, Row} from "antd";
 import CartCard from "../../components/CartCard";
 import "./index.css"
 import {Content} from "antd/es/layout/layout";
+import {Link} from "react-router-dom";
 
 export default class Cart extends React.Component {
+
     render() {
         return (
             <Content className={"page"}>
@@ -35,9 +37,11 @@ export default class Cart extends React.Component {
                         </Row>
                     </Col>
                     <Col span={24}>
-                        <div style={{display: "flex", justifyContent: "center", marginTop: "32px"}}>
-                            <h2 className={"checkoutButton"}>Check Out</h2><
-                        /div>
+                        <Link to={"/checkout"}>
+                            <div style={{display: "flex", justifyContent: "center", marginTop: "32px"}}>
+                                <h2 className={"checkoutButton"}>Check Out</h2>
+                            </div>
+                        </Link>
                     </Col>
                 </Row>
             </Content>
