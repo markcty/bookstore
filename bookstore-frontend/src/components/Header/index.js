@@ -1,13 +1,13 @@
 import React from "react";
-import {Avatar, Col, Dropdown, Image, Input, Layout, Menu, Popover, Row} from "antd";
+import { Avatar, Col, Dropdown, Image, Input, Layout, Menu, Popover, Row } from "antd";
 import logo from "../../assets/logo.svg";
 import avatar from "./avatar.JPG"
 import "./index.css"
-import {SearchOutlined, ShoppingCartOutlined} from '@ant-design/icons';
-import {Link} from "react-router-dom";
+import { SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { Link } from "react-router-dom";
 
-const {Header} = Layout;
-const {Search} = Input;
+const { Header } = Layout;
+const { Search } = Input;
 
 export default class BookstoreHeader extends React.Component {
     constructor(props) {
@@ -25,7 +25,7 @@ export default class BookstoreHeader extends React.Component {
                 <Menu.Item>
                     <span>My Orders</span>
                 </Menu.Item>
-                <Menu.Divider/>
+                <Menu.Divider />
                 <Menu.Item><span>Profile</span></Menu.Item>
                 <Menu.Item><span>Log Out</span></Menu.Item>
             </Menu>
@@ -36,13 +36,13 @@ export default class BookstoreHeader extends React.Component {
                     {/*logo*/}
                     <Col span={1}>
                         <Link to={"/"}>
-                            <img alt="" src={logo} className={'logo'}/>
+                            <img alt="" src={logo} className={'logo'} />
                         </Link>
                     </Col>
                     {/*bookstore*/}
                     <Col xs={0} sm={0} md={0} lg={2}>
                         <span
-                            style={{fontSize: '1.2em', whiteSpace: 'nowrap'}}
+                            style={{ fontSize: '1.2em', whiteSpace: 'nowrap' }}
                         >
                             Book Store
                         </span>
@@ -51,7 +51,7 @@ export default class BookstoreHeader extends React.Component {
                     <Col sm={16} md={9} lg={7} xl={4}>
                         <Menu
                             className={'menu'}
-                            style={{background: 'none', height: 54}}
+                            style={{ background: 'none', height: 54 }}
                             defaultSelectedKeys={'/'}
                             mode="horizontal"
                         >
@@ -66,7 +66,7 @@ export default class BookstoreHeader extends React.Component {
                     {/*search large*/}
                     <Col xs={0} md={8} lg={10}>
                         <Search placeholder="search" allowClear
-                                style={{marginTop: 8}}
+                            style={{ marginTop: 8 }}
                         />
                     </Col>
                     {/*search small*/}
@@ -80,22 +80,22 @@ export default class BookstoreHeader extends React.Component {
                             )}
                             placement="bottom"
                         >
-                            <SearchOutlined style={{fontSize: "1.4em", marginTop: 14}}/>
+                            <SearchOutlined style={{ fontSize: "1.4em", marginTop: 14 }} />
                         </Popover>
                     </Col>
                     {/*cart icon*/}
                     <Col>
                         <Link to={"/cart"}>
-                            <ShoppingCartOutlined style={{fontSize: "1.7em", marginTop: 12, color: "#64af3d"}}/>
+                            <ShoppingCartOutlined style={{ fontSize: "1.7em", marginTop: 12, color: "black" }} />
                         </Link>
                     </Col>
                     {/*avatar*/}
                     <Col>
                         <Dropdown overlay={loginMenu} placement="bottomRight">
-                            <div style={{cursor: "pointer", whiteSpace: "nowrap"}}>
+                            <div style={{ cursor: "pointer", whiteSpace: "nowrap" }}>
                                 <Avatar
                                     src={
-                                        <Image src={avatar} preview={false}/>
+                                        <Image src={avatar} preview={false} />
                                     }
                                 />
                                 {/*<span style={{marginLeft: 8}}>*/}
