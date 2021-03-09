@@ -5,9 +5,11 @@ import "./index.css";
 
 export default class CartCard extends React.Component {
     render() {
+        const {price, title, author, cover} = this.props;
         return (
-            <Row className="card" align={"middle"} justify={"center"} gutter={32}
-                 style={{paddingTop: 32, paddingBottom: 32, margin: 0}}>
+            <Row className="card" align={"middle"} gutter={16} wrap={false}
+                 style={{paddingTop: 32, paddingBottom: 32, margin: 0}}
+            >
                 <Col className={"deleteButton"} span={1}>
                     <DeleteOutlined style={{fontSize: "1.8em", color: "red"}}/>
                 </Col>
@@ -15,16 +17,16 @@ export default class CartCard extends React.Component {
                     <img
                         className={"cover"}
                         alt={" "}
-                        src={"https://s-media-cache-ak0.pinimg.com/564x/f9/8e/2d/f98e2d661445620266c0855d418aab71.jpg"}
+                        src={cover}
                         style={{width: "100%"}}
                     />
                 </Col>
-                <Col className="description" span={6}>
-                    <h3 className={"title"}>Frank</h3>
-                    <h4 className={"author"}>Mary Shelley</h4>
+                <Col className="description" span={9}>
+                    <h3 className={"title"}>{title}</h3>
+                    <h4 className={"author"}>{author}</h4>
                 </Col>
 
-                <Col className="price" offset={2}>$549</Col>
+                <Col className="price" offset={2}>${price}</Col>
             </Row>
         )
     }
