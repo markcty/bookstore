@@ -7,11 +7,11 @@ export default class BookCard extends React.Component {
         const {price, title, author, cover} = this.props;
         return (
             <div style={{display: "flex", justifyContent: "center"}}>
-                <Row className={"book read"} style={{marginLeft: "auto", marginRight: "auto"}}>
-                    <Col className={"cover"} span={24}>
-                        <div className={"coverContainer"}>
-                            <img alt={" "} src={cover}/>
-                        </div>
+                <Row className={"book"}>
+                    <Col className={"cover"}>
+                        {/*<div className={"coverContainer"}>*/}
+                        <img alt={" "} src={cover}/>
+                        {/*</div>*/}
                     </Col>
                     <Col span={24}>
                         <div className={"description"}>

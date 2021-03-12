@@ -3,12 +3,9 @@ Book stuff
 *******************************************/
 
 .book {
-    display: inline-block;
-    /*box-shadow: 0 3px 5px #aaa;*/
     border-radius: 8px;
     padding: 10px 10px 0 10px;
-    /*vertical-align: top;*/
-    /*transition: height 1s;*/
+    width: 190px;
     transition: 0.5s;
 }
 
@@ -17,50 +14,11 @@ Book stuff
     transition: 0.5s;
 }
 
-figure.sixteen-nine-img {
-    width: 100%;
-    overflow: hidden;
-    margin: 0;
-    padding-top: 56.25%;
-    position: relative;
-}
-
-figure.sixteen-nine-img img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    transform: translate(-50%, -50%);
-}
-
-
-/*!* Position child elements relative to this element *!*/
-/*.coverContainer {*/
-/*    position: relative;*/
-/*}*/
-
-/*!* Create a pseudo element that uses padding-bottom to take up space *!*/
-/*.coverContainer::after {*/
-/*    display: block;*/
-/*    content: "";*/
-/*    !* 16:9 aspect ratio *!*/
-/*    padding-bottom: 141%;*/
-/*}*/
-
-/*!* Image is positioned absolutely relative to the parent element *!*/
-/*.coverContainer img {*/
-/*    !* Image should match parent box size *!*/
-/*    position: absolute;*/
-/*    left: 0;*/
-/*    top: 0;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*}*/
-
 .cover {
-    border: 2px solid gray;
+    border: 2px solid grey;
+    width: 170px;
+    height: 240px;
     overflow: hidden;
-    width: 100%;
 }
 
 .cover img {
@@ -69,8 +27,6 @@ figure.sixteen-nine-img img {
     height: 240px;
     /*width: 100%;*/
     object-fit: cover;
-    /*height: 400px;*/
-    /*width: 283px;*/
 }
 
 
