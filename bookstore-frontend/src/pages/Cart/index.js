@@ -55,7 +55,7 @@ export default class Cart extends React.Component {
             <Content className={"page"}>
                 <Row justify={"center"}
                      align={"middle"}>
-                    <Col sm={24} md={16} lg={16} xl={14}>
+                    <Col xs={24} sm={20} md={18} lg={16} xl={14}>
                         <h1 style={{
                             borderBottom: "2px solid #E1E8EE",
                             textAlign: "center",
@@ -63,11 +63,11 @@ export default class Cart extends React.Component {
                             fontSize: "2em"
                         }}>My Cart</h1>
                     </Col>
-                    <Col sm={24} md={16} lg={16} xl={14}>
+                    <Col xs={24} sm={20} md={18} lg={16} xl={14}>
                         <Row gutter={48}>
                             {cartBooks.map(book => {
                                 return (
-                                    <Col sm={24} md={12}>
+                                    <Col span={24}>
                                         <Link to={`book/${book.id}`}><CartCard {...book}/></Link>
                                     </Col>
                                 )

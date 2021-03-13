@@ -13,15 +13,15 @@ export default class CartCard extends React.Component {
                 <Col className={"deleteButton"} span={1}>
                     <DeleteOutlined style={{fontSize: "1.8em", color: "red"}}/>
                 </Col>
-                <Col span={6} offset={1}>
+                <Col xs={0} sm={0} md={9} lg={6} offset={1}>
                     <img
                         className={"cover"}
                         alt={" "}
                         src={cover}
-                        style={{width: "100%"}}
+                        style={{width: "141px", height: "200px", objectFit: "cover"}}
                     />
                 </Col>
-                <Col className="description" span={9}>
+                <Col className="description" span={9} offset={1}>
                     <h3 className={"title"}>{title}</h3>
                     <h4 className={"author"}>{author}</h4>
                 </Col>
