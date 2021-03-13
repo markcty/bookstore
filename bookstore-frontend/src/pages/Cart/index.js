@@ -47,6 +47,13 @@ export default class Cart extends React.Component {
                 }
             ]
         }
+        this.removeCard = this.removeCard.bind(this);
+    }
+
+    removeCard(index) {
+        const newCartBooks = [...this.state.cartBooks];
+        newCartBooks.splice(index, 1);
+        this.setState({cartBooks: newCartBooks});
     }
 
     render() {
@@ -65,10 +72,10 @@ export default class Cart extends React.Component {
                     </Col>
                     <Col xs={24} sm={20} md={18} lg={16} xl={14}>
                         <Row gutter={48}>
-                            {cartBooks.map(book => {
+                            {cartBooks.map((book, index) => {
                                 return (
                                     <Col span={24}>
-                                        <Link to={`book/${book.id}`}><CartCard {...book}/></Link>
+                                        <CartCard {...book} index={index} remove={this.removeCard}/>
                                     </Col>
                                 )
                             })}
