@@ -70,7 +70,7 @@ export default class PopularBookList extends React.Component {
                     />
                 </Col>
                 {popularBooks.map(book => (
-                    <Col key={book.id} xs={24} sm={12} md={6} lg={6} xl={6}>
+                    <Col key={book.id} xs={12} sm={12} md={6} lg={6} xl={6}>
                         <Link to={`/book/${book.id}`}> <BookCard {...book}/> </Link>
                     </Col>
                 ))}
