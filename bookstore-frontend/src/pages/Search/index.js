@@ -7,6 +7,7 @@ import BookCard from "../../components/BookCard";
 import * as queryString from "query-string";
 
 function Index(props) {
+    // eslint-disable-next-line no-unused-vars
     const [books, setBooks] = useState(
         [
             {

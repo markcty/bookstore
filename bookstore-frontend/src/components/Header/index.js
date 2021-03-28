@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Avatar, Col, Dropdown, Image, Input, Layout, Menu, Popover, Row} from "antd";
 import logo from "../../assets/logo.svg";
 import PropTypes from "prop-types";
@@ -11,8 +11,8 @@ const {Header} = Layout;
 const {Search} = Input;
 
 function BookstoreHeader(props) {
-    const [isLogin, setIsLogin] = useState(true);
-    const [username, setUsername] = useState("markcty");
+    // const [isLogin, setIsLogin] = useState(true);
+    // const [username, setUsername] = useState("markcty");
 
     const loginMenu = (
         <Menu>
@@ -22,6 +22,7 @@ function BookstoreHeader(props) {
             </Menu.Item>
             <Menu.Divider/>
             <Menu.Item><span>Profile</span></Menu.Item>
+            <Menu.Item><Link to={"/admin/manage"}><span>Manage</span></Link></Menu.Item>
             <Menu.Item><span>Log Out</span></Menu.Item>
         </Menu>
     );
