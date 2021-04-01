@@ -18,6 +18,7 @@ export default function BookEditCard(props) {
     };
 
     useEffect(() => {
+        form.resetFields();
         form.setFieldsValue(props);
     });
 

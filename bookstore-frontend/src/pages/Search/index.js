@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Content} from "antd/es/layout/layout";
 import {Col, Row} from "antd";
-import {withRouter} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import BookCard from "../../components/BookCard";
 import * as queryString from "query-string";
@@ -48,7 +48,10 @@ function Index(props) {
         ]
     );
     const {q} = queryString.parse(props.location.search)
-    const filteredBooks = books.filter(book => book.title.toLowerCase().includes(q.toLowerCase()));
+    const filteredBooks = books.filter(book => (
+        book.author.toLowerCase().includes(q.toLowerCase())
+        || book.title.toLowerCase().includes(q.toLowerCase())
+    ));
     return (
         <Content className={"page"}>
             <Row justify={"center"}>
@@ -57,7 +60,7 @@ function Index(props) {
                         {filteredBooks.map(book => {
                             return (
                                 <Col key={book.id} xs={24} sm={12} md={6} lg={6} xl={6}>
-                                    <BookCard {...book}/>
+                                    <Link to={`/book/${book.id}`}> <BookCard {...book}/> </Link>
                                 </Col>
                             )
                         })}

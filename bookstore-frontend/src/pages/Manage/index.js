@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Button, Col, Row, Space, Table} from "antd";
 import {Content} from "antd/es/layout/layout";
 import BookEditCard from "../../components/BookEditCard";
+import Search from "antd/es/input/Search";
 
 export default function Manage(props) {
     const [books, setBooks] = useState(
@@ -39,6 +40,43 @@ export default function Manage(props) {
         ]
     );
     const [currentBook, setCurrentBook] = useState(null);
+
+    const updateBook = (bookInfo) => {
+        // update the book information by id
+        // if id does not exist then add the book
+        console.log(bookInfo);
+        let next = books.filter(book => book.id !== bookInfo.id);
+        next.push({
+            id: bookInfo.id,
+            author: bookInfo.author,
+            price: bookInfo.price,
+            title: bookInfo.title
+        });
+        setCurrentBook(null);
+        setBooks(next);
+    }
+
+    const deleteBook = (id) => {
+        setBooks(books.filter(book => book.id !== id));
+    }
+
+    const emptyEditCard = (
+        <div
+            style={{
+                width: "100%",
+                height: 424,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                border: "2px dashed grey",
+                borderRadius: 10
+            }}
+        >
+            <h1>Please Choose One Book To Edit</h1>
+        </div>
+    )
+
+    const [searchText, setSearchText] = useState("");
 
     const columns = [
         {
@@ -78,41 +116,6 @@ export default function Manage(props) {
         }
     ]
 
-    const updateBook = (bookInfo) => {
-        // update the book information by id
-        // if id does not exist then add the book
-        console.log(bookInfo);
-        let next = books.filter(book => book.id !== bookInfo.id);
-        next.push({
-            id: bookInfo.id,
-            author: bookInfo.author,
-            price: bookInfo.price,
-            title: bookInfo.title
-        });
-        setCurrentBook(null);
-        setBooks(next);
-    }
-
-    const deleteBook = (id) => {
-        setBooks(books.filter(book => book.id !== id));
-    }
-
-    const emptyEditCard = (
-        <div
-            style={{
-                width: "100%",
-                height: 424,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "2px dashed grey",
-                borderRadius: 10
-            }}
-        >
-            <h1>Please Choose One Book To Edit</h1>
-        </div>
-    )
-
     return (
         <Content className={"page"}>
             <Row justify={"center"}>
@@ -126,10 +129,24 @@ export default function Manage(props) {
                                 />
                                 : emptyEditCard}
                         </Col>
-                        <Col span={24}>
-                            <Button style={{width: "100%"}} onClick={() => setCurrentBook(-1)}>Add A Book</Button>
+                        <Col span={24} style={{display: "flex"}}>
+                            <Button type={"primary"} onClick={() => setCurrentBook(-1)} style={{marginRight: 16}}>
+                                Add A Book
+                            </Button>
+                            <Search placeholder="input book title or author" allowClear
+                                    onSearch={(v) => setSearchText(v.toLowerCase())}
+                                    style={{width: 300}}/>
                         </Col>
-                        <Col span={24}><Table dataSource={books} columns={columns}/></Col>
+                        <Col span={24}>
+                            <Table
+                                dataSource={
+                                    books.filter(book =>
+                                        (book.author.toLowerCase().includes(searchText))
+                                        || book.title.toLowerCase().includes(searchText)
+                                    )}
+                                columns={columns}
+                            />
+                        </Col>
                     </Row>
                 </Col>
             </Row>

@@ -61,7 +61,7 @@ function BookstoreHeader(props) {
                 </Col>
                 {/*search large*/}
                 <Col xs={0} md={8} lg={10}>
-                    <Search placeholder="search" allowClear
+                    <Search placeholder="input book title or author" allowClear
                             style={{marginTop: 8}}
                             onSearch={(query) => props.history.push('/search?q=' + query)}
                     />
