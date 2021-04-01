@@ -8,7 +8,7 @@
     box-shadow: 0 0 5px #bbb;
     height: 48px !important;
     line-height: 48px !important;
-    /*padding: 0 25px !important;*/
+    padding: 0 !important;
 }
 
 .menu {

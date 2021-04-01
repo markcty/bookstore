@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Col, Form, Input, Layout, Row} from "antd";
+import {Button, Col, Form, Input, Layout, Row} from "antd";
 import CartCard from "../../components/CartCard";
 import "./index.css"
 
@@ -150,9 +150,8 @@ export default function Checkout(props) {
                         <Col span={24}
                              style={{display: "flex", justifyContent: "flex-end", marginTop: 16}}
                         >
-                            <h2 className={"payButton"} onClick={() => form.submit()}>
-                                Pay
-                            </h2>
+                            <Button type={"primary"} size={"large"} style={{width: 100}}
+                                    onClick={() => form.submit()}>Pay</Button>
                         </Col>
                     </Row>
                 </Col>

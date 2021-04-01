@@ -1,5 +1,5 @@
 import React from "react";
-import {Col, Row} from "antd";
+import {Button, Col, Row} from "antd";
 import CartCard from "../../components/CartCard";
 import "./index.css"
 import {Content} from "antd/es/layout/layout";
@@ -62,7 +62,7 @@ export default class Cart extends React.Component {
             <Content className={"page"}>
                 <Row justify={"center"}
                      align={"middle"}>
-                    <Col xs={24} sm={20} md={18} lg={16} xl={14}>
+                    <Col xs={22} sm={20} md={18} lg={16} xl={14}>
                         <h1 style={{
                             borderBottom: "2px solid #E1E8EE",
                             textAlign: "center",
@@ -70,7 +70,7 @@ export default class Cart extends React.Component {
                             fontSize: "2em"
                         }}>My Cart</h1>
                     </Col>
-                    <Col xs={24} sm={20} md={18} lg={16} xl={14}>
+                    <Col xs={22} sm={20} md={18} lg={16} xl={14}>
                         <Row gutter={48}>
                             {cartBooks.map((book, index) => {
                                 return (
@@ -81,10 +81,11 @@ export default class Cart extends React.Component {
                             })}
                         </Row>
                     </Col>
-                    <Col span={24}>
+                    <Col span={22}>
                         <Link to={"/checkout"}>
+
                             <div style={{display: "flex", justifyContent: "center", marginTop: "32px"}}>
-                                <h2 className={"checkoutButton"}>Check Out</h2>
+                                <Button type={"primary"} size={"large"}>Check Out</Button>
                             </div>
                         </Link>
                     </Col>

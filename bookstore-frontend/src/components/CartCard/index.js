@@ -15,7 +15,7 @@ export default class CartCard extends React.Component {
                     <DeleteOutlined style={{fontSize: "1.8em", color: "red"}}
                                     onClick={() => this.props.remove(this.props.index)}/>
                 </Col>
-                <Col xs={0} sm={0} md={9} lg={6} offset={1}>
+                <Col xs={6} sm={6} md={9} lg={6} offset={1}>
                     <Link to={`book/${id}`}>
                         <img
                             className={"cover"}
