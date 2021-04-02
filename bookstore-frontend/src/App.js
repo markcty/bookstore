@@ -10,6 +10,7 @@ import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Search from "./pages/Search"
 import Manage from "./pages/Manage";
+import Orders from "./pages/Orders";
 import "./App.less";
 
 const {Footer} = Layout;
@@ -34,6 +35,8 @@ export default class App extends React.Component {
                         <Route path={"/search"} component={Search}/>
 
                         <Route path={"/admin"} component={Manage}/>
+
+                        <Route path={"/orders"} component={Orders}/>
 
                         <Route path={"/"} component={Home}/>
                     </Switch>

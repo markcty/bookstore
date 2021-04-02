@@ -18,7 +18,7 @@ function BookstoreHeader(props) {
         <Menu>
             <Menu.Item><Link to={"/cart"}><span>My Cart</span></Link></Menu.Item>
             <Menu.Item>
-                <span>My Orders</span>
+                <Link to={"/orders"}><span>My Orders</span></Link>
             </Menu.Item>
             <Menu.Divider/>
             <Menu.Item><span>Profile</span></Menu.Item>
