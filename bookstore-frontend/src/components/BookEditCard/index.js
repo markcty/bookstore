@@ -47,8 +47,21 @@ export default function BookEditCard(props) {
                     <Form.Item
                         labelCol={{span: 4}}
                         wrapperCol={{span: 4}}
-                        name={"id"}
-                        label="id"
+                        name={"ISBN"}
+                        label="ISBN"
+                        rules={[
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <InputNumber/>
+                    </Form.Item>
+                    <Form.Item
+                        labelCol={{span: 4}}
+                        wrapperCol={{span: 4}}
+                        name={"inventory"}
+                        label="Inventory"
                         rules={[
                             {
                                 required: true,

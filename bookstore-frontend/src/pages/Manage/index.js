@@ -8,56 +8,62 @@ export default function Manage(props) {
     const [books, setBooks] = useState(
         [
             {
-                id: 1,
+                ISBN: 1,
                 title: "Frankenstein",
                 author: "Mary Shelley",
                 price: 50.9,
+                inventory: 5
             },
             {
-                id: 2,
+                ISBN: 2,
                 title: "A Little Princess",
                 author: "Frances Hodgson Burnett",
                 price: 38.9,
+                inventory: 9
             },
             {
-                id: 3,
+                ISBN: 3,
                 title: "Bird By Bird",
                 author: "Anne Lamott",
                 price: 98.0,
+                inventory: 1
             },
             {
-                id: 4,
+                ISBN: 4,
                 title: "Girl at War",
                 author: "Sara Novic",
                 price: 14.3,
+                inventory: 99
             },
             {
-                id: 5,
+                ISBN: 5,
                 title: "The Alchemist",
                 author: "Paulo Coelho",
                 price: 67.2,
+                inventory: 55
             }
         ]
     );
     const [currentBook, setCurrentBook] = useState(null);
 
     const updateBook = (bookInfo) => {
-        // update the book information by id
-        // if id does not exist then add the book
+        // update the book information by ISBN
+        // if ISBN does not exist then add the book
         console.log(bookInfo);
-        let next = books.filter(book => book.id !== bookInfo.id);
+        let next = books.filter(book => book.ISBN !== bookInfo.ISBN);
         next.push({
-            id: bookInfo.id,
+            ISBN: bookInfo.ISBN,
             author: bookInfo.author,
             price: bookInfo.price,
-            title: bookInfo.title
+            title: bookInfo.title,
+            inventory: bookInfo.inventory
         });
         setCurrentBook(null);
         setBooks(next);
     }
 
-    const deleteBook = (id) => {
-        setBooks(books.filter(book => book.id !== id));
+    const deleteBook = (ISBN) => {
+        setBooks(books.filter(book => book.ISBN !== ISBN));
     }
 
     const emptyEditCard = (
@@ -80,12 +86,12 @@ export default function Manage(props) {
 
     const columns = [
         {
-            title: "Id",
-            dataIndex: "id",
-            key: "Id",
+            title: "ISBN",
+            dataIndex: "ISBN",
+            key: "ISBN",
             defaultSortOrder: "ascend",
             sortDirections: ['ascend', 'descend', 'ascend'],
-            sorter: (a, b) => a.id - b.id
+            sorter: (a, b) => a.ISBN - b.ISBN
         },
         {
             title: "Title",
@@ -105,12 +111,19 @@ export default function Manage(props) {
             sorter: (a, b) => a.price - b.price
         },
         {
+            title: "Inventory",
+            dataIndex: "inventory",
+            key: "inventory",
+            sortDirections: ['ascend', 'descend', 'ascend'],
+            sorter: (a, b) => a.inventory - b.inventory
+        },
+        {
             title: "Action",
             key: "action",
             render: (text, record) => (
                 <Space>
-                    <Button type={"primary"} onClick={() => setCurrentBook(record.id)}>Edit</Button>
-                    <Button type={"primary"} danger onClick={() => deleteBook(record.id)}>Delete</Button>
+                    <Button type={"primary"} onClick={() => setCurrentBook(record.ISBN)}>Edit</Button>
+                    <Button type={"primary"} danger onClick={() => deleteBook(record.ISBN)}>Delete</Button>
                 </Space>
             )
         }
@@ -124,7 +137,7 @@ export default function Manage(props) {
                         <Col span={24}>
                             {currentBook ?
                                 <BookEditCard
-                                    {...(books.find(book => book.id === currentBook))}
+                                    {...(books.find(book => book.ISBN === currentBook))}
                                     updateBook={updateBook}
                                 />
                                 : emptyEditCard}
