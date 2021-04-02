@@ -1,10 +1,24 @@
-#card {
-    background: #fbfbfb;
+.loginCard {
     border-radius: 8px;
-    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
-    height: 300px;
-    margin: 6rem auto 8.1rem auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width: 400px;
+    margin-top: -80px;
+    background-color: white;
+}
+
+.loginPage {
+    background-image: url(./loginBackground.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+#underline-title {
+    background: #7DC855;
+    height: 2px;
+    margin: -1.1rem auto 0 auto;
+    width: 89px;
 }
 
 .login-form {
@@ -21,86 +35,4 @@
 
 .login-form-button {
     width: 100%;
-}
-
-.loginButton {
-    background-color: #7DC855;
-    border-radius: 6px;
-    font-size: 1.4em;
-    color: #FFFFFF;
-    text-decoration: none;
-    text-align: center;
-    padding: 6px 15px;
-    transition: all .5s;
-    width: 130px;
-}
-
-.loginButton:hover {
-    background-color: #64af3d;
-}
-
-/*#card-title {*/
-/*    font-family: "Raleway Thin", sans-serif;*/
-/*    letter-spacing: 4px;*/
-/*    padding-bottom: 23px;*/
-/*    padding-top: 13px;*/
-/*    text-align: center;*/
-/*}*/
-
-/*#card-title h2 {*/
-/*    border-bottom: 2px solid #7DC855;*/
-/*    width: auto;*/
-/*}*/
-
-/*#signup {*/
-/*    color: #2dbd6e;*/
-/*    font-family: "Raleway", sans-serif;*/
-/*    font-size: 10pt;*/
-/*    margin-top: 16px;*/
-/*    text-align: center;*/
-/*}*/
-
-/*#submit-btn {*/
-/*    background: -webkit-linear-gradient(right, #a6f77b, #2dbd6e);*/
-/*    border: none;*/
-/*    border-radius: 21px;*/
-/*    box-shadow: 0px 1px 8px #24c64f;*/
-/*    cursor: pointer;*/
-/*    color: white;*/
-/*    font-family: "Raleway SemiBold", sans-serif;*/
-/*    height: 42.3px;*/
-/*    margin: 0 auto;*/
-/*    margin-top: 50px;*/
-/*    transition: 0.25s;*/
-/*    width: 153px;*/
-/*}*/
-
-/*#submit-btn:hover {*/
-/*    box-shadow: 0px 1px 18px #24c64f;*/
-/*}*/
-
-/*.form {*/
-/*    align-items: left;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*}*/
-
-/*.form-border {*/
-/*    background: -webkit-linear-gradient(right, #a6f77b, #2ec06f);*/
-/*    height: 1px;*/
-/*    width: 100%;*/
-/*}*/
-
-/*.form-content {*/
-/*    background: #fbfbfb;*/
-/*    border: none;*/
-/*    outline: none;*/
-/*    padding-top: 14px;*/
-/*}*/
-
-#underline-title {
-    background: #7DC855;
-    height: 2px;
-    margin: -1.1rem auto 0 auto;
-    width: 89px;
 }
