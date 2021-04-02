@@ -78,7 +78,7 @@ export default function Orders() {
             key: "purchaseDate",
             sortDirections: ['ascend', 'descend', 'ascend'],
             render: date => date.toLocaleString(),
-            sorter: (a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate)
+            sorter: (a, b) => new Date(a.purchaseDate) - new Date(b.purchaseDate)
         }
     ];
 
