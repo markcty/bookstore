@@ -10,6 +10,5 @@ public class Book {
     private String description;
     private Double price;
     private Integer inventory;
-    private String imageUrl;
-    
+    private String coverUrl;
 }

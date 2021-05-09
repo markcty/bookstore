@@ -17,13 +17,13 @@ public class BookController {
     BookService bookService;
 
     @CrossOrigin
-    @GetMapping("/books")
+    @GetMapping("/api/books")
     public List<Book> getBooks() {
         return bookService.getBooks();
     }
 
     @CrossOrigin
-    @GetMapping("/book")
+    @GetMapping("/api/book")
     public Book getBook(@RequestParam String ISBN) {
         return bookService.getBook(ISBN);
     }

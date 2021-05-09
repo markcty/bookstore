@@ -6,22 +6,20 @@ import PopularBookList from "../../components/PopularBookList";
 
 const {Content} = Layout;
 
-export default class Home extends React.Component {
-    render() {
-        return (
-            <Content className={"page"}>
-                <Row justify={"center"}
-                     align={"middle"}
-                     gutter={[16, 32]}
-                >
-                    <Col xs={24} sm={20} md={18} lg={16} xl={14}>
-                        <Banner/>
-                    </Col>
-                    <Col xs={24} sm={20} md={18} lg={16} xl={14}>
-                        <PopularBookList/>
-                    </Col>
-                </Row>
-            </Content>
-        )
-    }
+export default function Home() {
+    return (
+        <Content className={"page"}>
+            <Row justify={"center"}
+                 align={"middle"}
+                 gutter={[16, 32]}
+            >
+                <Col xs={24} sm={20} md={18} lg={16} xl={14}>
+                    <Banner/>
+                </Col>
+                <Col xs={24} sm={20} md={18} lg={16} xl={14}>
+                    <PopularBookList/>
+                </Col>
+            </Row>
+        </Content>
+    )
 }
