@@ -4,9 +4,7 @@ import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +21,11 @@ public class BookController {
     public List<Book> getBooks() {
         return bookService.getBooks();
     }
+
+    @CrossOrigin
+    @GetMapping("/book")
+    public Book getBook(@RequestParam String ISBN) {
+        return bookService.getBook(ISBN);
+    }
+
 }
