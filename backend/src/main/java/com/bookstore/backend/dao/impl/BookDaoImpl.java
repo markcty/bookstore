@@ -12,20 +12,17 @@ import java.util.List;
 @Repository
 public class BookDaoImpl implements BookDao {
 
-    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     @Override
     public List<Book> getBooks() {
-        return jdbcTemplate.query(
-                "SELECT * FROM book",
-                new BeanPropertyRowMapper<>(Book.class));
+        return jdbcTemplate.query("SELECT * FROM book", new BeanPropertyRowMapper<>(Book.class));
     }
 
     @Override
-    public Book getBook(String ISBN) {
-        String sql = "SELECT * FROM book WHERE ISBN='" + ISBN + "'";
+    public Book getBook(Integer id) {
+        String sql = "SELECT * FROM book WHERE id='" + id + "'";
         var list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Book.class));
         return list.get(0);
     }

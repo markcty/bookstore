@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from "react";
-import {Col, Row} from "antd";
+import React, { useState, useEffect } from "react";
+import { Col, Row } from "antd";
 import "./index.css"
 import BookCard from "../../components/BookCard";
-import {Content} from "antd/es/layout/layout";
-import {Link} from "react-router-dom";
-import {getBooks} from "../../services/api";
+import { Content } from "antd/es/layout/layout";
+import { Link } from "react-router-dom";
+import { getBooks } from "../../services/api";
 
 export default function Books() {
     const [books, setBooks] = useState([]);
@@ -20,8 +20,8 @@ export default function Books() {
                     <Row className={"bookCards"} gutter={[32, 16]}>
                         {books.map(book => {
                             return (
-                                <Col key={book.isbn} xs={24} sm={12} md={6} lg={6} xl={6}>
-                                    <Link to={`/book/${book.isbn}`}> <BookCard {...book}/> </Link>
+                                <Col key={book.id} xs={24} sm={12} md={6} lg={6} xl={6}>
+                                    <Link to={`/book/${book.id}`}> <BookCard {...book} /> </Link>
                                 </Col>
                             );
                         })}

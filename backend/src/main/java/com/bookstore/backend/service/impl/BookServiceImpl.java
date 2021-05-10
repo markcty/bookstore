@@ -1,6 +1,6 @@
 package com.bookstore.backend.service.impl;
 
-import com.bookstore.backend.dao.impl.BookDaoImpl;
+import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,8 @@ import java.util.List;
 @Service
 public class BookServiceImpl implements BookService {
 
-    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
-    private BookDaoImpl bookDao;
+    private BookDao bookDao;
 
     @Override
     public List<Book> getBooks() {
@@ -21,7 +20,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getBook(String ISBN) {
-        return bookDao.getBook(ISBN);
+    public Book getBook(Integer id) {
+        return bookDao.getBook(id);
     }
 }

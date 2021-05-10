@@ -1,5 +1,5 @@
 import axios from "axios";
-import {apiUrl} from "./config";
+import { apiUrl } from "./config";
 
 const http = axios.create({
     baseURL: apiUrl + "/api",
@@ -13,10 +13,18 @@ export function getBooks() {
     });
 }
 
-export function getBook(isbn) {
+export function getBook(id) {
     return new Promise((resolve, reject) => {
-        http.get("/book", {params: {ISBN: isbn}})
+        http.get("/book", { params: { id: id } })
             .then(res => resolve(res.data))
-            .catch(err => reject.err);
+            .catch(err => reject(err));
+    })
+}
+
+export function getCartItems(userId) {
+    return new Promise((resolve, reject) => {
+        http.get("/cart", { params: { userId: userId } })
+            .then(res => resolve(res.data))
+            .catch(err => reject(err));
     })
 }

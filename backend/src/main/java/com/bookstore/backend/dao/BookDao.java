@@ -7,5 +7,5 @@ import java.util.List;
 public interface BookDao {
     List<Book> getBooks();
 
-    Book getBook(String ISBN);
+    Book getBook(Integer id);
 }
