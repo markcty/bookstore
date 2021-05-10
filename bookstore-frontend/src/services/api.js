@@ -36,3 +36,12 @@ export function delCartItem(id) {
             .catch(err => reject(err));
     })
 }
+
+export function addCartItem(userId, bookId) {
+    return new Promise((resolve, reject) => {
+        console.log(userId, bookId);
+        http.post("/cart", { userId: userId, bookId: bookId })
+            .then(res => resolve(res))
+            .catch(err => reject(err));
+    })
+}

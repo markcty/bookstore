@@ -8,4 +8,6 @@ public interface CartDao {
   List<CartItem> getCartItems(Integer userId);
 
   void delCartItem(Integer id);
+
+  void addCartItem(Integer userId, Integer bookId);
 }

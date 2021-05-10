@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Content } from "antd/es/layout/layout";
 import { Button, Col, Row } from "antd";
 import "./index.css"
-import { getBook, getBooks } from "../../services/api";
+import { addCartItem, getBook, getBooks } from "../../services/api";
 
 
 export default function Book() {
     const [bookInfo, setBookInfo] = useState(null);
+    const userId = 1;
 
     useEffect(() => {
         let s = window.location.pathname;
@@ -23,7 +24,7 @@ export default function Book() {
             </Content>
         )
 
-    const { coverUrl, title, author, price, description } = bookInfo;
+    const { coverUrl, title, author, price, description, id } = bookInfo;
 
     return (
         <Content className={"page"}>
@@ -46,8 +47,7 @@ export default function Book() {
                         >
                             ${price}
                         </h1>
-                        {/*<h2 className={"cartButton"}>Add To Cart</h2>*/}
-                        <Button type={"primary"} size={"large"}>Add To Cart</Button>
+                        <Button type={"primary"} size={"large"} onClick={() => addCartItem(userId, id)}>Add To Cart</Button>
                     </div>
                 </Col>
             </Row>

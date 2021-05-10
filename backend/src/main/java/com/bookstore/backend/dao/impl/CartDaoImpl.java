@@ -29,4 +29,10 @@ public class CartDaoImpl implements CartDao {
     String sql = "delete from cartItem where id=" + id;
     jdbcTemplate.update(sql);
   }
+
+  @Override
+  public void addCartItem(Integer userId, Integer bookId) {
+    String sql = "INSERT INTO cartItem (userId, bookId) VALUES (" + userId + ", " + bookId + ")";
+    jdbcTemplate.update(sql);
+  }
 }
