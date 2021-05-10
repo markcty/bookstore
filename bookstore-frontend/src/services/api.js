@@ -28,3 +28,11 @@ export function getCartItems(userId) {
             .catch(err => reject(err));
     })
 }
+
+export function delCartItem(id) {
+    return new Promise((resolve, reject) => {
+        http.delete("/cart", { params: { id: id } })
+            .then(res => resolve(res))
+            .catch(err => reject(err));
+    })
+}

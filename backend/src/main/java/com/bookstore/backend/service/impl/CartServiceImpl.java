@@ -19,4 +19,9 @@ public class CartServiceImpl implements CartService {
   public List<CartItem> getCartItems(Integer userId) {
     return cartDao.getCartItems(userId);
   }
+
+  @Override
+  public void delCartItem(Integer id) {
+    cartDao.delCartItem(id);
+  }
 }

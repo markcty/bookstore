@@ -23,4 +23,10 @@ public class CartDaoImpl implements CartDao {
 
     return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItem.class));
   }
+
+  @Override
+  public void delCartItem(Integer id) {
+    String sql = "delete from cartItem where id=" + id;
+    jdbcTemplate.update(sql);
+  }
 }

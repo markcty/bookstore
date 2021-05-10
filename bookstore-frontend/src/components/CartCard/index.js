@@ -4,15 +4,15 @@ import { Col, Row } from "antd";
 import "./index.css";
 import { Link } from "react-router-dom";
 
-export default function CartCard({ id, price, title, author, inventory, coverUrl, bookId }) {
+export default function CartCard({ id, price, title, author, inventory, coverUrl, bookId, removeItem }) {
     return (
         <Row className="card" align={"middle"} gutter={16} wrap={false}
             style={{ paddingTop: 32, paddingBottom: 32, margin: 0 }}
         >
-            {/* <Col className={"deleteButton"} span={1}>
+            <Col className={"deleteButton"} span={1}>
                 <DeleteOutlined style={{ fontSize: "1.8em", color: "red" }}
-                    onClick={() => this.props.remove(this.props.index)} />
-            </Col> */}
+                    onClick={() => removeItem(id)} />
+            </Col>
             <Col xs={6} sm={6} md={9} lg={6} offset={1}>
                 <Link to={`book/${bookId}`}>
                     <img

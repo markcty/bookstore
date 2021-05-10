@@ -4,7 +4,7 @@ import CartCard from "../../components/CartCard";
 import "./index.css"
 import { Content } from "antd/es/layout/layout";
 import { Link } from "react-router-dom";
-import { getBook, getCartItems } from "../../services/api";
+import { delCartItem, getBook, getCartItems } from "../../services/api";
 import Book from "../Book";
 
 export default function Cart() {
@@ -13,9 +13,13 @@ export default function Cart() {
 
     const [cartItems, setCartItems] = useState([]);
 
-    useEffect(() => {
-        getCartItems(userId).then(cartItems => setCartItems(cartItems));
-    }, [])
+    const updateCart = () => getCartItems(userId).then(cartItems => setCartItems(cartItems));
+
+    const removeItem = (id) => {
+        delCartItem(id).then(updateCart);
+    }
+
+    useEffect(updateCart, []);
 
     return (
         <Content className={"page"}>
@@ -36,7 +40,7 @@ export default function Cart() {
                         {cartItems.map(book => {
                             return (
                                 <Col span={24}>
-                                    <CartCard {...book} key={book.id} />
+                                    <CartCard {...book} key={book.id} removeItem={removeItem} />
                                 </Col>
                             )
                         })}
@@ -44,7 +48,6 @@ export default function Cart() {
                 </Col>
                 <Col span={22}>
                     <Link to={"/checkout"}>
-
                         <div style={{ display: "flex", justifyContent: "center", marginTop: "32px" }}>
                             <Button type={"primary"} size={"large"}>Check Out</Button>
                         </div>
