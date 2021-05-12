@@ -1,8 +1,8 @@
-import {Layout} from "antd";
+import { Layout } from "antd";
 import BookstoreHeader from "./components/Header";
 import React from "react";
 import Home from "./pages/Home"
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Cart from "./pages/Cart";
 import Books from "./pages/Books";
 import Book from "./pages/Book";
@@ -13,34 +13,34 @@ import Manage from "./pages/Manage";
 import Orders from "./pages/Orders";
 import "./App.less";
 
-const {Footer} = Layout;
+const { Footer } = Layout;
 
 export default class App extends React.Component {
     render() {
         return (
             <Router>
                 <Layout>
-                    <BookstoreHeader/>
+                    <BookstoreHeader />
                     <Switch>
-                        <Route path={"/cart"} component={Cart}/>
+                        <Route path={"/cart"} component={Cart} />
 
-                        <Route path={"/books"} component={Books}/>
+                        <Route path={"/books"} component={Books} />
 
-                        <Route path={"/book/:id"} component={Book}/>
+                        <Route path={"/book/:id"} component={Book} />
 
-                        <Route path={"/checkout"} component={Checkout}/>
+                        <Route path={"/checkout"} component={Checkout} />
 
-                        <Route path={"/login"} component={Login}/>
+                        <Route path={"/login"} component={Login} />
 
-                        <Route path={"/search"} component={Search}/>
+                        <Route path={"/search"} component={Search} />
 
-                        <Route path={"/admin"} component={Manage}/>
+                        <Route path={"/admin"} component={Manage} />
 
-                        <Route path={"/orders"} component={Orders}/>
+                        <Route path={"/orders"} component={Orders} />
 
-                        <Route path={"/"} component={Home}/>
+                        <Route path={"/"} component={Home} />
                     </Switch>
-                    <Footer style={{textAlign: 'center', height: 50, marginTop: -50, paddingTop: 14}}>Created by
+                    <Footer style={{ textAlign: 'center', height: 50, marginTop: -50, paddingTop: 14 }}>Created by
                         markcty</Footer>
                 </Layout>
             </Router>

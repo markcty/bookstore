@@ -1,13 +1,13 @@
 import React from "react";
-import {Col, Row} from "antd";
+import { Col, Row } from "antd";
 import "./index.css"
 
-export default function BookCard({price, title, author, coverUrl}) {
+export default function BookCard({ price, title, author, coverUrl }) {
     return (
-        <div style={{display: "flex", justifyContent: "center"}}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
             <Row className={"book"}>
                 <Col className={"cover"}>
-                    <img alt={" "} src={coverUrl}/>
+                    <img alt={" "} src={coverUrl} />
                 </Col>
                 <Col span={24}>
                     <div className={"description"}>

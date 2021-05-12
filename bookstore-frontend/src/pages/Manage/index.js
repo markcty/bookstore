@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {Button, Col, Row, Space, Table} from "antd";
-import {Content} from "antd/es/layout/layout";
+import React, { useState } from "react";
+import { Button, Col, Row, Space, Table } from "antd";
+import { Content } from "antd/es/layout/layout";
 import BookEditCard from "../../components/BookEditCard";
 import Search from "antd/es/input/Search";
 
@@ -142,13 +142,13 @@ export default function Manage(props) {
                                 />
                                 : emptyEditCard}
                         </Col>
-                        <Col span={24} style={{display: "flex"}}>
-                            <Button type={"primary"} onClick={() => setCurrentBook(-1)} style={{marginRight: 16}}>
+                        <Col span={24} style={{ display: "flex" }}>
+                            <Button type={"primary"} onClick={() => setCurrentBook(-1)} style={{ marginRight: 16 }}>
                                 Add A Book
                             </Button>
                             <Search placeholder="input book title or author" allowClear
-                                    onSearch={(v) => setSearchText(v.toLowerCase())}
-                                    style={{width: 300}}/>
+                                onSearch={(v) => setSearchText(v.toLowerCase())}
+                                style={{ width: 300 }} />
                         </Col>
                         <Col span={24}>
                             <Table

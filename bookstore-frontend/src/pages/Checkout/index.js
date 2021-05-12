@@ -1,9 +1,9 @@
-import React, {useState} from "react";
-import {Button, Col, Form, Input, Layout, Row} from "antd";
+import React, { useState } from "react";
+import { Button, Col, Form, Input, Layout, Row } from "antd";
 import CartCard from "../../components/CartCard";
 import "./index.css"
 
-const {Content} = Layout
+const { Content } = Layout
 
 export default function Checkout(props) {
     const [form] = Form.useForm();
@@ -82,12 +82,12 @@ export default function Checkout(props) {
                                 Items
                             </h1>
                         </Col>
-                        <Col span={24} style={{paddingBottom: 24}}>
+                        <Col span={24} style={{ paddingBottom: 24 }}>
                             <Row gutter={48}>
                                 {books.map(book => {
                                     return (
                                         <Col span={24}>
-                                            <CartCard {...book}/>
+                                            <CartCard {...book} />
                                         </Col>
                                     )
                                 })}
@@ -105,10 +105,10 @@ export default function Checkout(props) {
                             </h1>
                         </Col>
                         <Col span={24}
-                             style={{display: "flex", justifyContent: "flex-start"}}>
+                            style={{ display: "flex", justifyContent: "flex-start" }}>
                             <Form {...layout} name="nest-messages" onFinish={(value) => console.log(value)}
-                                  validateMessages={validateMessages} style={{width: "100%"}}
-                                  form={form}
+                                validateMessages={validateMessages} style={{ width: "100%" }}
+                                form={form}
                             >
                                 <Form.Item
                                     name={['user', 'name']}
@@ -119,7 +119,7 @@ export default function Checkout(props) {
                                         },
                                     ]}
                                 >
-                                    <Input/>
+                                    <Input />
                                 </Form.Item>
                                 <Form.Item
                                     name={['user', 'phone']}
@@ -130,28 +130,28 @@ export default function Checkout(props) {
                                         },
                                     ]}
                                 >
-                                    <Input/>
+                                    <Input />
                                 </Form.Item>
                                 <Form.Item name={['user', 'address']}
-                                           label="Address"
-                                           rules={[
-                                               {
-                                                   required: true
-                                               },
-                                           ]}
+                                    label="Address"
+                                    rules={[
+                                        {
+                                            required: true
+                                        },
+                                    ]}
                                 >
-                                    <Input/>
+                                    <Input />
                                 </Form.Item>
                                 <Form.Item name={['user', 'Notes']} label="Notes">
-                                    <Input.TextArea/>
+                                    <Input.TextArea />
                                 </Form.Item>
                             </Form>
                         </Col>
                         <Col span={24}
-                             style={{display: "flex", justifyContent: "flex-end", marginTop: 16}}
+                            style={{ display: "flex", justifyContent: "flex-end", marginTop: 16 }}
                         >
-                            <Button type={"primary"} size={"large"} style={{width: 100}}
-                                    onClick={() => form.submit()}>Pay</Button>
+                            <Button type={"primary"} size={"large"} style={{ width: 100 }}
+                                onClick={() => form.submit()}>Pay</Button>
                         </Col>
                     </Row>
                 </Col>

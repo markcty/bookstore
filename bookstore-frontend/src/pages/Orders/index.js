@@ -1,9 +1,9 @@
-import React, {useState} from "react";
-import {Content} from "antd/es/layout/layout";
-import {Col, DatePicker, Row, Table} from "antd";
+import React, { useState } from "react";
+import { Content } from "antd/es/layout/layout";
+import { Col, DatePicker, Row, Table } from "antd";
 import Search from "antd/es/input/Search";
 
-const {RangePicker} = DatePicker;
+const { RangePicker } = DatePicker;
 
 export default function Orders() {
     const [books, setBooks] = useState(
@@ -86,7 +86,7 @@ export default function Orders() {
 
     const [dateRange, setDateRange] = useState(
         [new Date("January 1, 1900 00:00:00"),
-            new Date("January 1, 2099 00:00:00")
+        new Date("January 1, 2099 00:00:00")
         ])
 
     return (
@@ -94,13 +94,13 @@ export default function Orders() {
             <Row justify={"center"}>
                 <Col xs={22} sm={20} md={18} lg={16} xl={14}>
                     <Row gutter={[32, 16]}>
-                        <Col span={24} style={{display: "flex", justifyContent: "space-between"}}>
+                        <Col span={24} style={{ display: "flex", justifyContent: "space-between" }}>
                             <RangePicker onChange={(range) => {
                                 setDateRange(range)
-                            }}/>
+                            }} />
                             <Search placeholder="input book title or author" allowClear
-                                    onSearch={(v) => setSearchText(v.toLowerCase())}
-                                    style={{width: 300}}/>
+                                onSearch={(v) => setSearchText(v.toLowerCase())}
+                                style={{ width: 300 }} />
                         </Col>
                         <Col span={24}>
                             <Table
