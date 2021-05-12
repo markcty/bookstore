@@ -3,15 +3,16 @@ import "./index.css";
 import { Content } from "antd/es/layout/layout";
 import { Button, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import Checkbox from "antd/es/checkbox/Checkbox";
-import { login } from "../../services/api";
+import { useAuth } from "../../services/auth";
+import { Redirect } from "react-router";
 
 export default function Login() {
-    const onFinish = (values) => {
-        login(values.username, values.password)
-            .then(() => console.log("log in succeed"))
-            .catch(() => console.log("wrong username or password"));
-    };
+    const auth = useAuth();
+
+    if (auth.isLogin) return <Redirect to="/" />;
+
+
+    const onFinish = ({ username, password }) => auth.login(username, password).catch(err => window.alert("wrong username or password"));
 
     return (
         <Content className={"page loginPage"} style={{
@@ -31,9 +32,6 @@ export default function Login() {
                 <Form
                     name="normal_login"
                     className="login-form"
-                    initialValues={{
-                        remember: true,
-                    }}
                     onFinish={onFinish}
                 >
                     <Form.Item
@@ -62,11 +60,6 @@ export default function Login() {
                             type="password"
                             placeholder="Password"
                         />
-                    </Form.Item>
-                    <Form.Item>
-                        <Form.Item name="remember" valuePropName="checked" noStyle>
-                            <Checkbox>Remember me</Checkbox>
-                        </Form.Item>
                     </Form.Item>
 
                     <Form.Item>

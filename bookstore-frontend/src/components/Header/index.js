@@ -6,13 +6,13 @@ import avatar from "./avatar.JPG"
 import "./index.css"
 import { SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Link, withRouter } from "react-router-dom";
+import { useAuth } from "../../services/auth";
 
-const { Header } = Layout;
+const { Header: AntHeader } = Layout;
 const { Search } = Input;
 
-function BookstoreHeader(props) {
-    // const [isLogin, setIsLogin] = useState(true);
-    // const [username, setUsername] = useState("markcty");
+function Header(props) {
+    const auth = useAuth();
 
     const loginMenu = (
         <Menu>
@@ -23,11 +23,11 @@ function BookstoreHeader(props) {
             <Menu.Divider />
             <Menu.Item><span>Profile</span></Menu.Item>
             <Menu.Item><Link to={"/admin/manage"}><span>Manage</span></Link></Menu.Item>
-            <Menu.Item><span>Log Out</span></Menu.Item>
+            <Menu.Item><span onClick={auth.logout}>Log Out</span></Menu.Item>
         </Menu>
     );
     return (
-        <Header className={'desktopHeader'}>
+        <AntHeader className={'desktopHeader'}>
             <Row className={'headerContainer'} justify={"center"} gutter={16} wrap={false}>
                 {/*logo*/}
                 <Col span={1}>
@@ -88,26 +88,30 @@ function BookstoreHeader(props) {
                 </Col>
                 {/*avatar*/}
                 <Col>
-                    <Dropdown overlay={loginMenu} placement="bottomRight">
-                        <div style={{ cursor: "pointer", whiteSpace: "nowrap" }}>
-                            <Avatar
-                                src={
-                                    <Image src={avatar} preview={false} />
-                                }
-                            />
-                            {/*<span style={{marginLeft: 8}}>*/}
-                            {/*    {this.state.username}*/}
-                            {/*</span>*/}
-                        </div>
-                    </Dropdown>
+                    {(auth.isLogin ?
+                        <Dropdown overlay={loginMenu} placement="bottomRight">
+                            <div style={{ cursor: "pointer", whiteSpace: "nowrap" }}>
+                                <Avatar
+                                    src={
+                                        <Image src={avatar} preview={false} />
+                                    }
+                                />
+                                {/*<span style={{marginLeft: 8}}>*/}
+                                {/*    {this.state.username}*/}
+                                {/*</span>*/}
+                            </div>
+                        </Dropdown>
+                        :
+                        <Link to={"/login"}>Log In</Link>
+                    )}
                 </Col>
             </Row>
-        </Header>
+        </AntHeader>
     )
 }
 
-BookstoreHeader.propTypes = {
+Header.propTypes = {
     history: PropTypes.object.isRequired,
 };
 
-export default withRouter(BookstoreHeader);
+export default withRouter(Header);

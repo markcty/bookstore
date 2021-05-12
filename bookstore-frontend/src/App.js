@@ -1,5 +1,5 @@
 import { Layout } from "antd";
-import BookstoreHeader from "./components/Header";
+import Header from "./components/Header";
 import React from "react";
 import Home from "./pages/Home"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -12,38 +12,38 @@ import Search from "./pages/Search"
 import Manage from "./pages/Manage";
 import Orders from "./pages/Orders";
 import "./App.less";
+import { ProvideAuth } from "./services/auth";
+import { PrivateRoute } from "./utils/privateRoute";
+
 
 const { Footer } = Layout;
 
-export default class App extends React.Component {
-    render() {
-        return (
+export default function App() {
+
+    // const [state, dispatch] = useReducer(reducer, initialState);
+
+
+    return (
+        <ProvideAuth>
             <Router>
                 <Layout>
-                    <BookstoreHeader />
+                    <Header />
                     <Switch>
-                        <Route path={"/cart"} component={Cart} />
-
+                        <PrivateRoute path={"/cart"} component={Cart} />
                         <Route path={"/books"} component={Books} />
-
-                        <Route path={"/book/:id"} component={Book} />
-
+                        <Route path={"/book/:bookId"} component={Book} />
                         <Route path={"/checkout"} component={Checkout} />
-
                         <Route path={"/login"} component={Login} />
-
                         <Route path={"/search"} component={Search} />
-
                         <Route path={"/admin"} component={Manage} />
-
                         <Route path={"/orders"} component={Orders} />
-
                         <Route path={"/"} component={Home} />
                     </Switch>
                     <Footer style={{ textAlign: 'center', height: 50, marginTop: -50, paddingTop: 14 }}>Created by
-                        markcty</Footer>
+                            markcty</Footer>
                 </Layout>
             </Router>
-        );
-    }
+        </ProvideAuth>
+    );
+
 }

@@ -4,8 +4,8 @@ import CartCard from "../../components/CartCard";
 import "./index.css"
 import { Content } from "antd/es/layout/layout";
 import { Link } from "react-router-dom";
-import { delCartItem, getBook, getCartItems } from "../../services/api";
-import Book from "../Book";
+import { delCartItem, getCartItems } from "../../services/api";
+import { useAuth } from "../../services/auth";
 
 export default function Cart() {
 

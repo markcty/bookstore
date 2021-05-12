@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Content } from "antd/es/layout/layout";
 import { Button, Col, Row } from "antd";
 import "./index.css"
-import { addCartItem, getBook, getBooks } from "../../services/api";
+import { addCartItem, getBook } from "../../services/api";
+import { useParams } from "react-router";
 
 
 export default function Book() {
     const [bookInfo, setBookInfo] = useState(null);
     const userId = 1;
 
+    let { bookId } = useParams();
+
     useEffect(() => {
-        let s = window.location.pathname;
-        let bookId = s.substring(s.lastIndexOf('/') + 1);
+        console.log(bookId);
         getBook(bookId).then(bookInfo => setBookInfo(bookInfo));
-    }, [])
+    }, [bookId])
 
     if (!bookInfo)
         return (

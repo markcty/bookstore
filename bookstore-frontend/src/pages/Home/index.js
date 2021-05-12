@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Layout, Row } from "antd"
+import { Col, Layout, Row } from "antd";
 import Banner from "../../components/Banner/Banner";
 import "./index.css";
 import PopularBookList from "../../components/PopularBookList";
