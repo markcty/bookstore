@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
-@RequestMapping("/api")
 @CrossOrigin
+@RequestMapping("/api")
 public class AuthController {
 
   @Autowired

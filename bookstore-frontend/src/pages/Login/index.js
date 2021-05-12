@@ -8,8 +8,9 @@ import { login } from "../../services/api";
 
 export default function Login() {
     const onFinish = (values) => {
-        console.log(values);
-        login(values.username, values.password);
+        login(values.username, values.password)
+            .then(() => console.log("log in succeed"))
+            .catch(() => console.log("wrong username or password"));
     };
 
     return (
@@ -66,10 +67,6 @@ export default function Login() {
                         <Form.Item name="remember" valuePropName="checked" noStyle>
                             <Checkbox>Remember me</Checkbox>
                         </Form.Item>
-
-                        {/*<a className="login-form-forgot" href="">*/}
-                        {/*    Forgot password*/}
-                        {/*</a>*/}
                     </Form.Item>
 
                     <Form.Item>
