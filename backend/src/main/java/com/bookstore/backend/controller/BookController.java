@@ -8,19 +8,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class BookController {
 
     @Autowired
     BookService bookService;
 
-    @CrossOrigin
     @GetMapping("/books")
     public List<Book> getBooks() {
         return bookService.getBooks();
     }
 
-    @CrossOrigin
     @GetMapping("/book")
     public Book getBook(@RequestParam Integer id) {
         return bookService.getBook(id);

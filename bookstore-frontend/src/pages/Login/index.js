@@ -1,13 +1,15 @@
 import React from "react";
 import "./index.css";
-import {Content} from "antd/es/layout/layout";
-import {Button, Form, Input} from 'antd';
-import {LockOutlined, UserOutlined} from '@ant-design/icons';
+import { Content } from "antd/es/layout/layout";
+import { Button, Form, Input } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import Checkbox from "antd/es/checkbox/Checkbox";
+import { login } from "../../services/api";
 
 export default function Login() {
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
+        console.log(values);
+        login(values.username, values.password);
     };
 
     return (
@@ -19,11 +21,11 @@ export default function Login() {
             alignItems: "center",
         }}>
             <div className={"loginCard"}
-                 style={{display: "flex", flexDirection: "column", paddingLeft: 48, paddingRight: 48}}>
+                style={{ display: "flex", flexDirection: "column", paddingLeft: 48, paddingRight: 48 }}>
                 <div className={"cardTitle"}
-                     style={{textAlign: "center", marginBottom: "32px", marginTop: "16px"}}>
-                    <h2 style={{paddingBottom: "8px"}}>LOGIN</h2>
-                    <div id={"underline-title"}/>
+                    style={{ textAlign: "center", marginBottom: "32px", marginTop: "16px" }}>
+                    <h2 style={{ paddingBottom: "8px" }}>LOGIN</h2>
+                    <div id={"underline-title"} />
                 </div>
                 <Form
                     name="normal_login"
@@ -42,8 +44,8 @@ export default function Login() {
                             },
                         ]}
                     >
-                        <Input prefix={<UserOutlined className="site-form-item-icon"/>}
-                               placeholder="Username"/>
+                        <Input prefix={<UserOutlined className="site-form-item-icon" />}
+                            placeholder="Username" />
                     </Form.Item>
                     <Form.Item
                         name="password"
@@ -55,7 +57,7 @@ export default function Login() {
                         ]}
                     >
                         <Input
-                            prefix={<LockOutlined className="site-form-item-icon"/>}
+                            prefix={<LockOutlined className="site-form-item-icon" />}
                             type="password"
                             placeholder="Password"
                         />

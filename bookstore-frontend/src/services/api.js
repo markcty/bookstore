@@ -45,3 +45,11 @@ export function addCartItem(userId, bookId) {
             .catch(err => reject(err));
     })
 }
+
+export function login(username, password) {
+    return new Promise((resolve, reject) => {
+        http.post("/login", { auth: { username: username, password: password } })
+            .then(res => resolve(res))
+            .catch(err => reject(err));
+    })
+}
