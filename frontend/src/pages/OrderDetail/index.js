@@ -19,7 +19,7 @@ export default function OrderDetail() {
   return (
     <Content className={"page"}>
       <Row justify={"center"}>
-        <Col xs={22} sm={20} md={20} lg={18} xl={16}>
+        <Col xs={22} sm={22} md={20} lg={18} xl={16}>
           <BookTable books={books} />
         </Col>
       </Row>

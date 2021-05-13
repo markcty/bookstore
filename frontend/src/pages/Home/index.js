@@ -13,10 +13,10 @@ export default function Home() {
                 align={"middle"}
                 gutter={[16, 32]}
             >
-                <Col xs={24} sm={20} md={18} lg={16} xl={14}>
+                <Col xs={22} sm={22} md={20} lg={18} xl={16}>
                     <Banner />
                 </Col>
-                <Col xs={24} sm={20} md={18} lg={16} xl={14}>
+                <Col xs={22} sm={20} md={20} lg={18} xl={16}>
                     <PopularBookList />
                 </Col>
             </Row>

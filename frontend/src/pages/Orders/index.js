@@ -85,7 +85,7 @@ export default function Orders() {
     return (
         <Content className={"page"}>
             <Row justify={"center"}>
-                <Col xs={22} sm={20} md={18} lg={18} xl={16}>
+                <Col xs={22} sm={22} md={20} lg={18} xl={16}>
                     <Row gutter={[32, 16]}>
                         <Col span={24} style={{ display: "flex", justifyContent: "space-between" }}>
                             <RangePicker onChange={(range) => {

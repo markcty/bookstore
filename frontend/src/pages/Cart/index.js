@@ -22,7 +22,7 @@ export default function Cart() {
         <Content className={"page"}>
             <Row justify={"center"}
                 align={"middle"}>
-                <Col xs={22} sm={20} md={18} lg={16} xl={14}>
+                <Col xs={22} sm={22} md={20} lg={18} xl={16}>
                     <h1 style={{
                         borderBottom: "2px solid #E1E8EE",
                         textAlign: "center",
@@ -32,7 +32,7 @@ export default function Cart() {
                         My Cart
                     </h1>
                 </Col>
-                <Col xs={22} sm={20} md={18} lg={16} xl={14}>
+                <Col xs={22} sm={22} md={20} lg={18} xl={16}>
                     <Row gutter={48}>
                         {cartItems.map(item => {
                             return (

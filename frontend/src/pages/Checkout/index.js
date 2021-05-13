@@ -59,7 +59,7 @@ function Checkout(props) {
     return (
         <Content className={"page"}>
             <Row justify={"center"}>
-                <Col xs={24} sm={20} md={18} lg={16} xl={14}>
+                <Col xs={22} sm={22} md={20} lg={18} xl={16}>
                     <Row justify={"center"}>
                         <Col span={24}>
                             <h1 style={{

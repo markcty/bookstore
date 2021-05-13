@@ -96,9 +96,6 @@ function Header(props) {
                                         <Image src={avatar} preview={false} />
                                     }
                                 />
-                                {/*<span style={{marginLeft: 8}}>*/}
-                                {/*    {this.state.username}*/}
-                                {/*</span>*/}
                             </div>
                         </Dropdown>
                         :
