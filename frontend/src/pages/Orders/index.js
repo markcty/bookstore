@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Content } from "antd/es/layout/layout";
-import { Col, DatePicker, Row, Table } from "antd";
-import Search from "antd/es/input/Search";
+import { Col, DatePicker, Row, Space, Table } from "antd";
 import { getOrders } from "../../services/api";
+import { Link } from "react-router-dom";
 
 const { RangePicker } = DatePicker;
 
@@ -18,7 +18,7 @@ export default function Orders() {
                         receiverName: order.name,
                         address: order.address,
                         phoneNumber: order.phoneNumber,
-                        price: 100,
+                        price: order.totalPrice,
                         purchaseDate: new Date(Date.parse(order.time))
                     }
                 });
@@ -51,7 +51,7 @@ export default function Orders() {
             key: "address"
         },
         {
-            title: "Price",
+            title: "Total Price",
             dataIndex: "price",
             key: "price",
             sortDirections: ['ascend', 'descend', 'ascend'],
@@ -64,10 +64,17 @@ export default function Orders() {
             sortDirections: ['ascend', 'descend', 'ascend'],
             render: date => date.toLocaleString(),
             sorter: (a, b) => new Date(a.purchaseDate) - new Date(b.purchaseDate)
+        },
+        {
+            title: "Operation",
+            dataIndex: "orderId",
+            key: "orderId",
+            render: id =>
+                <Space size={"middle"}>
+                    <Link to={`/order/${id}`}>Detail</Link>
+                </Space>
         }
     ];
-
-    const [searchText, setSearchText] = useState("");
 
     const [dateRange, setDateRange] = useState(
         [
@@ -78,7 +85,7 @@ export default function Orders() {
     return (
         <Content className={"page"}>
             <Row justify={"center"}>
-                <Col xs={22} sm={20} md={18} lg={16} xl={14}>
+                <Col xs={22} sm={20} md={18} lg={18} xl={16}>
                     <Row gutter={[32, 16]}>
                         <Col span={24} style={{ display: "flex", justifyContent: "space-between" }}>
                             <RangePicker onChange={(range) => {

@@ -39,7 +39,7 @@ export function getCartItems() {
 }
 
 export function delCartItem(cartItemId) {
-    const { id: userId, username, password } = getUser();
+    const { username, password } = getUser();
     return new Promise((resolve, reject) => {
         http({
             method: "DELETE",
@@ -92,6 +92,15 @@ export function getOrders() {
     const { username, password } = getUser();
     return new Promise((resolve, reject) => {
         http.get("/orders", { auth: { username: username, password: password } })
+            .then(res => resolve(res))
+            .catch(err => reject(err));
+    })
+}
+
+export function getOrderDetail(id) {
+    const { username, password } = getUser();
+    return new Promise((resolve, reject) => {
+        http.get("/order", { params: { id: id }, auth: { username: username, password: password } })
             .then(res => resolve(res))
             .catch(err => reject(err));
     })

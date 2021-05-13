@@ -3,6 +3,7 @@ package com.bookstore.backend.service.impl;
 import java.util.List;
 
 import com.bookstore.backend.dao.OrderDao;
+import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.service.CartService;
 import com.bookstore.backend.service.OrderService;
@@ -24,7 +25,10 @@ public class OrderServiceImpl implements OrderService {
     var items = cartService.getCartItems(userId);
     if (items.isEmpty())
       return "No items to checkout";
-    var orderId = orderDao.createOrder(userId, name, phoneNumber, address, note);
+    Double totalPrice = 0.0;
+    for (var item : items)
+      totalPrice += item.getPrice();
+    var orderId = orderDao.createOrder(userId, name, phoneNumber, address, note, totalPrice);
     items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBookId()));
     cartService.clearCart(userId);
     return "success";
@@ -34,6 +38,11 @@ public class OrderServiceImpl implements OrderService {
   @Override
   public List<Order> getOrders(Integer userId) {
     return orderDao.getOrders(userId);
+  }
+
+  @Override
+  public List<Book> getOrderDetail(Integer id) {
+    return orderDao.getBooksOfOrder(id);
   }
 
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import { Button, Col, Form, Input, Layout, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { withRouter, useHistory } from "react-router";

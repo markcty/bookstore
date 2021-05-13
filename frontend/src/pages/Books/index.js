@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
 import { Col, Row } from "antd";
-import "./index.css"
-import BookCard from "../../components/BookCard";
 import { Content } from "antd/es/layout/layout";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import BookTable from "../../components/BookTable";
 import { getBooks } from "../../services/api";
+import "./index.css";
 
 export default function Books() {
     const [books, setBooks] = useState([]);
@@ -16,19 +15,10 @@ export default function Books() {
     return (
         <Content className={"page"}>
             <Row justify={"center"}>
-                <Col xs={24} sm={20} md={18} lg={16} xl={14}>
-                    <Row className={"bookCards"} gutter={[32, 16]}>
-                        {books.map(book => {
-                            return (
-                                <Col key={book.id} xs={24} sm={12} md={6} lg={6} xl={6}>
-                                    <Link to={`/book/${book.id}`}> <BookCard {...book} /> </Link>
-                                </Col>
-                            );
-                        })}
-                    </Row>
+                <Col xs={24} sm={20} md={20} lg={18} xl={16}>
+                    <BookTable books={books} />
                 </Col>
             </Row>
         </Content>
     )
-
 }

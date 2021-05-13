@@ -15,6 +15,7 @@ import "./App.less";
 import { ProvideAuth } from "./services/auth";
 import { PrivateRoute } from "./utils/privateRoute";
 import Thanks from "./pages/Thanks";
+import OrderDetail from "./pages/OrderDetail";
 
 
 const { Footer } = Layout;
@@ -39,6 +40,7 @@ export default function App() {
                         <PrivateRoute path={"/admin"} component={Manage} />
                         <Route path={"/orders"} component={Orders} />
                         <Route path={"/thanks"} component={Thanks} />
+                        <Route path={"/order/:orderId"} component={OrderDetail} />
                         <Route path={"/"} component={Home} />
                     </Switch>
                     <Footer style={{ textAlign: 'center', height: 50, marginTop: -50, paddingTop: 14 }}>Created by

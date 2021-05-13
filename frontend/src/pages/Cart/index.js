@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
 import { Button, Col, Row } from "antd";
-import CartCard from "../../components/CartCard";
-import "./index.css"
 import { Content } from "antd/es/layout/layout";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CartCard from "../../components/CartCard";
 import { delCartItem, getCartItems } from "../../services/api";
-import { useAuth } from "../../services/auth";
+import "./index.css";
 
 export default function Cart() {
-
-    const auth = useAuth();
 
     const [cartItems, setCartItems] = useState([]);
 
