@@ -13,8 +13,8 @@ public final class AuthUserFactory {
   private AuthUserFactory() {
   }
 
-  public static AuthUser create(User user) {
-    return new AuthUser(user.getId(), user.getUsername(), user.getPassword(), user.getEmail(),
+  public static AuthUserDetail create(User user) {
+    return new AuthUserDetail(user.getId(), user.getUsername(), user.getPassword(), user.getEmail(),
         mapToGrantedAuthorities(user.getIsAdmin()), user.getIsEnabled());
   }
 

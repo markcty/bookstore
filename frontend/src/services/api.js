@@ -79,10 +79,19 @@ export function checkout(order) {
     return new Promise((resolve, reject) => {
         http({
             method: "POST",
-            url: "/order",
+            url: "/checkout",
             auth: { username, password },
             data: { userId: userId, ...order }
         })
+            .then(res => resolve(res))
+            .catch(err => reject(err));
+    })
+}
+
+export function getOrders() {
+    const { username, password } = getUser();
+    return new Promise((resolve, reject) => {
+        http.get("/orders", { auth: { username: username, password: password } })
             .then(res => resolve(res))
             .catch(err => reject(err));
     })

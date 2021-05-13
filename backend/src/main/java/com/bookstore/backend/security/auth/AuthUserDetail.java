@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class AuthUser implements UserDetails {
+public class AuthUserDetail implements UserDetails {
   private final Integer id;
   private final String username;
   private final String password;
@@ -15,7 +15,7 @@ public class AuthUser implements UserDetails {
   private final Collection<? extends GrantedAuthority> authorities;
   private final Boolean isEnabled;
 
-  public AuthUser(Integer id, String username, String password, String email,
+  public AuthUserDetail(Integer id, String username, String password, String email,
       Collection<? extends GrantedAuthority> authorities, Integer isEnabled) {
     this.id = id;
     this.username = username;

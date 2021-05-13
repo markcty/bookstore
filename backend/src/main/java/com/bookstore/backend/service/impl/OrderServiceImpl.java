@@ -1,6 +1,9 @@
 package com.bookstore.backend.service.impl;
 
+import java.util.List;
+
 import com.bookstore.backend.dao.OrderDao;
+import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.service.CartService;
 import com.bookstore.backend.service.OrderService;
 
@@ -25,6 +28,12 @@ public class OrderServiceImpl implements OrderService {
     items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBookId()));
     cartService.clearCart(userId);
     return "success";
+
+  }
+
+  @Override
+  public List<Order> getOrders(Integer userId) {
+    return orderDao.getOrders(userId);
   }
 
 }
