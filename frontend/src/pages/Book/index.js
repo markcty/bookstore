@@ -8,12 +8,10 @@ import { useParams } from "react-router";
 
 export default function Book() {
     const [bookInfo, setBookInfo] = useState(null);
-    const userId = 1;
 
     let { bookId } = useParams();
 
     useEffect(() => {
-        console.log(bookId);
         getBook(bookId).then(bookInfo => setBookInfo(bookInfo));
     }, [bookId])
 
@@ -49,7 +47,7 @@ export default function Book() {
                         >
                             ${price}
                         </h1>
-                        <Button type={"primary"} size={"large"} onClick={() => addCartItem(userId, id)}>Add To Cart</Button>
+                        <Button type={"primary"} size={"large"} onClick={() => addCartItem(id)}>Add To Cart</Button>
                     </div>
                 </Col>
             </Row>

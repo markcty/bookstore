@@ -22,10 +22,23 @@ function useProvideAuth() {
 
   const login = (username, password) => {
     return realLogin(username, password)
-      .then((res) => { setIsLogin(true); Cookies.set("isLogin", "true"); Cookies.set("username", username); Cookies.set("password", password); });
+      .then(res => {
+        setIsLogin(true);
+        Cookies.set("isLogin", "true");
+        console.log(res);
+        Cookies.set("user", JSON.stringify(res.data));
+      });
   };
 
-  const logout = () => { setIsLogin(false); Cookies.remove("isLogin"); Cookies.remove("username"); Cookies.remove("password"); };
+  const logout = () => {
+    setIsLogin(false);
+    Cookies.remove("isLogin");
+    Cookies.remove("user");
+  };
 
-  return { isLogin, login, logout };
+  const getUser = () => {
+    return JSON.parse(Cookies.get("user"));
+  }
+
+  return { isLogin, login, logout, getUser };
 }

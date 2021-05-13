@@ -49,7 +49,6 @@ export default function Manage(props) {
     const updateBook = (bookInfo) => {
         // update the book information by ISBN
         // if ISBN does not exist then add the book
-        console.log(bookInfo);
         let next = books.filter(book => book.ISBN !== bookInfo.ISBN);
         next.push({
             ISBN: bookInfo.ISBN,

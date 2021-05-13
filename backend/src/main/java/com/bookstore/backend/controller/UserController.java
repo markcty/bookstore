@@ -2,9 +2,14 @@ package com.bookstore.backend.controller;
 
 import java.util.Map;
 
+import com.bookstore.backend.entity.User;
 import com.bookstore.backend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.trace.http.HttpTrace.Principal;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,24 +24,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
 
   @Autowired
-  UserService authService;
-
-  @Autowired
-  PasswordEncoder passwordEncoder;
+  UserService userService;
 
   @PostMapping("/register")
   public void register(@RequestBody Map<String, String> body) {
-    var username = body.get("username");
-    var password = body.get("password");
-    System.out.println("register!!!!!!");
-    System.out.println(username);
-    System.out.println(password);
-    authService.register(username, password);
+    userService.register(body.get("username"), body.get("password"));
   }
 
   @GetMapping("/login")
-  public String login() {
-    System.out.println("login!!!!!!!!!!");
-    return "Welcome";
+  public User login() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String username = authentication.getName();
+    var user = userService.getUser(username);
+    return user.get();
   }
 }

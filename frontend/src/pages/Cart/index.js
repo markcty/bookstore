@@ -9,7 +9,9 @@ import { useAuth } from "../../services/auth";
 
 export default function Cart() {
 
-    const userId = 1;
+    const auth = useAuth();
+
+    const { id: userId } = auth.getUser();
 
     const [cartItems, setCartItems] = useState([]);
 

@@ -1,9 +1,15 @@
 import axios from "axios";
-import { apiUrl } from "./config";
+import { useAuth } from "./auth";
+import { apiUrl } from "./config"
+import Cookies from "js-cookie";
 
 const http = axios.create({
     baseURL: apiUrl + "/api",
 });
+
+const getUser = () => {
+    return JSON.parse(Cookies.get("user"));
+}
 
 export function getBooks() {
     return new Promise((resolve, reject) => {
@@ -21,26 +27,41 @@ export function getBook(id) {
     })
 }
 
-export function getCartItems(userId) {
+export function getCartItems() {
+    const { id: userId, username, password } = getUser();
     return new Promise((resolve, reject) => {
-        http.get("/cart", { params: { userId: userId } })
+        http.get("/cart", {
+            params: { userId: userId },
+            auth: { username: username, password: password }
+        })
             .then(res => resolve(res.data))
             .catch(err => reject(err));
     })
 }
 
-export function delCartItem(id) {
+export function delCartItem(cartItemId) {
+    const { id: userId, username, password } = getUser();
     return new Promise((resolve, reject) => {
-        http.delete("/cart", { params: { id: id } })
+        http({
+            method: "DELETE",
+            url: "/cart",
+            auth: { username, password },
+            params: { id: cartItemId }
+        })
             .then(res => resolve(res))
             .catch(err => reject(err));
     })
 }
 
-export function addCartItem(userId, bookId) {
+export function addCartItem(bookId) {
+    const { id: userId, username, password } = getUser();
     return new Promise((resolve, reject) => {
-        console.log(userId, bookId);
-        http.post("/cart", { userId: userId, bookId: bookId })
+        http({
+            method: "POST",
+            url: "/cart",
+            auth: { username, password },
+            data: { userId: userId, bookId: bookId }
+        })
             .then(res => resolve(res))
             .catch(err => reject(err));
     })
