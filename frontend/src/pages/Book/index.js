@@ -3,13 +3,17 @@ import { Content } from "antd/es/layout/layout";
 import { Button, Col, Row } from "antd";
 import "./index.css"
 import { addCartItem, getBook } from "../../services/api";
-import { useParams } from "react-router";
+import { useHistory, useParams, withRouter } from "react-router";
+import { useAuth } from "../../services/auth"
 
-
-export default function Book() {
+function Book() {
     const [bookInfo, setBookInfo] = useState(null);
 
-    let { bookId } = useParams();
+    const { bookId } = useParams();
+
+    const { isLogin } = useAuth();
+
+    let history = useHistory();
 
     useEffect(() => {
         getBook(bookId).then(bookInfo => setBookInfo(bookInfo));
@@ -25,6 +29,15 @@ export default function Book() {
         )
 
     const { coverUrl, title, author, price, description, id } = bookInfo;
+
+    const onAddToCart = () => {
+        if (!isLogin) {
+            history.push("/login");
+            return;
+        }
+        addCartItem(id)
+            .then(() => window.alert("Book Added"))
+    }
 
     return (
         <Content className={"page"}>
@@ -47,7 +60,7 @@ export default function Book() {
                         >
                             ${price}
                         </h1>
-                        <Button type={"primary"} size={"large"} onClick={() => addCartItem(id).then(() => window.alert("Book Added"))}>Add To Cart</Button>
+                        <Button type={"primary"} size={"large"} onClick={onAddToCart}>Add To Cart</Button>
                     </div>
                 </Col>
             </Row>
@@ -55,3 +68,5 @@ export default function Book() {
     );
 
 }
+
+export default withRouter(Book);

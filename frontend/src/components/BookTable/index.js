@@ -10,7 +10,7 @@ function BookTable({ books }) {
       title: "Title",
       dataIndex: "title",
       key: "title",
-      render: (text, record) => <Link to={`book/${record.id}`}>{text}</Link>
+      render: (text, record) => <Link to={`/book/${record.id}`}>{text}</Link>
     },
     {
       title: "ISBN",
