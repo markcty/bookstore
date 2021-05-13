@@ -47,7 +47,7 @@ export default function Book() {
                         >
                             ${price}
                         </h1>
-                        <Button type={"primary"} size={"large"} onClick={() => addCartItem(id)}>Add To Cart</Button>
+                        <Button type={"primary"} size={"large"} onClick={() => addCartItem(id).then(() => window.alert("Book Added"))}>Add To Cart</Button>
                     </div>
                 </Col>
             </Row>

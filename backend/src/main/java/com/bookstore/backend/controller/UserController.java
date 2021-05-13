@@ -6,11 +6,10 @@ import com.bookstore.backend.entity.User;
 import com.bookstore.backend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.trace.http.HttpTrace.Principal;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

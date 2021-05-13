@@ -1,49 +1,39 @@
-import React, { useState } from "react";
 import { Button, Col, Form, Input, Layout, Row } from "antd";
+import React, { useEffect, useState } from "react";
+import { withRouter, useHistory } from "react-router";
 import CartCard from "../../components/CartCard";
-import "./index.css"
+import { checkout, delCartItem, getCartItems } from "../../services/api";
+import "./index.css";
 
-const { Content } = Layout
+const { Content } = Layout;
 
-export default function Checkout(props) {
+function Checkout(props) {
+    let history = useHistory();
+
     const [form] = Form.useForm();
-    const [books, useBooks] = useState([
-        {
-            id: 1,
-            title: "Frankenstein",
-            author: "Mary Shelley",
-            price: 50.9,
-            cover: "https://s-media-cache-ak0.pinimg.com/564x/f9/8e/2d/f98e2d661445620266c0855d418aab71.jpg"
-        },
-        {
-            id: 2,
-            title: "A Little Princess",
-            author: "Frances Hodgson Burnett",
-            price: 38.9,
-            cover: "http://www.publishersweekly.com/images/data/ARTICLE_PHOTO/photo/000/028/28129-1.JPG"
-        },
-        {
-            id: 3,
-            title: "Bird By Bird",
-            author: "Anne Lamott",
-            price: 98.0,
-            cover: "http://talkingwriting.com//sites/default/files/Bird-by-Bird-image1.jpg"
-        },
-        {
-            id: 4,
-            title: "Girl at War",
-            author: "Sara Novic",
-            price: 14.3,
-            cover: "http://d.gr-assets.com/books/1414348859l/23209971.jpg"
-        },
-        {
-            id: 5,
-            title: "The Alchemist",
-            author: "Paulo Coelho",
-            price: 67.2,
-            cover: "http://prodimage.images-bn.com/pimages/9780062315007_p0_v2_s192x300.jpg"
-        }
-    ]);
+
+    const [cartItems, setCartItems] = useState([]);
+
+    const updateCart = () => getCartItems().then(cartItems => setCartItems(cartItems));
+
+    const removeItem = (id) => {
+        delCartItem(id).then(updateCart);
+    }
+
+    useEffect(updateCart, []);
+
+    if (cartItems.length === 0) return (
+        <Content className={"page"}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+                <h1>Add some books to your cart first</h1>
+            </div>
+        </Content>
+    );
+
+    const onFinish = values => {
+        checkout(values.order)
+            .then(() => history.push("/thanks"));
+    }
 
     const layout = {
         labelCol: {
@@ -54,7 +44,6 @@ export default function Checkout(props) {
         },
     };
 
-    /* eslint-disable no-template-curly-in-string */
     const validateMessages = {
         required: '${label} is required!',
         types: {
@@ -84,10 +73,10 @@ export default function Checkout(props) {
                         </Col>
                         <Col span={24} style={{ paddingBottom: 24 }}>
                             <Row gutter={48}>
-                                {books.map(book => {
+                                {cartItems.map(item => {
                                     return (
                                         <Col span={24}>
-                                            <CartCard {...book} />
+                                            <CartCard {...item} removeItem={removeItem} key={item.id} />
                                         </Col>
                                     )
                                 })}
@@ -106,12 +95,12 @@ export default function Checkout(props) {
                         </Col>
                         <Col span={24}
                             style={{ display: "flex", justifyContent: "flex-start" }}>
-                            <Form {...layout} name="nest-messages" onFinish={(value) => console.log(value)}
+                            <Form {...layout} name="nest-messages" onFinish={onFinish}
                                 validateMessages={validateMessages} style={{ width: "100%" }}
                                 form={form}
                             >
                                 <Form.Item
-                                    name={['user', 'name']}
+                                    name={['order', 'name']}
                                     label="Name"
                                     rules={[
                                         {
@@ -122,7 +111,7 @@ export default function Checkout(props) {
                                     <Input />
                                 </Form.Item>
                                 <Form.Item
-                                    name={['user', 'phone']}
+                                    name={['order', 'phoneNumber']}
                                     label="Phone Number"
                                     rules={[
                                         {
@@ -132,7 +121,7 @@ export default function Checkout(props) {
                                 >
                                     <Input />
                                 </Form.Item>
-                                <Form.Item name={['user', 'address']}
+                                <Form.Item name={['order', 'address']}
                                     label="Address"
                                     rules={[
                                         {
@@ -142,7 +131,7 @@ export default function Checkout(props) {
                                 >
                                     <Input />
                                 </Form.Item>
-                                <Form.Item name={['user', 'Notes']} label="Notes">
+                                <Form.Item name={['order', 'note']} label="note">
                                     <Input.TextArea />
                                 </Form.Item>
                             </Form>
@@ -159,3 +148,5 @@ export default function Checkout(props) {
         </Content>
     );
 }
+
+export default withRouter(Checkout);

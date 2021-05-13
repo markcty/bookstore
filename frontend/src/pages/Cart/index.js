@@ -11,11 +11,9 @@ export default function Cart() {
 
     const auth = useAuth();
 
-    const { id: userId } = auth.getUser();
-
     const [cartItems, setCartItems] = useState([]);
 
-    const updateCart = () => getCartItems(userId).then(cartItems => setCartItems(cartItems));
+    const updateCart = () => getCartItems().then(cartItems => setCartItems(cartItems));
 
     const removeItem = (id) => {
         delCartItem(id).then(updateCart);
@@ -39,10 +37,10 @@ export default function Cart() {
                 </Col>
                 <Col xs={22} sm={20} md={18} lg={16} xl={14}>
                     <Row gutter={48}>
-                        {cartItems.map(book => {
+                        {cartItems.map(item => {
                             return (
                                 <Col span={24}>
-                                    <CartCard {...book} key={book.id} removeItem={removeItem} />
+                                    <CartCard {...item} key={item.id} removeItem={removeItem} />
                                 </Col>
                             )
                         })}

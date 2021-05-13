@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useAuth } from "./auth";
 import { apiUrl } from "./config"
 import Cookies from "js-cookie";
 
@@ -70,6 +69,20 @@ export function addCartItem(bookId) {
 export function login(username, password) {
     return new Promise((resolve, reject) => {
         http.get("/login", { auth: { username: username, password: password } })
+            .then(res => resolve(res))
+            .catch(err => reject(err));
+    })
+}
+
+export function checkout(order) {
+    const { id: userId, username, password } = getUser();
+    return new Promise((resolve, reject) => {
+        http({
+            method: "POST",
+            url: "/order",
+            auth: { username, password },
+            data: { userId: userId, ...order }
+        })
             .then(res => resolve(res))
             .catch(err => reject(err));
     })
