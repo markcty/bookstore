@@ -37,7 +37,7 @@ function useProvideAuth() {
   };
 
   const getUser = () => {
-    return JSON.parse(Cookies.get("user"));
+    return Cookies.getJSON("user");
   }
 
   return { isLogin, login, logout, getUser };

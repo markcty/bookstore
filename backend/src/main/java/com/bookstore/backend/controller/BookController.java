@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -23,6 +24,13 @@ public class BookController {
     @GetMapping("/book")
     public Book getBook(@RequestParam Integer id) {
         return bookService.getBook(id);
+    }
+
+    @PostMapping("/updateBook")
+    public void updateBook(@RequestBody Book book) {
+        System.out.println("update!!!!!!");
+        System.out.println(book);
+        bookService.updateBook(book);
     }
 
 }

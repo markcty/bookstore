@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class Book {
-    private Long id;
-    private String ISBN;
+    private Integer id;
+    private String isbn;
     private String title;
     private String author;
     private String description;

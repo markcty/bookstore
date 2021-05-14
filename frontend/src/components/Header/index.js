@@ -14,6 +14,8 @@ const { Search } = Input;
 function Header(props) {
     const auth = useAuth();
 
+    const user = auth.getUser();
+
     const loginMenu = (
         <Menu>
             <Menu.Item><Link to={"/cart"}><span>My Cart</span></Link></Menu.Item>
@@ -22,7 +24,9 @@ function Header(props) {
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item><span>Profile</span></Menu.Item>
-            <Menu.Item><Link to={"/admin/manage"}><span>Manage</span></Link></Menu.Item>
+            {user
+                && user.isAdmin
+                && <Menu.Item><Link to={"/admin/manage"}><span>Manage</span></Link></Menu.Item>}
             <Menu.Item><span onClick={auth.logout}>Log Out</span></Menu.Item>
         </Menu>
     );

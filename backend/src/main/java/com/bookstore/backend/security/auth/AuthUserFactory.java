@@ -20,9 +20,9 @@ public final class AuthUserFactory {
 
   private static List<GrantedAuthority> mapToGrantedAuthorities(Integer isAdmin) {
     List<String> authorities = new LinkedList<>();
-    authorities.add("User");
+    authorities.add("ROLE_USER");
     if (isAdmin > 0)
-      authorities.add("Admin");
+      authorities.add("ROLE_ADMIN");
     return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
   }
 }
