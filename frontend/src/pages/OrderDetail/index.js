@@ -2,7 +2,6 @@ import {Col, Row, Table} from "antd";
 import {Content} from "antd/es/layout/layout";
 import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
-import BookTable from "../../components/BookTable";
 import {getOrderDetail} from "../../services/api";
 import Search from "antd/es/input/Search";
 

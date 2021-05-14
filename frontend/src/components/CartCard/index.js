@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {DeleteOutlined} from "@ant-design/icons";
 import {Button, Col, Row, Space} from "antd";
 import "./index.css";
