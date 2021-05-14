@@ -2,13 +2,13 @@ package com.bookstore.backend.service;
 
 import java.util.List;
 
-import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
+import com.bookstore.backend.entity.OrderDetailMeta;
 
 public interface OrderService {
-  String checkout(Integer userId, String name, String phoneNumber, String address, String note);
+  void checkout(Integer userId, String name, String phoneNumber, String address, String note);
 
   List<Order> getOrders(Integer userId);
 
-  List<Book> getOrderDetail(Integer id);
+  List<OrderDetailMeta> getOrderDetail(Integer id);
 }

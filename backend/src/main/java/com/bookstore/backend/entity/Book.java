@@ -12,4 +12,5 @@ public class Book {
     private Double price;
     private Integer inventory;
     private String coverUrl;
+    private Boolean visible;
 }

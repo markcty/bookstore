@@ -7,7 +7,7 @@ import com.bookstore.backend.entity.CartItemMeta;
 public interface CartService {
   List<CartItemMeta> getCart(Integer userId);
 
-  void delCartItem(Integer id);
+  void delCartItem(Integer userId, Integer bookId);
 
   void addCartItem(Integer userId, Integer bookId);
 

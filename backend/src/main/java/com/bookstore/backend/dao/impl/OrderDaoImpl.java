@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.List;
 
 import com.bookstore.backend.dao.OrderDao;
-import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
+import com.bookstore.backend.entity.OrderDetailMeta;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -21,7 +21,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class OrderDaoImpl implements OrderDao {
-
   @Autowired
   JdbcTemplate jdbcTemplate;
 
@@ -46,9 +45,9 @@ public class OrderDaoImpl implements OrderDao {
   }
 
   @Override
-  public void addBookForOrder(Integer orderId, Integer bookId) {
-    String sql = "INSERT INTO bookstore.`orderDetail`(orderId, bookId) VALUES(?, ?)";
-    jdbcTemplate.update(sql, orderId, bookId);
+  public void addBookForOrder(Integer orderId, Integer bookId, Integer quantity) {
+    String sql = "INSERT INTO bookstore.`orderDetail`(orderId, bookId, quantity) VALUES(?, ?, ?)";
+    jdbcTemplate.update(sql, orderId, bookId, quantity);
   }
 
   @Override
@@ -60,9 +59,10 @@ public class OrderDaoImpl implements OrderDao {
   }
 
   @Override
-  public List<Book> getBooksOfOrder(Integer id) {
-    String sql = "SELECT book.* FROM `book`,`orderDetail` WHERE `book`.id = `orderDetail`.bookId and orderId = " + id;
-    return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Book.class));
+  public List<OrderDetailMeta> getOrderDetail(Integer id) {
+    String sql = "SELECT book.id as bookId, title, price, quantity FROM `book`,`orderDetail` WHERE `book`.id = `orderDetail`.bookId and orderId = "
+        + id;
+    return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderDetailMeta.class));
   }
 
 }

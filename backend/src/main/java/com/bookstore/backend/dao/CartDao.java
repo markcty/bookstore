@@ -7,9 +7,11 @@ import com.bookstore.backend.entity.CartItemMeta;
 public interface CartDao {
   List<CartItemMeta> getCart(Integer userId);
 
-  void delCartItem(Integer id);
+  Integer getQuantityOfBook(Integer userId, Integer bookId);
 
-  void addCartItem(Integer userId, Integer bookId);
+  void updateQuantityOfBook(Integer userId, Integer bookId, Integer quantity);
+
+  Integer getCartIdOfUser(Integer userId);
 
   void clearCart(Integer userId);
 }

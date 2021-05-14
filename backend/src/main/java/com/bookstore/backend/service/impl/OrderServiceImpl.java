@@ -3,8 +3,8 @@ package com.bookstore.backend.service.impl;
 import java.util.List;
 
 import com.bookstore.backend.dao.OrderDao;
-import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
+import com.bookstore.backend.entity.OrderDetailMeta;
 import com.bookstore.backend.service.CartService;
 import com.bookstore.backend.service.OrderService;
 
@@ -21,17 +21,16 @@ public class OrderServiceImpl implements OrderService {
   OrderDao orderDao;
 
   @Override
-  public String checkout(Integer userId, String name, String phoneNumber, String address, String note) {
+  public void checkout(Integer userId, String name, String phoneNumber, String address, String note) {
     var items = cartService.getCart(userId);
     if (items.isEmpty())
-      return "No items to checkout";
+      return;
     Double totalPrice = 0.0;
     for (var item : items)
-      totalPrice += item.getPrice();
+      totalPrice += item.getPrice() * item.getQuantity();
     var orderId = orderDao.createOrder(userId, name, phoneNumber, address, note, totalPrice);
-    items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBookId()));
+    items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBookId(), item.getQuantity()));
     cartService.clearCart(userId);
-    return "success";
 
   }
 
@@ -41,8 +40,8 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public List<Book> getOrderDetail(Integer id) {
-    return orderDao.getBooksOfOrder(id);
+  public List<OrderDetailMeta> getOrderDetail(Integer id) {
+    return orderDao.getOrderDetail(id);
   }
 
 }

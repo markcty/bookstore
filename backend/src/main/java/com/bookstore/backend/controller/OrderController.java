@@ -3,8 +3,8 @@ package com.bookstore.backend.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
+import com.bookstore.backend.entity.OrderDetailMeta;
 import com.bookstore.backend.security.auth.AuthUserDetail;
 import com.bookstore.backend.service.OrderService;
 
@@ -27,14 +27,13 @@ public class OrderController {
   OrderService orderService;
 
   @PostMapping("/checkout")
-  public String checkout(@RequestBody Map<String, String> body) {
+  public void checkout(@RequestBody Map<String, String> body) {
     var userId = Integer.parseInt(body.get("userId"));
     var name = body.get("name");
     var note = body.get("note");
     var phoneNumber = body.get("phoneNumber");
     var address = body.get("address");
     orderService.checkout(userId, name, phoneNumber, address, note);
-    return "success";
   }
 
   @GetMapping("/orders")
@@ -44,7 +43,7 @@ public class OrderController {
   }
 
   @GetMapping("/order")
-  public List<Book> getOrderDetail(@RequestParam Integer id) {
+  public List<OrderDetailMeta> getOrderDetail(@RequestParam Integer id) {
     return orderService.getOrderDetail(id);
   }
 }

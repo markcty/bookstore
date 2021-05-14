@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,12 +33,13 @@ public class CartController {
   }
 
   @DeleteMapping("/user/cart")
-  public void delCartItem(@RequestParam Integer id) {
-    cartService.delCartItem(id);
+  public void delCartItem(@RequestParam Integer bookId) {
+    AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    cartService.delCartItem(user.getId(), bookId);
   }
 
   @PostMapping("/user/cart")
-  public void addCartItem(@RequestBody Integer bookId) {
+  public void addCartItem(@RequestParam Integer bookId) {
     AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     cartService.addCartItem(user.getId(), bookId);
   }

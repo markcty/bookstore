@@ -21,13 +21,18 @@ public class CartServiceImpl implements CartService {
   }
 
   @Override
-  public void delCartItem(Integer id) {
-    cartDao.delCartItem(id);
+  public void delCartItem(Integer userId, Integer bookId) {
+    var quantity = cartDao.getQuantityOfBook(userId, bookId);
+    if (quantity <= 0)
+      return;
+    cartDao.updateQuantityOfBook(userId, bookId, quantity - 1);
   }
 
   @Override
   public void addCartItem(Integer userId, Integer bookId) {
-    cartDao.addCartItem(userId, bookId);
+    var quantity = cartDao.getQuantityOfBook(userId, bookId);
+    cartDao.updateQuantityOfBook(userId, bookId, quantity + 1);
+
   }
 
   @Override
