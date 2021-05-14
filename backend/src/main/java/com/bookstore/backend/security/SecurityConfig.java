@@ -33,8 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // public request
         .authorizeRequests().antMatchers("/api/books", "/api/book").permitAll().and()
         // admin request
-        .authorizeRequests().antMatchers("/api/updateBook").hasRole("ADMIN").and()
-        // private request
+        .authorizeRequests().antMatchers("/api/admin/book").hasRole("ADMIN").and()
+        // user request
         .authorizeRequests().anyRequest().authenticated().and()
         // basic auth
         .httpBasic();

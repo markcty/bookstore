@@ -38,6 +38,7 @@ public class CartController {
 
   @PostMapping("/cart")
   public void addCartItem(@RequestBody Map<String, Integer> body) {
+    // TODO: remove userId
     var userId = body.get("userId");
     var bookId = body.get("bookId");
     cartService.addCartItem(userId, bookId);

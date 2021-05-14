@@ -42,4 +42,10 @@ public class BookDaoImpl implements BookDao {
         var list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Book.class));
         return list.get(0);
     }
+
+    @Override
+    public void delBook(Integer id) {
+        String sql = "DELETE FROM bookstore.book WHERE id = ?";
+        jdbcTemplate.update(sql, id);
+    }
 }
