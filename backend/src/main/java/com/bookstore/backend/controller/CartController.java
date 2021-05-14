@@ -1,13 +1,14 @@
 package com.bookstore.backend.controller;
 
 import java.util.List;
-import java.util.Map;
 
-import com.bookstore.backend.entity.CartItem;
+import com.bookstore.backend.entity.CartItemMeta;
+import com.bookstore.backend.security.auth.AuthUserDetail;
 import com.bookstore.backend.service.CartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,21 +27,20 @@ public class CartController {
   @Autowired
   CartService cartService;
 
-  @GetMapping("/cart")
-  public List<CartItem> getCartItems(@RequestParam Integer userId) {
-    return cartService.getCartItems(userId);
+  @GetMapping("/user/cart")
+  public List<CartItemMeta> getCartItems() {
+    AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    return cartService.getCart(user.getId());
   }
 
-  @DeleteMapping("/cart")
+  @DeleteMapping("/user/cart")
   public void delCartItem(@RequestParam Integer id) {
     cartService.delCartItem(id);
   }
 
-  @PostMapping("/cart")
-  public void addCartItem(@RequestBody Map<String, Integer> body) {
-    // TODO: remove userId
-    var userId = body.get("userId");
-    var bookId = body.get("bookId");
-    cartService.addCartItem(userId, bookId);
+  @PostMapping("/user/cart")
+  public void addCartItem(@RequestBody Integer bookId) {
+    AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    cartService.addCartItem(user.getId(), bookId);
   }
 }

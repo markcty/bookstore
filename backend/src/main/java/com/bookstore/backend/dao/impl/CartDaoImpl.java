@@ -3,7 +3,7 @@ package com.bookstore.backend.dao.impl;
 import java.util.List;
 
 import com.bookstore.backend.dao.CartDao;
-import com.bookstore.backend.entity.CartItem;
+import com.bookstore.backend.entity.CartItemMeta;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -17,11 +17,9 @@ public class CartDaoImpl implements CartDao {
   JdbcTemplate jdbcTemplate;
 
   @Override
-  public List<CartItem> getCartItems(Integer userId) {
-    String sql = "select cartItem.id as id, book.id as bookId, title, author, price, inventory, coverUrl "
-        + "from cartItem,book where cartItem.userId = " + userId + " and bookId = book.id";
-
-    return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItem.class));
+  public List<CartItemMeta> getCart(Integer userId) {
+    String sql = "SELECT book.id as bookId, title, author, price, coverUrl, quantity FROM `cart`,`cartItem`,`book` WHERE cart.id = cartItem.cartId and cartItem.bookId = book.id";
+    return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItemMeta.class));
   }
 
   @Override

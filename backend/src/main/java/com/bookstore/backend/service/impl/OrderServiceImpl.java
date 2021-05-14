@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
 
   @Override
   public String checkout(Integer userId, String name, String phoneNumber, String address, String note) {
-    var items = cartService.getCartItems(userId);
+    var items = cartService.getCart(userId);
     if (items.isEmpty())
       return "No items to checkout";
     Double totalPrice = 0.0;
