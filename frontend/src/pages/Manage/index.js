@@ -1,68 +1,33 @@
-import React, { useState } from "react";
-import { Button, Col, Row, Space, Table } from "antd";
-import { Content } from "antd/es/layout/layout";
+import React, {useEffect, useState} from "react";
+import {Button, Col, Row, Space, Table} from "antd";
+import {Content} from "antd/es/layout/layout";
 import BookEditCard from "../../components/BookEditCard";
 import Search from "antd/es/input/Search";
+import {getBooks} from "../../services/api";
+import {updateBook as updateBookApi, delBook as deleteBookApi} from "../../services/api";
 
-export default function Manage(props) {
-    const [books, setBooks] = useState(
-        [
-            {
-                ISBN: 1,
-                title: "Frankenstein",
-                author: "Mary Shelley",
-                price: 50.9,
-                inventory: 5
-            },
-            {
-                ISBN: 2,
-                title: "A Little Princess",
-                author: "Frances Hodgson Burnett",
-                price: 38.9,
-                inventory: 9
-            },
-            {
-                ISBN: 3,
-                title: "Bird By Bird",
-                author: "Anne Lamott",
-                price: 98.0,
-                inventory: 1
-            },
-            {
-                ISBN: 4,
-                title: "Girl at War",
-                author: "Sara Novic",
-                price: 14.3,
-                inventory: 99
-            },
-            {
-                ISBN: 5,
-                title: "The Alchemist",
-                author: "Paulo Coelho",
-                price: 67.2,
-                inventory: 55
-            }
-        ]
-    );
-    const [currentBook, setCurrentBook] = useState(null);
+export default function Manage() {
+    const [books, setBooks] = useState([]);
 
-    const updateBook = (bookInfo) => {
-        // update the book information by ISBN
-        // if ISBN does not exist then add the book
-        let next = books.filter(book => book.ISBN !== bookInfo.ISBN);
-        next.push({
-            ISBN: bookInfo.ISBN,
-            author: bookInfo.author,
-            price: bookInfo.price,
-            title: bookInfo.title,
-            inventory: bookInfo.inventory
+    useEffect(() => {
+        getBooks().then(books => setBooks(books));
+    }, []);
+
+    const [bookId, setBookId] = useState(null);
+
+    const updateBook = (bookDetail) => {
+        updateBookApi(bookDetail).then(() => {
+            getBooks().then(books => setBooks(books))
+            window.alert("Edit succeed");
+            setBookId(null);
         });
-        setCurrentBook(null);
-        setBooks(next);
     }
 
-    const deleteBook = (ISBN) => {
-        setBooks(books.filter(book => book.ISBN !== ISBN));
+    const deleteBook = (bookId) => {
+        deleteBookApi(bookId).then(() => {
+            getBooks().then(books => setBooks(books));
+            window.alert("Delete succeed");
+        })
     }
 
     const emptyEditCard = (
@@ -86,11 +51,10 @@ export default function Manage(props) {
     const columns = [
         {
             title: "ISBN",
-            dataIndex: "ISBN",
-            key: "ISBN",
+            dataIndex: "isbn",
+            key: "isbn",
             defaultSortOrder: "ascend",
             sortDirections: ['ascend', 'descend', 'ascend'],
-            sorter: (a, b) => a.ISBN - b.ISBN
         },
         {
             title: "Title",
@@ -121,8 +85,8 @@ export default function Manage(props) {
             key: "action",
             render: (text, record) => (
                 <Space>
-                    <Button type={"primary"} onClick={() => setCurrentBook(record.ISBN)}>Edit</Button>
-                    <Button type={"primary"} danger onClick={() => deleteBook(record.ISBN)}>Delete</Button>
+                    <Button type={"link"} onClick={() => setBookId(record.id)}>Edit</Button>
+                    <Button type={"link"} danger onClick={() => deleteBook(record.id)}>Delete</Button>
                 </Space>
             )
         }
@@ -133,21 +97,13 @@ export default function Manage(props) {
             <Row justify={"center"}>
                 <Col xs={22} sm={22} md={20} lg={18} xl={16}>
                     <Row gutter={[32, 16]}>
-                        <Col span={24}>
-                            {currentBook ?
-                                <BookEditCard
-                                    {...(books.find(book => book.ISBN === currentBook))}
-                                    updateBook={updateBook}
-                                />
-                                : emptyEditCard}
-                        </Col>
-                        <Col span={24} style={{ display: "flex" }}>
-                            <Button type={"primary"} onClick={() => setCurrentBook(-1)} style={{ marginRight: 16 }}>
+                        <Col span={24} style={{display: "flex", justifyContent: "flex-start"}}>
+                            <Button type={"primary"} onClick={() => setBookId(-1)} style={{marginRight: 16}}>
                                 Add A Book
                             </Button>
                             <Search placeholder="input book title or author" allowClear
-                                onSearch={(v) => setSearchText(v.toLowerCase())}
-                                style={{ width: 300 }} />
+                                    onSearch={(v) => setSearchText(v.toLowerCase())}
+                                    style={{width: 300}}/>
                         </Col>
                         <Col span={24}>
                             <Table
@@ -158,6 +114,14 @@ export default function Manage(props) {
                                     )}
                                 columns={columns}
                             />
+                        </Col>
+                        <Col span={24}>
+                            {bookId ?
+                                <BookEditCard
+                                    bookId={bookId}
+                                    updateBook={updateBook}
+                                />
+                                : emptyEditCard}
                         </Col>
                     </Row>
                 </Col>
