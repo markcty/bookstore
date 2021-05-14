@@ -28,7 +28,8 @@ public class OrderController {
 
   @PostMapping("/checkout")
   public void checkout(@RequestBody Map<String, String> body) {
-    var userId = Integer.parseInt(body.get("userId"));
+    AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    var userId = user.getId();
     var name = body.get("name");
     var note = body.get("note");
     var phoneNumber = body.get("phoneNumber");
