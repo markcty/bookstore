@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiUrl } from "./config"
+import {apiUrl} from "./config"
 import Cookies from "js-cookie";
 
 const http = axios.create({
@@ -20,17 +20,41 @@ export function getBooks() {
 
 export function getBook(id) {
     return new Promise((resolve, reject) => {
-        http.get("/book", { params: { id: id } })
+        http.get("/book", {params: {id: id}})
             .then(res => resolve(res.data))
             .catch(err => reject(err));
     })
 }
 
-export function getCartItems() {
-    const { username, password } = getUser();
+export function updateBook(bookDetail) {
+    const {username, password} = getUser();
     return new Promise((resolve, reject) => {
-        http.get("/cart", {
-            auth: { username: username, password: password }
+        http({
+            method: "POST",
+            url: "/admin/book",
+            auth: {username, password},
+            data: bookDetail
+        })
+            .then(res => resolve(res))
+            .catch(err => reject(err));
+    })
+}
+
+export function delBook(bookId) {
+    const {username, password} = getUser();
+    return new Promise((resolve, reject) => {
+            http.delete("/admin/book", {params: {id: bookId}, auth: {username: username, password: password}})
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        }
+    )
+}
+
+export function getCartItems() {
+    const {username, password} = getUser();
+    return new Promise((resolve, reject) => {
+        http.get("/user/cart", {
+            auth: {username: username, password: password}
         })
             .then(res => resolve(res.data))
             .catch(err => reject(err));
@@ -38,13 +62,13 @@ export function getCartItems() {
 }
 
 export function delCartItem(bookId) {
-    const { username, password } = getUser();
+    const {username, password} = getUser();
     return new Promise((resolve, reject) => {
         http({
             method: "DELETE",
-            url: "/cart",
-            auth: { username, password },
-            params: { id: bookId }
+            url: "/user/cart",
+            auth: {username, password},
+            params: {bookId: bookId}
         })
             .then(res => resolve(res))
             .catch(err => reject(err));
@@ -52,13 +76,13 @@ export function delCartItem(bookId) {
 }
 
 export function addCartItem(bookId) {
-    const { id: userId, username, password } = getUser();
+    const {username, password} = getUser();
     return new Promise((resolve, reject) => {
         http({
             method: "POST",
-            url: "/cart",
-            auth: { username, password },
-            data: { userId: userId, bookId: bookId }
+            url: "/user/cart",
+            auth: {username, password},
+            params: {bookId: bookId}
         })
             .then(res => resolve(res))
             .catch(err => reject(err));
@@ -67,20 +91,20 @@ export function addCartItem(bookId) {
 
 export function login(username, password) {
     return new Promise((resolve, reject) => {
-        http.get("/login", { auth: { username: username, password: password } })
+        http.get("/login", {auth: {username: username, password: password}})
             .then(res => resolve(res))
             .catch(err => reject(err));
     })
 }
 
 export function checkout(order) {
-    const { id: userId, username, password } = getUser();
+    const {username, password} = getUser();
     return new Promise((resolve, reject) => {
         http({
             method: "POST",
             url: "/checkout",
-            auth: { username, password },
-            data: { userId: userId, ...order }
+            auth: {username, password},
+            data: order
         })
             .then(res => resolve(res))
             .catch(err => reject(err));
@@ -88,18 +112,18 @@ export function checkout(order) {
 }
 
 export function getOrders() {
-    const { username, password } = getUser();
+    const {username, password} = getUser();
     return new Promise((resolve, reject) => {
-        http.get("/orders", { auth: { username: username, password: password } })
+        http.get("/orders", {auth: {username: username, password: password}})
             .then(res => resolve(res))
             .catch(err => reject(err));
     })
 }
 
 export function getOrderDetail(id) {
-    const { username, password } = getUser();
+    const {username, password} = getUser();
     return new Promise((resolve, reject) => {
-        http.get("/order", { params: { id: id }, auth: { username: username, password: password } })
+        http.get("/order", {params: {id: id}, auth: {username: username, password: password}})
             .then(res => resolve(res))
             .catch(err => reject(err));
     })
