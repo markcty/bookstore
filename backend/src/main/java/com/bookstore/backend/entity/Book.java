@@ -8,9 +8,6 @@ public class Book {
     private String isbn;
     private String title;
     private String author;
-    private String description;
     private Double price;
-    private Integer inventory;
     private String coverUrl;
-    private Boolean visible;
 }

@@ -3,6 +3,7 @@ package com.bookstore.backend.controller;
 import java.util.List;
 
 import com.bookstore.backend.entity.Book;
+import com.bookstore.backend.entity.BookDetail;
 import com.bookstore.backend.service.BookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,12 @@ public class BookController {
     }
 
     @GetMapping("/book")
-    public Book getBook(@RequestParam Integer id) {
-        return bookService.getBook(id);
+    public BookDetail getBook(@RequestParam Integer id) {
+        return bookService.getBookDetail(id);
     }
 
     @PostMapping("/admin/book")
-    public void updateBook(@RequestBody Book book) {
+    public void updateBook(@RequestBody BookDetail book) {
         System.out.println("update!!!!!!");
         System.out.println(book);
         bookService.updateBook(book);
