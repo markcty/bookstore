@@ -53,6 +53,11 @@ public class CartDaoImpl implements CartDao {
       sql = "INSERT INTO cartItem(cartId, bookId, quantity) VALUE(?, ?, ?) ";
       jdbcTemplate.update(sql, cartId, bookId, quantity);
     }
+
+    if (quantity == 0) {
+      sql = "DELETE FROM cartItem WHERE cartId = ? and bookId = ?";
+      jdbcTemplate.update(sql, cartId, bookId);
+    }
   }
 
   @Override

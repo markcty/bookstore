@@ -4,7 +4,7 @@ import { Col, Row } from "antd";
 import "./index.css";
 import { Link } from "react-router-dom";
 
-export default function CartCard({ id, price, title, author, inventory, coverUrl, bookId, removeItem }) {
+export default function CartCard({ bookId, price, title, author,  coverUrl, bookId, removeItem }) {
     return (
         <Row className="card" align={"middle"} gutter={16} wrap={false}
             style={{ paddingTop: 32, paddingBottom: 32, margin: 0 }}

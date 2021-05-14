@@ -3,7 +3,7 @@ import { Content } from "antd/es/layout/layout";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CartCard from "../../components/CartCard";
-import { delCartItem, getCartItems } from "../../services/api";
+import { getCartItems } from "../../services/api";
 import "./index.css";
 
 export default function Cart() {
@@ -12,9 +12,6 @@ export default function Cart() {
 
     const updateCart = () => getCartItems().then(cartItems => setCartItems(cartItems));
 
-    const removeItem = (id) => {
-        delCartItem(id).then(updateCart);
-    }
 
     useEffect(updateCart, []);
 
@@ -37,7 +34,7 @@ export default function Cart() {
                         {cartItems.map(item => {
                             return (
                                 <Col span={24}>
-                                    <CartCard {...item} key={item.id} removeItem={removeItem} />
+                                    <CartCard {...item} key={item.bookId} />
                                 </Col>
                             )
                         })}

@@ -27,10 +27,9 @@ export function getBook(id) {
 }
 
 export function getCartItems() {
-    const { id: userId, username, password } = getUser();
+    const { username, password } = getUser();
     return new Promise((resolve, reject) => {
         http.get("/cart", {
-            params: { userId: userId },
             auth: { username: username, password: password }
         })
             .then(res => resolve(res.data))
@@ -38,14 +37,14 @@ export function getCartItems() {
     })
 }
 
-export function delCartItem(cartItemId) {
+export function delCartItem(bookId) {
     const { username, password } = getUser();
     return new Promise((resolve, reject) => {
         http({
             method: "DELETE",
             url: "/cart",
             auth: { username, password },
-            params: { id: cartItemId }
+            params: { id: bookId }
         })
             .then(res => resolve(res))
             .catch(err => reject(err));
