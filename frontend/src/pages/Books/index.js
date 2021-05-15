@@ -6,19 +6,19 @@ import { getBooks } from "../../services/api";
 import "./index.css";
 
 export default function Books() {
-    const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState([]);
 
-    useEffect(() => {
-        getBooks().then(books => setBooks(books));
-    }, []);
+  useEffect(() => {
+    getBooks().then((books) => setBooks(books));
+  }, []);
 
-    return (
-        <Content className={"page"}>
-            <Row justify={"center"}>
-                <Col xs={22} sm={22} md={20} lg={18} xl={16}>
-                    <BookTable books={books} />
-                </Col>
-            </Row>
-        </Content>
-    )
+  return (
+    <Content className={"page"}>
+      <Row justify={"center"}>
+        <Col xs={22} sm={22} md={20} lg={18} xl={16}>
+          <BookTable books={books} />
+        </Col>
+      </Row>
+    </Content>
+  );
 }

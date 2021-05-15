@@ -11,5 +11,5 @@ export default function Thanks() {
         <h1>Thank you for buying. Good Day!</h1>
       </div>
     </Content>
-  )
+  );
 }
