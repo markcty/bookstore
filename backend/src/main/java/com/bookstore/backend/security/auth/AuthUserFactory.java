@@ -14,7 +14,7 @@ public final class AuthUserFactory {
   }
 
   public static AuthUserDetail create(User user) {
-    return new AuthUserDetail(user.getId(), user.getUsername(), user.getPassword(), user.getEmail(),
+    return new AuthUserDetail(user.getId(), user.getUsername(), user.getPassword(),
         mapToGrantedAuthorities(user.getIsAdmin()), user.getIsEnabled());
   }
 

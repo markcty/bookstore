@@ -61,3 +61,12 @@ export function logout() {
 export function getUser() {
   return Cookies.getJSON("user");
 }
+
+export function register(username, password) {
+  return new Promise((resolve, reject) => {
+    http
+      .post("/register", { username: username, password: password })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+}

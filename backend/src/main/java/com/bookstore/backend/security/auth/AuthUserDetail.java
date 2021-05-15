@@ -11,16 +11,14 @@ public class AuthUserDetail implements UserDetails {
   private final Integer id;
   private final String username;
   private final String password;
-  private final String email;
   private final Collection<? extends GrantedAuthority> authorities;
   private final Boolean isEnabled;
 
-  public AuthUserDetail(Integer id, String username, String password, String email,
+  public AuthUserDetail(Integer id, String username, String password,
       Collection<? extends GrantedAuthority> authorities, Integer isEnabled) {
     this.id = id;
     this.username = username;
     this.password = password;
-    this.email = email;
     this.authorities = authorities;
     this.isEnabled = isEnabled > 0 ? true : false;
 
@@ -33,10 +31,6 @@ public class AuthUserDetail implements UserDetails {
 
   public Integer getId() {
     return id;
-  }
-
-  public String getEmail() {
-    return email;
   }
 
   @Override

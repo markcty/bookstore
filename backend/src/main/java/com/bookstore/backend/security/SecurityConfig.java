@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // allow preflight
         .authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll().and()
         // public request
-        .authorizeRequests().antMatchers("/api/books", "/api/book").permitAll().and()
+        .authorizeRequests().antMatchers("/api/books", "/api/book", "/api/register").permitAll().and()
         // admin request
         .authorizeRequests().antMatchers("/api/admin/book").hasRole("ADMIN").and()
         // user request

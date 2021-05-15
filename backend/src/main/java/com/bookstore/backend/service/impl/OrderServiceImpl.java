@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     var orderId = orderDao.createOrder(userId, name, phoneNumber, address, note, totalPrice);
     items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBookId(), item.getQuantity()));
     cartService.clearCart(userId);
-
+    // TODO: subtract inventory
   }
 
   @Override

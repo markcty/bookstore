@@ -16,6 +16,7 @@ import { getUser } from "./services/auth";
 import { PrivateRoute } from "./utils/privateRoute";
 import Thanks from "./pages/Thanks";
 import OrderDetail from "./pages/OrderDetail";
+import Register from "./pages/Register";
 
 const { Footer } = Layout;
 
@@ -28,17 +29,22 @@ export default function App() {
         <Switch>
           <PrivateRoute path={"/cart"} component={Cart} />
           <Route path={"/books"} component={Books} />
-          <Route path={"/book/:bookId"} component={Book} />
+          <Route path={"/book/:bookId"}>
+            <Book user={user} setUser={setUser} />
+          </Route>
           <PrivateRoute path={"/checkout"} component={Checkout} />
           <Route path={"/login"}>
             <Login user={user} setUser={setUser} />
+          </Route>
+          <Route path={"/register"}>
+            <Register user={user} setUser={setUser} />
           </Route>
           <Route path={"/search"} component={Search} />
           <PrivateRoute path={"/admin"} component={Manage} />
           <PrivateRoute path={"/orders"} component={Orders} />
           <PrivateRoute path={"/thanks"} component={Thanks} />
           <PrivateRoute path={"/order/:orderId"} component={OrderDetail} />
-          <Route path={"/"} component={Home} />
+          <Route exact path={"/"} component={Home} />
         </Switch>
         <Footer
           style={{
