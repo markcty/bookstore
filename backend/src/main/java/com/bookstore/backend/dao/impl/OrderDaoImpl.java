@@ -1,5 +1,6 @@
 package com.bookstore.backend.dao.impl;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +27,7 @@ public class OrderDaoImpl implements OrderDao {
 
   @Override
   public Integer createOrder(Integer userId, String name, String phoneNumber, String address, String note,
-      Double totalPrice) {
+      BigDecimal totalPrice) {
     KeyHolder keyHolder = new GeneratedKeyHolder();
     String sql = "INSERT INTO bookstore.`order` (userId, name, phoneNumber, Address, note, totalPrice) VALUES (?, ?, ?, ?, ?, ?)";
     jdbcTemplate.update(new PreparedStatementCreator() {
@@ -37,7 +38,7 @@ public class OrderDaoImpl implements OrderDao {
         ps.setString(3, phoneNumber);
         ps.setString(4, address);
         ps.setString(5, note);
-        ps.setDouble(6, totalPrice);
+        ps.setBigDecimal(6, totalPrice);
         return ps;
       }
     }, keyHolder);

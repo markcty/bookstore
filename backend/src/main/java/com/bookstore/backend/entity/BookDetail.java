@@ -1,5 +1,7 @@
 package com.bookstore.backend.entity;
 
+import java.math.BigDecimal;
+
 import lombok.Data;
 
 @Data
@@ -9,7 +11,7 @@ public class BookDetail {
   private String title;
   private String author;
   private String description;
-  private Double price;
+  private BigDecimal price;
   private Integer inventory;
   private String coverUrl;
 }

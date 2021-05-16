@@ -1,5 +1,6 @@
 package com.bookstore.backend.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.bookstore.backend.dao.OrderDao;
@@ -25,9 +26,9 @@ public class OrderServiceImpl implements OrderService {
     var items = cartService.getCart(userId);
     if (items.isEmpty())
       return;
-    Double totalPrice = 0.0;
+    BigDecimal totalPrice = new BigDecimal(0);
     for (var item : items)
-      totalPrice += item.getPrice() * item.getQuantity();
+      totalPrice = totalPrice.add(item.getPrice().multiply(new BigDecimal(item.getQuantity())));
     var orderId = orderDao.createOrder(userId, name, phoneNumber, address, note, totalPrice);
     items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBookId(), item.getQuantity()));
     cartService.clearCart(userId);

@@ -1,5 +1,6 @@
 package com.bookstore.backend.entity;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import lombok.Data;
@@ -13,5 +14,5 @@ public class Order {
   private String phoneNumber;
   private String address;
   private String note;
-  private Double totalPrice;
+  private BigDecimal totalPrice;
 }
