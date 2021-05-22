@@ -1,6 +1,6 @@
 package com.bookstore.backend.security.auth;
 
-import com.bookstore.backend.dao.UserDao;
+import com.bookstore.backend.repository.UserDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

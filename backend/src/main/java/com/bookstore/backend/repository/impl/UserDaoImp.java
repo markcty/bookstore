@@ -1,9 +1,9 @@
-package com.bookstore.backend.dao.impl;
+package com.bookstore.backend.repository.impl;
 
 import java.util.Optional;
 
-import com.bookstore.backend.dao.UserDao;
 import com.bookstore.backend.entity.User;
+import com.bookstore.backend.repository.UserDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

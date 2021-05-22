@@ -1,9 +1,9 @@
-package com.bookstore.backend.dao.impl;
+package com.bookstore.backend.repository.impl;
 
 import java.util.List;
 
-import com.bookstore.backend.dao.CartDao;
 import com.bookstore.backend.entity.CartItemMeta;
+import com.bookstore.backend.repository.CartDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

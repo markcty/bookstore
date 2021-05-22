@@ -1,4 +1,4 @@
-package com.bookstore.backend.dao;
+package com.bookstore.backend.repository;
 
 import java.util.Optional;
 

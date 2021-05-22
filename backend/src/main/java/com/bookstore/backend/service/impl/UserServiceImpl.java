@@ -1,7 +1,7 @@
 package com.bookstore.backend.service.impl;
 
-import com.bookstore.backend.dao.UserDao;
 import com.bookstore.backend.entity.User;
+import com.bookstore.backend.repository.UserDao;
 import com.bookstore.backend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;

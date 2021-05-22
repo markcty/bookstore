@@ -1,4 +1,4 @@
-package com.bookstore.backend.dao;
+package com.bookstore.backend.repository;
 
 import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.BookDetail;

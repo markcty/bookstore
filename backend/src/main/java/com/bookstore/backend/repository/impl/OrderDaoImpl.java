@@ -1,4 +1,4 @@
-package com.bookstore.backend.dao.impl;
+package com.bookstore.backend.repository.impl;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import com.bookstore.backend.dao.OrderDao;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderDetailMeta;
+import com.bookstore.backend.repository.OrderDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

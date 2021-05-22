@@ -1,8 +1,8 @@
-package com.bookstore.backend.dao.impl;
+package com.bookstore.backend.repository.impl;
 
-import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.BookDetail;
+import com.bookstore.backend.repository.BookDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

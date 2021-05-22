@@ -3,9 +3,9 @@ package com.bookstore.backend.service.impl;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.bookstore.backend.dao.OrderDao;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderDetailMeta;
+import com.bookstore.backend.repository.OrderDao;
 import com.bookstore.backend.service.CartService;
 import com.bookstore.backend.service.OrderService;
 

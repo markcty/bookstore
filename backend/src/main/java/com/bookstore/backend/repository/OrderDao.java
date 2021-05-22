@@ -1,4 +1,4 @@
-package com.bookstore.backend.dao;
+package com.bookstore.backend.repository;
 
 import java.math.BigDecimal;
 import java.util.List;
