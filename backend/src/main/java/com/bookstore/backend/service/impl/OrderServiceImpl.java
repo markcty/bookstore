@@ -1,6 +1,5 @@
 package com.bookstore.backend.service.impl;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.bookstore.backend.entity.Order;
@@ -23,15 +22,18 @@ public class OrderServiceImpl implements OrderService {
 
   @Override
   public void checkout(Integer userId, String name, String phoneNumber, String address, String note) {
-    var items = cartService.getCart(userId);
-    if (items.isEmpty())
-      return;
-    BigDecimal totalPrice = new BigDecimal(0);
-    for (var item : items)
-      totalPrice = totalPrice.add(item.getPrice().multiply(new BigDecimal(item.getQuantity())));
-    var orderId = orderDao.createOrder(userId, name, phoneNumber, address, note, totalPrice);
-    items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBookId(), item.getQuantity()));
-    cartService.clearCart(userId);
+    // var items = cartService.getCart(userId);
+    // if (items.isEmpty())
+    // return;
+    // BigDecimal totalPrice = new BigDecimal(0);
+    // for (var item : items)
+    // totalPrice = totalPrice.add(item.getPrice().multiply(new
+    // BigDecimal(item.getQuantity())));
+    // var orderId = orderDao.createOrder(userId, name, phoneNumber, address, note,
+    // totalPrice);
+    // items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBookId(),
+    // item.getQuantity()));
+    // cartService.clearCart(userId);
     // TODO: subtract inventory
   }
 

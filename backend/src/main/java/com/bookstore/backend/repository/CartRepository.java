@@ -1,17 +1,11 @@
 package com.bookstore.backend.repository;
 
-import java.util.List;
+import java.util.Optional;
 
-import com.bookstore.backend.entity.CartItemMeta;
+import com.bookstore.backend.entity.Cart;
 
-public interface CartRepository {
-  List<CartItemMeta> getCart(Integer userId);
+import org.springframework.data.jpa.repository.JpaRepository;
 
-  Integer getQuantityOfBook(Integer userId, Integer bookId);
-
-  void updateQuantityOfBook(Integer userId, Integer bookId, Integer quantity);
-
-  Integer getCartIdOfUser(Integer userId);
-
-  void clearCart(Integer userId);
+public interface CartRepository extends JpaRepository<Cart, Integer> {
+  Optional<Cart> findByUserId(Integer userId);
 }
