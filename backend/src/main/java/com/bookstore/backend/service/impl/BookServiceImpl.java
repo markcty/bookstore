@@ -33,8 +33,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void updateBook(Book book) {
-        if (book.getId() == -1)
-            bookDao.addBook(book);
         bookDao.updateBook(book);
     }
 

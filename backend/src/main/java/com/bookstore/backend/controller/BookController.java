@@ -34,8 +34,6 @@ public class BookController {
 
     @PostMapping("/admin/book")
     public void updateBook(@RequestBody Book book) {
-        System.out.println("update!!!!!!");
-        System.out.println(book);
         bookService.updateBook(book);
     }
 

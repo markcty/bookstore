@@ -10,8 +10,6 @@ public interface BookDao {
 
   Optional<Book> getBookDetail(Integer id);
 
-  void addBook(Book book);
-
   void updateBook(Book book);
 
   void delBook(Integer id);
