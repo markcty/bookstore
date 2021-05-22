@@ -1,18 +1,8 @@
 package com.bookstore.backend.repository;
 
 import com.bookstore.backend.entity.Book;
-import com.bookstore.backend.entity.BookDetail;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BookRepository {
-    List<Book> getBooks();
-
-    BookDetail getBookDetail(Integer id);
-
-    void addBook(BookDetail book);
-
-    void updateBook(BookDetail book);
-
-    void delBook(Integer id);
+public interface BookRepository extends JpaRepository<Book, Integer> {
 }

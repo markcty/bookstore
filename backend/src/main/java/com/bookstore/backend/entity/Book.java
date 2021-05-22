@@ -14,15 +14,14 @@ import lombok.Data;
 @Entity
 @Table(name = "book")
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String isbn;
-    private Integer inventory;
     private String title;
     private String author;
+    private String description;
     private BigDecimal price;
+    private Integer inventory;
     private String coverUrl;
 }
