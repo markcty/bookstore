@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderDetailMeta;
-import com.bookstore.backend.repository.OrderDao;
+import com.bookstore.backend.repository.OrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -21,7 +21,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class OrderDaoImpl implements OrderDao {
+public class OrderRepositoryImpl implements OrderRepository {
   @Autowired
   JdbcTemplate jdbcTemplate;
 

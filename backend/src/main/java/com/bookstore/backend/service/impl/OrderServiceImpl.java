@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderDetailMeta;
-import com.bookstore.backend.repository.OrderDao;
+import com.bookstore.backend.repository.OrderRepository;
 import com.bookstore.backend.service.CartService;
 import com.bookstore.backend.service.OrderService;
 
@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
   CartService cartService;
 
   @Autowired
-  OrderDao orderDao;
+  OrderRepository orderDao;
 
   @Override
   public void checkout(Integer userId, String name, String phoneNumber, String address, String note) {

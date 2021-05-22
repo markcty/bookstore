@@ -6,7 +6,7 @@ import java.util.List;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderDetailMeta;
 
-public interface OrderDao {
+public interface OrderRepository {
   Integer createOrder(Integer userId, String name, String phoneNumber, String address, String note,
       BigDecimal totalPrice);
 

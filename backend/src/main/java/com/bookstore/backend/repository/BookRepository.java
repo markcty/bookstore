@@ -5,7 +5,7 @@ import com.bookstore.backend.entity.BookDetail;
 
 import java.util.List;
 
-public interface BookDao {
+public interface BookRepository {
     List<Book> getBooks();
 
     BookDetail getBookDetail(Integer id);

@@ -2,7 +2,7 @@ package com.bookstore.backend.repository.impl;
 
 import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.BookDetail;
-import com.bookstore.backend.repository.BookDao;
+import com.bookstore.backend.repository.BookRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class BookDaoImpl implements BookDao {
+public class BookRepositoryImpl implements BookRepository {
 
     @Autowired
     JdbcTemplate jdbcTemplate;

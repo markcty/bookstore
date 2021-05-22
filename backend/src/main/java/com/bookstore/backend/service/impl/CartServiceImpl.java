@@ -3,7 +3,7 @@ package com.bookstore.backend.service.impl;
 import java.util.List;
 
 import com.bookstore.backend.entity.CartItemMeta;
-import com.bookstore.backend.repository.CartDao;
+import com.bookstore.backend.repository.CartRepository;
 import com.bookstore.backend.service.CartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class CartServiceImpl implements CartService {
 
   @Autowired
-  CartDao cartDao;
+  CartRepository cartDao;
 
   @Override
   public List<CartItemMeta> getCart(Integer userId) {

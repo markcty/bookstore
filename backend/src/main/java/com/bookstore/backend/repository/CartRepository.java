@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.bookstore.backend.entity.CartItemMeta;
 
-public interface CartDao {
+public interface CartRepository {
   List<CartItemMeta> getCart(Integer userId);
 
   Integer getQuantityOfBook(Integer userId, Integer bookId);

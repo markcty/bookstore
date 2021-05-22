@@ -1,7 +1,7 @@
 package com.bookstore.backend.service.impl;
 
 import com.bookstore.backend.entity.User;
-import com.bookstore.backend.repository.UserDao;
+import com.bookstore.backend.repository.UserRepository;
 import com.bookstore.backend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
   @Autowired
-  private UserDao userDao;
+  private UserRepository userDao;
 
   @Autowired
   PasswordEncoder passwordEncoder;

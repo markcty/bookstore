@@ -3,7 +3,7 @@ package com.bookstore.backend.repository.impl;
 import java.util.List;
 
 import com.bookstore.backend.entity.CartItemMeta;
-import com.bookstore.backend.repository.CartDao;
+import com.bookstore.backend.repository.CartRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CartDaoImpl implements CartDao {
+public class CartRepositoryImpl implements CartRepository {
 
   @Autowired
   JdbcTemplate jdbcTemplate;

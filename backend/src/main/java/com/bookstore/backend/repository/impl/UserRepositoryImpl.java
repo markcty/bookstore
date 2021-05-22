@@ -3,7 +3,7 @@ package com.bookstore.backend.repository.impl;
 import java.util.Optional;
 
 import com.bookstore.backend.entity.User;
-import com.bookstore.backend.repository.UserDao;
+import com.bookstore.backend.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDaoImp implements UserDao {
+public class UserRepositoryImpl implements UserRepository {
 
   @Autowired
   JdbcTemplate jdbcTemplate;

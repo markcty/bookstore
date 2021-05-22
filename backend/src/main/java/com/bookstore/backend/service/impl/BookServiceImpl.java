@@ -2,7 +2,7 @@ package com.bookstore.backend.service.impl;
 
 import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.BookDetail;
-import com.bookstore.backend.repository.BookDao;
+import com.bookstore.backend.repository.BookRepository;
 import com.bookstore.backend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
 
     @Autowired
-    private BookDao bookDao;
+    private BookRepository bookDao;
 
     @Override
     public List<Book> getBooks() {
