@@ -2,10 +2,10 @@ package com.bookstore.backend.service;
 
 import java.util.Set;
 
-import com.bookstore.backend.entity.CartItem;
+import com.bookstore.backend.msg.CartItemMsg;
 
 public interface CartService {
-  Set<CartItem> getCart(Integer userId);
+  Set<CartItemMsg> getCartItems(Integer userId);
 
   void delCartItem(Integer userId, Integer bookId);
 
