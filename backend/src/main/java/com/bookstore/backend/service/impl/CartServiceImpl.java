@@ -1,10 +1,9 @@
 package com.bookstore.backend.service.impl;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import com.bookstore.backend.dao.CartDao;
-import com.bookstore.backend.msg.CartItemMsg;
+import com.bookstore.backend.entity.CartItem;
 import com.bookstore.backend.service.CartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,8 @@ public class CartServiceImpl implements CartService {
   CartDao cartDao;
 
   @Override
-  public Set<CartItemMsg> getCartItems(Integer userId) {
-    var items = cartDao.getCartItems(userId);
-    HashSet<CartItemMsg> itemMsgs = new HashSet<>();
-    for (var item : items)
-      itemMsgs.add(new CartItemMsg(item));
-    return itemMsgs;
+  public Set<CartItem> getCartItems(Integer userId) {
+    return cartDao.getCartItems(userId);
   }
 
   @Override

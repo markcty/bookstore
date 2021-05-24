@@ -8,7 +8,7 @@ import com.bookstore.backend.entity.Book;
 public interface BookDao {
   List<Book> getBooks();
 
-  Optional<Book> getBookDetail(Integer id);
+  Optional<Book> getBook(Integer id);
 
   void updateBook(Book book);
 

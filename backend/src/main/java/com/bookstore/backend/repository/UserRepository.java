@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import com.bookstore.backend.entity.User;
 
-public interface UserRepository {
-  Optional<User> getUser(String username);
+import org.springframework.data.jpa.repository.JpaRepository;
 
-  void register(String username, String password);
+public interface UserRepository extends JpaRepository<User, Integer> {
+  Optional<User> findByUsername(String username);
 }

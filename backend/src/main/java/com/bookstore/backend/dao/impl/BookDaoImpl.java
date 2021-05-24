@@ -22,7 +22,7 @@ public class BookDaoImpl implements BookDao {
   }
 
   @Override
-  public Optional<Book> getBookDetail(Integer id) {
+  public Optional<Book> getBook(Integer id) {
     return bookRepository.findById(id);
   }
 

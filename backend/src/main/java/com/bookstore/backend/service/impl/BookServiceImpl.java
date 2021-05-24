@@ -24,7 +24,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBookDetail(Integer id) {
-        var book = bookDao.getBookDetail(id);
+        var book = bookDao.getBook(id);
         if (book.isPresent())
             return book.get();
         else

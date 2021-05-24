@@ -2,10 +2,11 @@ package com.bookstore.backend.dao.impl;
 
 import java.util.Set;
 
+import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.CartDao;
+import com.bookstore.backend.dao.UserDao;
 import com.bookstore.backend.entity.Cart;
 import com.bookstore.backend.entity.CartItem;
-import com.bookstore.backend.repository.BookRepository;
 import com.bookstore.backend.repository.CartRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,13 @@ import org.springframework.stereotype.Repository;
 public class CartDaoImpl implements CartDao {
 
   @Autowired
-  CartRepository cartRepository;
+  UserDao userDao;
 
   @Autowired
-  BookRepository bookRepository;
+  BookDao bookDao;
+
+  @Autowired
+  CartRepository cartRepository;
 
   @Override
   public Set<CartItem> getCartItems(Integer userId) {
@@ -27,10 +31,12 @@ public class CartDaoImpl implements CartDao {
 
   @Override
   public Integer getQuantityOfBook(Integer userId, Integer bookId) {
-    var cartItems = getCart(userId).getItems();
+    var cart = getCart(userId);
+    var cartItems = cart.getItems();
     for (var item : cartItems)
       if (item.getBook().getId() == bookId)
         return item.getQuantity();
+    cartRepository.save(cart);
     return 0;
   }
 
@@ -47,7 +53,7 @@ public class CartDaoImpl implements CartDao {
       }
     if (newItem == null) {
       newItem = new CartItem();
-      var book = bookRepository.findById(bookId).get();
+      var book = bookDao.getBook(bookId).get();
       newItem.setBook(book);
       newItem.setCart(cart);
       newItem.setQuantity(quantity);
@@ -55,24 +61,18 @@ public class CartDaoImpl implements CartDao {
     }
     if (quantity == 0)
       cartItems.remove(newItem);
+    cart.setItems(cartItems);
     cartRepository.save(cart);
   }
 
   @Override
   public void clearCart(Integer userId) {
-    var cart = getCart(userId);
+    var cart = userDao.getUser(userId).get().getCart();
     cart.getItems().clear();
     cartRepository.save(cart);
   }
 
   private Cart getCart(Integer userId) {
-    var cart = cartRepository.findByUserId(userId);
-    if (cart.isPresent())
-      return cart.get();
-
-    Cart newCart = new Cart();
-    newCart.setUserId(userId);
-    cartRepository.save(newCart);
-    return newCart;
+    return userDao.getUser(userId).get().getCart();
   }
 }

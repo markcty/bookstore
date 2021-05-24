@@ -3,7 +3,6 @@ package com.bookstore.backend.controller;
 import java.util.Set;
 
 import com.bookstore.backend.entity.CartItem;
-import com.bookstore.backend.msg.CartItemMsg;
 import com.bookstore.backend.security.auth.AuthUserDetail;
 import com.bookstore.backend.service.CartService;
 
@@ -26,7 +25,7 @@ public class CartController {
   CartService cartService;
 
   @GetMapping("/user/cart")
-  public Set<CartItemMsg> getCartItems() {
+  public Set<CartItem> getCartItems() {
     AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     return cartService.getCartItems(user.getId());
   }
