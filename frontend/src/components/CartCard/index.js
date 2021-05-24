@@ -1,9 +1,7 @@
 import React from "react";
-import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Col, Row, Space } from "antd";
 import "./index.css";
 import { Link } from "react-router-dom";
-import { delCartItem } from "../../services/api";
 
 export default function CartCard({ quantity, book, addBook, delBook }) {
   const { id: bookId, coverUrl, title, author, price } = book;
@@ -15,12 +13,6 @@ export default function CartCard({ quantity, book, addBook, delBook }) {
       wrap={false}
       style={{ paddingTop: 32, paddingBottom: 32, margin: 0 }}
     >
-      <Col className={"deleteButton"} span={1}>
-        <DeleteOutlined
-          style={{ fontSize: "1.8em", color: "red" }}
-          onClick={() => delCartItem(bookId)}
-        />
-      </Col>
       <Col xs={6} sm={6} md={9} lg={6} offset={1}>
         <Link to={`book/${bookId}`}>
           <img

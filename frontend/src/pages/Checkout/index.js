@@ -3,7 +3,13 @@ import { Button, Col, Form, Input, Layout, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { withRouter, useHistory } from "react-router";
 import CartCard from "../../components/CartCard";
-import { checkout, delCartItem, getCartItems } from "../../services/api";
+import {
+  checkout,
+  delCartItem,
+  getCartItems,
+  addCartItem,
+} from "../../services/api";
+
 import "./index.css";
 
 const { Content } = Layout;
@@ -18,9 +24,15 @@ function Checkout(props) {
   const updateCart = () =>
     getCartItems().then((cartItems) => setCartItems(cartItems));
 
-  const removeItem = (id) => {
-    delCartItem(id).then(updateCart);
-  };
+  const addBook = (bookId) =>
+    addCartItem(bookId).then(() =>
+      getCartItems().then((cartItems) => setCartItems(cartItems))
+    );
+
+  const delBook = (bookId) =>
+    delCartItem(bookId).then(() =>
+      getCartItems().then((cartItems) => setCartItems(cartItems))
+    );
 
   useEffect(updateCart, []);
 
@@ -82,8 +94,9 @@ function Checkout(props) {
                     <Col span={24}>
                       <CartCard
                         {...item}
-                        removeItem={removeItem}
                         key={item.id}
+                        addBook={addBook}
+                        delBook={delBook}
                       />
                     </Col>
                   );
