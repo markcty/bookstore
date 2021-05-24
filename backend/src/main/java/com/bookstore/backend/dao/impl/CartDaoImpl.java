@@ -1,8 +1,6 @@
 package com.bookstore.backend.dao.impl;
 
-import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.CartDao;
-import com.bookstore.backend.dao.UserDao;
 import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Cart;
 import com.bookstore.backend.entity.CartItem;
