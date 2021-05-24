@@ -1,16 +1,12 @@
 package com.bookstore.backend.dao;
 
-import java.util.Set;
-
-import com.bookstore.backend.entity.CartItem;
+import com.bookstore.backend.entity.Book;
+import com.bookstore.backend.entity.Cart;
 
 public interface CartDao {
+  Integer getQuantityOfBook(Cart cart, Book book);
 
-  Set<CartItem> getCartItems(Integer userId);
+  void updateQuantityOfBook(Cart cart, Book book, int quantity);
 
-  Integer getQuantityOfBook(Integer userId, Integer bookId);
-
-  void updateQuantityOfBook(Integer userId, Integer bookId, int quantity);
-
-  void clearCart(Integer userId);
+  void clearCart(Cart cart);
 }
