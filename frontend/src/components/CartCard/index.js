@@ -5,16 +5,8 @@ import "./index.css";
 import { Link } from "react-router-dom";
 import { delCartItem } from "../../services/api";
 
-export default function CartCard({
-  bookId,
-  price,
-  title,
-  author,
-  quantity,
-  coverUrl,
-  addBook,
-  delBook,
-}) {
+export default function CartCard({ quantity, book, addBook, delBook }) {
+  const { id: bookId, coverUrl, title, author, price } = book;
   return (
     <Row
       className="card"
