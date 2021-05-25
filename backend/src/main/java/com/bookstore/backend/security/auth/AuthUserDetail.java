@@ -21,7 +21,6 @@ public class AuthUserDetail implements UserDetails {
     this.password = password;
     this.authorities = authorities;
     this.isEnabled = isEnabled > 0 ? true : false;
-
   }
 
   @Override

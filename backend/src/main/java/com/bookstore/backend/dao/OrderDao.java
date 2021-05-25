@@ -6,4 +6,6 @@ import com.bookstore.backend.entity.Order;
 
 public interface OrderDao {
   Optional<Order> getOrder(Integer id);
+
+  void createOrder(Order order);
 }

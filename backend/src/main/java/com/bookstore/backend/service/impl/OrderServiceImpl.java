@@ -1,7 +1,10 @@
 package com.bookstore.backend.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.CartDao;
 import com.bookstore.backend.dao.OrderDao;
 import com.bookstore.backend.dao.UserDao;
@@ -26,21 +29,49 @@ public class OrderServiceImpl implements OrderService {
   @Autowired
   OrderDao orderDao;
 
+  @Autowired
+  BookDao bookDao;
+
   @Override
-  public void checkout(Integer userId, String name, String phoneNumber, String address, String note) {
-    // var items = cartService.getCart(userId);
-    // if (items.isEmpty())
-    // return;
-    // BigDecimal totalPrice = new BigDecimal(0);
-    // for (var item : items)
-    // totalPrice = totalPrice.add(item.getPrice().multiply(new
-    // BigDecimal(item.getQuantity())));
-    // var orderId = orderDao.createOrder(userId, name, phoneNumber, address, note,
-    // totalPrice);
-    // items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBookId(),
-    // item.getQuantity()));
-    // cartService.clearCart(userId);
-    // TODO: subtract inventory
+  public void checkout(Integer userId, String consignee, String phoneNumber, String address, String note) {
+    var user = userDao.getUser(userId).get();
+    var items = user.getCart().getItems();
+    if (items.isEmpty())
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "empty cart");
+
+    // calculate total price and check inventory
+    BigDecimal totalPrice = new BigDecimal(0);
+    for (var item : items) {
+      var book = item.getBook();
+      if (book.getInventory() < item.getQuantity())
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+            "Inventory for book " + book.getTitle() + " is not enough");
+      totalPrice.add(book.getPrice().multiply(new BigDecimal(item.getQuantity())));
+    }
+
+    // create new order
+    var newOrder = new Order();
+    newOrder.setAddress(address);
+    newOrder.setConsignee(consignee);
+    newOrder.setNote(note);
+    var orderItems = items.stream().map(item -> {
+      var orderItem = new OrderItem();
+      orderItem.setBook(item.getBook());
+      orderItem.setQuantity(item.getQuantity());
+      return orderItem;
+    }).collect(Collectors.toSet());
+    newOrder.setOrderItems(orderItems);
+    newOrder.setPhoneNumber(phoneNumber);
+    newOrder.setTotalPrice(totalPrice);
+    newOrder.setUser(user);
+    orderDao.createOrder(newOrder);
+
+    // subtract inventory
+    for (var item : orderItems) {
+      var book = item.getBook();
+      book.setInventory(book.getInventory() - item.getQuantity());
+      bookDao.updateBook(book);
+    }
   }
 
   @Override
@@ -53,8 +84,6 @@ public class OrderServiceImpl implements OrderService {
   public Set<OrderItem> getOrder(Integer userId, Integer id) {
     var user = userDao.getUser(userId).get();
     var order = orderDao.getOrder(id);
-    System.out.println("haha");
-    System.out.println(order);
     if (!order.isPresent())
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such order");
     if (!order.get().getUser().equals(user) && user.getIsAdmin() == 0)

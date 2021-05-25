@@ -8,10 +8,22 @@ import Search from "antd/es/input/Search";
 export default function OrderDetail() {
   const { orderId } = useParams();
 
-  const [books, setBooks] = useState([]);
+  const [orderItems, setOrderItems] = useState([]);
 
   useEffect(() => {
-    getOrderDetail(orderId).then((res) => setBooks(res.data));
+    getOrderDetail(orderId).then((res) => {
+      const data = res.data;
+      const orderItems = data.map((item) => {
+        const book = item.book;
+        return {
+          bookId: book.id,
+          price: book.price,
+          title: book.title,
+          quantity: item.quantity,
+        };
+      });
+      setOrderItems(orderItems);
+    });
   }, [orderId]);
 
   const columns = [
@@ -59,7 +71,7 @@ export default function OrderDetail() {
             </Col>
             <Col span={24}>
               <Table
-                dataSource={books.filter((book) =>
+                dataSource={orderItems.filter((book) =>
                   book.title.toLowerCase().includes(searchText)
                 )}
                 columns={columns}
