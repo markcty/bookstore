@@ -26,6 +26,18 @@ public class OrderItem {
   @JoinColumn(name = "book_id")
   private Book book;
 
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "order_id")
+  private Order order;
+
+  public Order getOrder() {
+    return order;
+  }
+
+  public void setOrder(Order order) {
+    this.order = order;
+  }
+
   private Integer quantity;
 
   public Integer getId() {

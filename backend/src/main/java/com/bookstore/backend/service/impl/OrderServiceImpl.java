@@ -45,8 +45,8 @@ public class OrderServiceImpl implements OrderService {
       var book = item.getBook();
       if (book.getInventory() < item.getQuantity())
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-            "Inventory for book " + book.getTitle() + " is not enough");
-      totalPrice.add(book.getPrice().multiply(new BigDecimal(item.getQuantity())));
+            "There is not enough inventory for book " + book.getTitle());
+      totalPrice = totalPrice.add(book.getPrice().multiply(new BigDecimal(item.getQuantity())));
     }
 
     // create new order
@@ -58,6 +58,7 @@ public class OrderServiceImpl implements OrderService {
       var orderItem = new OrderItem();
       orderItem.setBook(item.getBook());
       orderItem.setQuantity(item.getQuantity());
+      orderItem.setOrder(newOrder);
       return orderItem;
     }).collect(Collectors.toSet());
     newOrder.setOrderItems(orderItems);
@@ -66,12 +67,17 @@ public class OrderServiceImpl implements OrderService {
     newOrder.setUser(user);
     orderDao.createOrder(newOrder);
 
+    System.out.println(newOrder.getId());
+
     // subtract inventory
     for (var item : orderItems) {
       var book = item.getBook();
       book.setInventory(book.getInventory() - item.getQuantity());
       bookDao.updateBook(book);
     }
+
+    // clear cart
+    cartDao.clearCart(user.getCart());
   }
 
   @Override

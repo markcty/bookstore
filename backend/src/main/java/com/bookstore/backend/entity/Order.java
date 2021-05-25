@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name = "order")
 @JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer", "fieldHandler", "user", "orderItems" })
@@ -37,10 +39,10 @@ public class Order {
   private User user;
 
   @Temporal(TemporalType.TIMESTAMP)
+  @CreationTimestamp
   private Date purchaseTime;
 
-  @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-  @JoinColumn(name = "order_id")
+  @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order")
   private Set<OrderItem> orderItems = new HashSet<>();
 
   private String consignee;

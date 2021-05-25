@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
 import { Button, Col, Row, Space, Table } from "antd";
-import { Content } from "antd/es/layout/layout";
-import BookEditCard from "../../components/BookEditCard";
 import Search from "antd/es/input/Search";
-import { getBooks } from "../../services/api";
+import { Content } from "antd/es/layout/layout";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import BookEditCard from "../../components/BookEditCard";
 import {
-  updateBook as updateBookApi,
   delBook as deleteBookApi,
+  getBooks,
+  updateBook as updateBookApi,
 } from "../../services/api";
 
 export default function Manage() {
@@ -63,6 +64,7 @@ export default function Manage() {
       title: "Title",
       dataIndex: "title",
       key: "title",
+      render: (text, record) => <Link to={`/book/${record.id}`}>{text}</Link>,
     },
     {
       title: "Author",

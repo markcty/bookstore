@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import org.hibernate.annotations.ColumnDefault;
+
 @Entity
 @Table(name = "book")
 @JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer", "fieldHandler" })
@@ -27,6 +29,11 @@ public class Book {
     private String title;
     private String author;
     private String description;
+    private BigDecimal price;
+    private Integer inventory;
+
+    @ColumnDefault(value = "https://markcty-image-server.oss-cn-shanghai.aliyuncs.com/uPic/2021-05-25-YD6pZQ.jpg")
+    private String coverUrl;
 
     public Integer getId() {
         return id;
@@ -87,10 +94,6 @@ public class Book {
     public void setCoverUrl(String coverUrl) {
         this.coverUrl = coverUrl;
     }
-
-    private BigDecimal price;
-    private Integer inventory;
-    private String coverUrl;
 
     @Override
     public int hashCode() {

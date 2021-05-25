@@ -129,8 +129,8 @@ function Checkout(props) {
                 form={form}
               >
                 <Form.Item
-                  name={["order", "name"]}
-                  label="Name"
+                  name={["order", "consignee"]}
+                  label="Consignee"
                   rules={[
                     {
                       required: true,
