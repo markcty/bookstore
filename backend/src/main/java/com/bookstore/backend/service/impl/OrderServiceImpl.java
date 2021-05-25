@@ -1,24 +1,30 @@
 package com.bookstore.backend.service.impl;
 
-import java.util.List;
+import java.util.Set;
 
+import com.bookstore.backend.dao.CartDao;
+import com.bookstore.backend.dao.OrderDao;
+import com.bookstore.backend.dao.UserDao;
 import com.bookstore.backend.entity.Order;
-import com.bookstore.backend.entity.OrderDetailMeta;
-import com.bookstore.backend.repository.OrderRepository;
-import com.bookstore.backend.service.CartService;
+import com.bookstore.backend.entity.OrderItem;
 import com.bookstore.backend.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
   @Autowired
-  CartService cartService;
+  CartDao cartDao;
 
   @Autowired
-  OrderRepository orderDao;
+  UserDao userDao;
+
+  @Autowired
+  OrderDao orderDao;
 
   @Override
   public void checkout(Integer userId, String name, String phoneNumber, String address, String note) {
@@ -38,13 +44,21 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public List<Order> getOrders(Integer userId) {
-    return orderDao.getOrders(userId);
+  public Set<Order> getOrders(Integer userId) {
+    var user = userDao.getUser(userId).get();
+    return user.getOrders();
   }
 
   @Override
-  public List<OrderDetailMeta> getOrderDetail(Integer id) {
-    return orderDao.getOrderDetail(id);
+  public Set<OrderItem> getOrder(Integer userId, Integer id) {
+    var user = userDao.getUser(userId).get();
+    var order = orderDao.getOrder(id);
+    System.out.println("haha");
+    System.out.println(order);
+    if (!order.isPresent())
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such order");
+    if (!order.get().getUser().equals(user) && user.getIsAdmin() == 0)
+      throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You can not get other user's order");
+    return order.get().getOrderItems();
   }
-
 }

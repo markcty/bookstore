@@ -1,10 +1,10 @@
 package com.bookstore.backend.controller;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.bookstore.backend.entity.Order;
-import com.bookstore.backend.entity.OrderDetailMeta;
+import com.bookstore.backend.entity.OrderItem;
 import com.bookstore.backend.security.auth.AuthUserDetail;
 import com.bookstore.backend.service.OrderService;
 
@@ -28,21 +28,23 @@ public class OrderController {
   public void checkout(@RequestBody Map<String, String> body) {
     AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     var userId = user.getId();
-    var name = body.get("name");
+    var consignee = body.get("consignee");
     var note = body.get("note");
     var phoneNumber = body.get("phoneNumber");
     var address = body.get("address");
-    orderService.checkout(userId, name, phoneNumber, address, note);
+    orderService.checkout(userId, consignee, phoneNumber, address, note);
   }
 
   @GetMapping("/orders")
-  public List<Order> getOrders() {
+  public Set<Order> getOrders() {
     AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
     return orderService.getOrders(user.getId());
   }
 
   @GetMapping("/order")
-  public List<OrderDetailMeta> getOrderDetail(@RequestParam Integer id) {
-    return orderService.getOrderDetail(id);
+  public Set<OrderItem> getOrderDetail(@RequestParam Integer id) {
+    AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    return orderService.getOrder(user.getId(), id);
   }
 }

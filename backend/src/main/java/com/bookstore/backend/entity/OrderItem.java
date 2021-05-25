@@ -13,10 +13,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name = "cartItem")
-@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer", "fieldHandler", "cart" })
+@Table(name = "order_item")
+@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer", "fieldHandler" })
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class CartItem {
+public class OrderItem {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
@@ -24,10 +25,6 @@ public class CartItem {
   @ManyToOne(optional = false)
   @JoinColumn(name = "book_id")
   private Book book;
-
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "cart_id", nullable = false)
-  private Cart cart;
 
   private Integer quantity;
 
@@ -43,45 +40,12 @@ public class CartItem {
     this.book = book;
   }
 
-  public Cart getCart() {
-    return cart;
-  }
-
-  public void setCart(Cart cart) {
-    this.cart = cart;
-  }
-
   public Integer getQuantity() {
     return quantity;
   }
 
   public void setQuantity(Integer quantity) {
     this.quantity = quantity;
-  }
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((id == null) ? 0 : id.hashCode());
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    CartItem other = (CartItem) obj;
-    if (id == null) {
-      if (other.id != null)
-        return false;
-    } else if (!id.equals(other.id))
-      return false;
-    return true;
   }
 
 }

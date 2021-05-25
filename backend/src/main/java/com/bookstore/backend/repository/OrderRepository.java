@@ -1,18 +1,9 @@
 package com.bookstore.backend.repository;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import com.bookstore.backend.entity.Order;
-import com.bookstore.backend.entity.OrderDetailMeta;
 
-public interface OrderRepository {
-  Integer createOrder(Integer userId, String name, String phoneNumber, String address, String note,
-      BigDecimal totalPrice);
+import org.springframework.data.jpa.repository.JpaRepository;
 
-  List<Order> getOrders(Integer userId);
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-  List<OrderDetailMeta> getOrderDetail(Integer id);
-
-  void addBookForOrder(Integer orderId, Integer bookId, Integer quantity);
 }
