@@ -1,6 +1,8 @@
 package com.bookstore.backend.dao.impl;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import com.bookstore.backend.dao.UserDao;
 import com.bookstore.backend.entity.Cart;
@@ -46,4 +48,8 @@ public class UserDaoImpl implements UserDao {
     return userRepository.findById(userId);
   }
 
+  @Override
+  public Set<User> getUsers() {
+    return new HashSet<>(userRepository.findAll());
+  }
 }

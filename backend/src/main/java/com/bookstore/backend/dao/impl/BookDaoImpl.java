@@ -2,6 +2,7 @@ package com.bookstore.backend.dao.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.entity.Book;
@@ -18,7 +19,7 @@ public class BookDaoImpl implements BookDao {
 
   @Override
   public List<Book> getBooks() {
-    return bookRepository.findAll();
+    return bookRepository.findAll().stream().filter(book -> book.getIsDeleted() != 1).collect(Collectors.toList());
   }
 
   @Override
@@ -28,7 +29,9 @@ public class BookDaoImpl implements BookDao {
 
   @Override
   public void delBook(Integer id) {
-    bookRepository.deleteById(id);
+    var book = bookRepository.findById(id).get();
+    book.setIsDeleted(1);
+    bookRepository.save(book);
   }
 
   @Override

@@ -31,7 +31,8 @@ public class Book {
     private String description;
     private BigDecimal price;
     private Integer inventory;
-
+    @ColumnDefault(value = "0")
+    private Integer isDeleted;
     @ColumnDefault(value = "https://markcty-image-server.oss-cn-shanghai.aliyuncs.com/uPic/2021-05-25-YD6pZQ.jpg")
     private String coverUrl;
 
@@ -118,6 +119,14 @@ public class Book {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
 }

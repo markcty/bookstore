@@ -1,5 +1,7 @@
 package com.bookstore.backend.service.impl;
 
+import java.util.Set;
+
 import com.bookstore.backend.dao.UserDao;
 import com.bookstore.backend.entity.User;
 import com.bookstore.backend.service.UserService;
@@ -25,5 +27,10 @@ public class UserServiceImpl implements UserService {
   @Override
   public User getUser(String username) {
     return userDao.getUser(username).get();
+  }
+
+  @Override
+  public Set<User> getUsers() {
+    return userDao.getUsers();
   }
 }

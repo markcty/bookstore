@@ -1,6 +1,7 @@
 package com.bookstore.backend.dao;
 
 import java.util.Optional;
+import java.util.Set;
 
 import com.bookstore.backend.entity.User;
 
@@ -10,4 +11,6 @@ public interface UserDao {
   Optional<User> getUser(String username);
 
   Optional<User> getUser(Integer userId);
+
+  Set<User> getUsers();
 }

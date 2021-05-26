@@ -1,6 +1,7 @@
 package com.bookstore.backend.controller;
 
 import java.util.Map;
+import java.util.Set;
 
 import com.bookstore.backend.entity.User;
 import com.bookstore.backend.service.UserService;
@@ -32,5 +33,10 @@ public class UserController {
     String username = authentication.getName();
     var user = userService.getUser(username);
     return user;
+  }
+
+  @GetMapping("/admin/users")
+  public Set<User> getUsers() {
+    return userService.getUsers();
   }
 }

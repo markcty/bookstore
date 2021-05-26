@@ -3,7 +3,6 @@ package com.bookstore.backend.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +17,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "user")
-@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer", "fieldHandler", "cart" })
+@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer", "fieldHandler", "cart", "orders" })
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
   @Id
@@ -30,10 +29,10 @@ public class User {
   private Integer isAdmin;
   private Integer isEnabled;
 
-  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+  @OneToOne(mappedBy = "user")
   private Cart cart;
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "user")
   private Set<Order> orders = new HashSet<>();
 
   public Set<Order> getOrders() {
