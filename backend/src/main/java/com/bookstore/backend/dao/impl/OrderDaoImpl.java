@@ -1,6 +1,8 @@
 package com.bookstore.backend.dao.impl;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import com.bookstore.backend.dao.OrderDao;
 import com.bookstore.backend.entity.Order;
@@ -23,6 +25,11 @@ public class OrderDaoImpl implements OrderDao {
   @Override
   public void createOrder(Order order) {
     orderRepository.save(order);
+  }
+
+  @Override
+  public Set<Order> getAllOrders() {
+    return new HashSet<>(orderRepository.findAll());
   }
 
 }

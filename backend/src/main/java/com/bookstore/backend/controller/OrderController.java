@@ -47,4 +47,9 @@ public class OrderController {
     AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     return orderService.getOrder(user.getId(), id);
   }
+
+  @GetMapping("/admin/orders")
+  public Set<Order> getAllOrders() {
+    return orderService.getAllOrders();
+  }
 }

@@ -11,4 +11,6 @@ public interface OrderService {
   Set<Order> getOrders(Integer userId);
 
   Set<OrderItem> getOrder(Integer userId, Integer id);
+
+  Set<Order> getAllOrders();
 }

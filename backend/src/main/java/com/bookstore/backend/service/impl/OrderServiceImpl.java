@@ -96,4 +96,10 @@ public class OrderServiceImpl implements OrderService {
       throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You can not get other user's order");
     return order.get().getOrderItems();
   }
+
+  @Override
+  public Set<Order> getAllOrders() {
+    return orderDao.getAllOrders();
+  }
+
 }
