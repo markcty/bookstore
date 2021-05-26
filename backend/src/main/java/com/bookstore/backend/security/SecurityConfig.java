@@ -20,6 +20,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
+@SuppressWarnings("deprecation")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
@@ -38,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // public request
         .authorizeRequests().antMatchers("/api/books", "/api/book", "/api/register").permitAll().and()
         // admin request
-        .authorizeRequests().antMatchers("/api/admin/book").hasRole("ADMIN").and()
+        .authorizeRequests().antMatchers("/api/admin/**").hasRole("ADMIN").and()
         // user request
         .authorizeRequests().anyRequest().authenticated().and()
         // logout
