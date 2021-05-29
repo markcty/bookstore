@@ -1,9 +1,14 @@
 package com.bookstore.backend.service.impl;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.bookstore.backend.dao.BookDao;
+import com.bookstore.backend.dao.OrderDao;
 import com.bookstore.backend.entity.Book;
+import com.bookstore.backend.entity.BookSale;
 import com.bookstore.backend.service.BookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +21,9 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookDao bookDao;
+
+    @Autowired
+    private OrderDao orderDao;
 
     @Override
     public List<Book> getBooks() {
@@ -41,4 +49,25 @@ public class BookServiceImpl implements BookService {
         bookDao.delBook(id);
     }
 
+    @Override
+    public List<BookSale> getHotSales(LocalDate start, LocalDate end) {
+        var orders = orderDao.getAllOrders();
+        var sales = new HashMap<String, Integer>();
+        for (var order : orders) {
+            for (var item : order.getOrderItems()) {
+                var bookTitle = item.getBook().getTitle();
+                var quantity = item.getQuantity();
+                if (sales.containsKey(bookTitle))
+                    sales.replace(bookTitle, sales.get(bookTitle) + quantity);
+                else
+                    sales.put(bookTitle, quantity);
+            }
+        }
+        var bookSales = new ArrayList<BookSale>();
+        for (var sale : sales.entrySet()) {
+            bookSales.add(new BookSale(sale.getKey(), sale.getValue()));
+        }
+        bookSales.sort((a, b) -> b.getSales() - a.getSales());
+        return bookSales;
+    }
 }

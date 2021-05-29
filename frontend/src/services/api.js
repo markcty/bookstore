@@ -111,3 +111,21 @@ export function getOrderDetail(id) {
       .catch((err) => reject(err));
   });
 }
+
+export function getHotSales(start, end) {
+  return new Promise((resolve, reject) => {
+    http
+      .get("/admin/hotSales", {
+        // params: {
+        //   start: start.toISOString().split("T")[0],
+        //   end: end.toISOString().split("T")[0],
+        // },
+        params: {
+          start: start,
+          end: end,
+        },
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+}

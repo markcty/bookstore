@@ -67,8 +67,6 @@ public class OrderServiceImpl implements OrderService {
     newOrder.setUser(user);
     orderDao.createOrder(newOrder);
 
-    System.out.println(newOrder.getId());
-
     // subtract inventory
     for (var item : orderItems) {
       var book = item.getBook();

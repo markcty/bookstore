@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Content } from "antd/es/layout/layout";
 import { Col, DatePicker, Row, Space, Table } from "antd";
-import { getOrders } from "../../services/api";
+import { Content } from "antd/es/layout/layout";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getHotSales, getOrders } from "../../services/api";
+import moment from "moment";
 
 const { RangePicker } = DatePicker;
 
@@ -18,7 +19,7 @@ export default function Orders() {
           address: order.address,
           phoneNumber: order.phoneNumber,
           price: order.totalPrice,
-          purchaseDate: new Date(Date.parse(order.purchaseTime)),
+          purchaseDate: moment(order.purchaseTime),
         };
       });
       setOrders(data);
@@ -61,8 +62,9 @@ export default function Orders() {
       dataIndex: "purchaseDate",
       key: "purchaseDate",
       sortDirections: ["ascend", "descend", "ascend"],
-      render: (date) => date.toLocaleString(),
-      sorter: (a, b) => new Date(a.purchaseDate) - new Date(b.purchaseDate),
+      render: (date) => date.format("MMM Do YYYY, h:mm:ss a"),
+      // sorter: (a, b) => new Date(a.purchaseDate) - new Date(b.purchaseDate),
+      sorter: (a, b) => a.purchaseDate.isAfter(b.purchaseDate),
     },
     {
       title: "Operation",
@@ -77,9 +79,14 @@ export default function Orders() {
   ];
 
   const [dateRange, setDateRange] = useState([
-    new Date("January 1, 1900 00:00:00"),
-    new Date("January 1, 2099 00:00:00"),
+    moment("1-1-1999", "MM-DD-YYYY"),
+    moment("1-1-2099", "MM-DD-YYYY"),
   ]);
+
+  getHotSales(dateRange[0].format(), dateRange[1].format()).then((res) =>
+    console.log(res)
+  );
+  // console.log(dateRange[0].format(), dateRange[1].format());
 
   return (
     <Content className={"page"}>
@@ -88,7 +95,7 @@ export default function Orders() {
           <Row gutter={[32, 16]}>
             <Col
               span={24}
-              style={{ display: "flex", justifyContent: "space-between" }}
+              style={{ display: "flex", justifyContent: "flex-end" }}
             >
               <RangePicker
                 onChange={(range) => {

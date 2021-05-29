@@ -1,11 +1,14 @@
 package com.bookstore.backend.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.bookstore.backend.entity.Book;
+import com.bookstore.backend.entity.BookSale;
 import com.bookstore.backend.service.BookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,5 +42,12 @@ public class BookController {
     @DeleteMapping("/admin/book")
     public void delBook(@RequestParam Integer id) {
         bookService.delBook(id);
+    }
+
+    @GetMapping("/admin/hotSales")
+    public List<BookSale> getHotSales(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
+        return bookService.getHotSales(start.toLocalDate(), end.toLocalDate());
     }
 }
