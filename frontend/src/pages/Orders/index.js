@@ -1,4 +1,4 @@
-import { Col, DatePicker, Row, Space, Table } from "antd";
+import { Breadcrumb, Col, DatePicker, Row, Space, Table } from "antd";
 import { Content } from "antd/es/layout/layout";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -95,8 +95,11 @@ export default function Orders() {
           <Row gutter={[32, 16]}>
             <Col
               span={24}
-              style={{ display: "flex", justifyContent: "flex-end" }}
+              style={{ display: "flex", justifyContent: "space-between" }}
             >
+              <Breadcrumb>
+                <Breadcrumb.Item>All Orders</Breadcrumb.Item>
+              </Breadcrumb>
               <RangePicker
                 onChange={(range) => {
                   setDateRange(range);

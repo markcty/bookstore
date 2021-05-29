@@ -1,4 +1,4 @@
-import { Col, Row, Table } from "antd";
+import { Breadcrumb, Col, Row, Table } from "antd";
 import { Content } from "antd/es/layout/layout";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -62,6 +62,10 @@ export default function OrderDetail() {
               span={24}
               style={{ display: "flex", justifyContent: "space-between" }}
             >
+              <Breadcrumb>
+                <Breadcrumb.Item href={"/orders"}>All Orders</Breadcrumb.Item>
+                <Breadcrumb.Item>Order {orderId}</Breadcrumb.Item>
+              </Breadcrumb>
               <Search
                 placeholder="input book title"
                 allowClear
