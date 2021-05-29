@@ -13,10 +13,11 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 @Entity
 @Table(name = "book")
+@DynamicInsert
 @JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer", "fieldHandler" })
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Book {
@@ -26,14 +27,13 @@ public class Book {
 
     @Column(unique = true)
     private String isbn;
+
     private String title;
     private String author;
     private String description;
     private BigDecimal price;
     private Integer inventory;
-    @ColumnDefault(value = "0")
     private Integer isDeleted;
-    @ColumnDefault(value = "https://markcty-image-server.oss-cn-shanghai.aliyuncs.com/uPic/2021-05-25-YD6pZQ.jpg")
     private String coverUrl;
 
     public Integer getId() {
