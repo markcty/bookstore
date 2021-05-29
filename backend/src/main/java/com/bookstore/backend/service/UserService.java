@@ -1,7 +1,10 @@
 package com.bookstore.backend.service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
+import com.bookstore.backend.entity.BuyerStat;
 import com.bookstore.backend.entity.User;
 
 public interface UserService {
@@ -10,4 +13,6 @@ public interface UserService {
   User getUser(String username);
 
   Set<User> getUsers();
+
+  List<BuyerStat> getGoldenBuyers(LocalDate start, LocalDate end);
 }

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.bookstore.backend.entity.Book;
-import com.bookstore.backend.entity.BookSale;
+import com.bookstore.backend.entity.BookSaleStat;
 import com.bookstore.backend.service.BookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class BookController {
     }
 
     @GetMapping("/admin/hotSales")
-    public List<BookSale> getHotSales(
+    public List<BookSaleStat> getHotSales(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
         return bookService.getHotSales(start.toLocalDate(), end.toLocalDate());

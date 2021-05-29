@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class BookSale {
+public class BookSaleStat {
   private String title;
   private Integer sales;
 }

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.bookstore.backend.entity.Book;
-import com.bookstore.backend.entity.BookSale;
+import com.bookstore.backend.entity.BookSaleStat;
 
 public interface BookService {
     List<Book> getBooks();
@@ -15,5 +15,5 @@ public interface BookService {
 
     void delBook(Integer id);
 
-    List<BookSale> getHotSales(LocalDate start, LocalDate end);
+    List<BookSaleStat> getHotSales(LocalDate start, LocalDate end);
 }
