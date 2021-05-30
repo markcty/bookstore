@@ -15,7 +15,6 @@ import "./App.less";
 import { getUser } from "./services/auth";
 import { PrivateRoute } from "./utils/privateRoute";
 import Thanks from "./pages/Thanks";
-import OrderDetail from "./pages/OrderDetail";
 import Register from "./pages/Register";
 
 const { Footer } = Layout;
@@ -43,7 +42,6 @@ export default function App() {
           <PrivateRoute path={"/admin"} component={Manage} />
           <PrivateRoute path={"/orders"} component={Orders} />
           <PrivateRoute path={"/thanks"} component={Thanks} />
-          <PrivateRoute path={"/order/:orderId"} component={OrderDetail} />
           <Route exact path={"/"} component={Home} />
         </Switch>
         <Footer

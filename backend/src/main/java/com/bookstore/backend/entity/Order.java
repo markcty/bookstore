@@ -18,16 +18,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "order")
-@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer", "fieldHandler", "user", "orderItems" })
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Order {
 
   @Id
@@ -35,6 +31,7 @@ public class Order {
   private Integer id;
 
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @JsonIgnore
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
 
@@ -42,7 +39,7 @@ public class Order {
   @CreationTimestamp
   private Date purchaseTime;
 
-  @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order")
+  @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.EAGER)
   private Set<OrderItem> orderItems = new HashSet<>();
 
   private String consignee;

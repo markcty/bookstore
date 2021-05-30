@@ -32,7 +32,6 @@ function Book({ user }) {
       history.push("/login");
       return;
     }
-    console.log("addd");
     addCartItem(id).then(() => window.alert("Book Added"));
   };
 

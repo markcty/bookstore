@@ -1,9 +1,9 @@
-import { Breadcrumb, Col, DatePicker, Row, Space, Table } from "antd";
+import { Breadcrumb, Col, DatePicker, Row, Table } from "antd";
 import { Content } from "antd/es/layout/layout";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getHotSales, getOrders } from "../../services/api";
 import moment from "moment";
+import React, { useEffect, useState } from "react";
+import OrderDetail from "../../components/OrderDetail";
+import { getOrders } from "../../services/api";
 
 const { RangePicker } = DatePicker;
 
@@ -14,12 +14,14 @@ export default function Orders() {
     getOrders().then((values) => {
       let data = values.data.map((order) => {
         return {
+          key: order.id,
           orderId: order.id,
           receiverName: order.consignee,
           address: order.address,
           phoneNumber: order.phoneNumber,
           price: order.totalPrice,
           purchaseDate: moment(order.purchaseTime),
+          orderItems: order.orderItems,
         };
       });
       setOrders(data);
@@ -28,7 +30,7 @@ export default function Orders() {
 
   const columns = [
     {
-      title: "Order Id",
+      title: "Id",
       dataIndex: "orderId",
       key: "orderId",
       defaultSortOrder: "descend",
@@ -63,18 +65,10 @@ export default function Orders() {
       key: "purchaseDate",
       sortDirections: ["ascend", "descend", "ascend"],
       render: (date) => date.format("MMM Do YYYY, h:mm:ss a"),
-      // sorter: (a, b) => new Date(a.purchaseDate) - new Date(b.purchaseDate),
       sorter: (a, b) => a.purchaseDate.isAfter(b.purchaseDate),
     },
     {
       title: "Operation",
-      dataIndex: "orderId",
-      key: "orderId",
-      render: (id) => (
-        <Space size={"middle"}>
-          <Link to={`/order/${id}`}>Detail</Link>
-        </Space>
-      ),
     },
   ];
 
@@ -82,11 +76,6 @@ export default function Orders() {
     moment("1-1-1999", "MM-DD-YYYY"),
     moment("1-1-2099", "MM-DD-YYYY"),
   ]);
-
-  getHotSales(dateRange[0].format(), dateRange[1].format()).then((res) =>
-    console.log(res)
-  );
-  // console.log(dateRange[0].format(), dateRange[1].format());
 
   return (
     <Content className={"page"}>
@@ -113,6 +102,11 @@ export default function Orders() {
                     new Date(dateRange[0]) < new Date(order.purchaseDate) &&
                     new Date(dateRange[1]) > new Date(order.purchaseDate)
                 )}
+                expandable={{
+                  expandedRowRender: (record) => (
+                    <OrderDetail orderItems={record.orderItems} />
+                  ),
+                }}
                 columns={columns}
               />
             </Col>
