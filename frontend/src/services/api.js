@@ -10,7 +10,13 @@ export function getBooks() {
   return new Promise((resolve, reject) => {
     http
       .get("/books")
-      .then((res) => resolve(res.data))
+      .then((res) =>
+        resolve(
+          res.data.map((book) => {
+            return { ...book, key: book.id };
+          })
+        )
+      )
       .catch((err) => reject(err));
   });
 }
@@ -116,15 +122,44 @@ export function getHotSales(start, end) {
   return new Promise((resolve, reject) => {
     http
       .get("/admin/hotSales", {
-        // params: {
-        //   start: start.toISOString().split("T")[0],
-        //   end: end.toISOString().split("T")[0],
-        // },
         params: {
           start: start,
           end: end,
         },
       })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+}
+
+export function getAllUsers() {
+  return new Promise((resolve, reject) => {
+    http
+      .get("/admin/users")
+      .then((res) =>
+        resolve(
+          res.data.map((user) => {
+            return { ...user, key: user.id };
+          })
+        )
+      )
+      .catch((err) => reject(err));
+  });
+}
+
+export function disableUser(id) {
+  return new Promise((resolve, reject) => {
+    http
+      .delete("/admin/disableUser", { params: { id: id } })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+}
+
+export function enableUser(id) {
+  return new Promise((resolve, reject) => {
+    http
+      .get("/admin/enableUser", { params: { id: id } })
       .then((res) => resolve(res))
       .catch((err) => reject(err));
   });

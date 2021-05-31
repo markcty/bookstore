@@ -9,13 +9,14 @@ import Book from "./pages/Book";
 import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Search from "./pages/Search";
-import Manage from "./pages/Manage";
+import ManageBooks from "./pages/ManageBooks";
 import Orders from "./pages/Orders";
 import "./App.less";
 import { getUser } from "./services/auth";
 import { PrivateRoute } from "./utils/privateRoute";
 import Thanks from "./pages/Thanks";
 import Register from "./pages/Register";
+import ManageUsers from "./pages/MangeUsers";
 
 const { Footer } = Layout;
 
@@ -39,7 +40,8 @@ export default function App() {
             <Register user={user} setUser={setUser} />
           </Route>
           <Route path={"/search"} component={Search} />
-          <PrivateRoute path={"/admin"} component={Manage} />
+          <PrivateRoute path={"/admin/books"} component={ManageBooks} />
+          <PrivateRoute path={"/admin/users"} component={ManageUsers} />
           <PrivateRoute path={"/orders"} component={Orders} />
           <PrivateRoute path={"/thanks"} component={Thanks} />
           <Route exact path={"/"} component={Home} />

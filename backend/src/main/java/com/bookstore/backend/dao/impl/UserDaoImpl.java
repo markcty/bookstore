@@ -52,4 +52,9 @@ public class UserDaoImpl implements UserDao {
   public Set<User> getUsers() {
     return new HashSet<>(userRepository.findAll());
   }
+
+  @Override
+  public void updateUser(User user) {
+    userRepository.save(user);
+  }
 }

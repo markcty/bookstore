@@ -12,7 +12,10 @@ export default function Login({ user, setUser }) {
   const onFinish = ({ username, password }) => {
     login(username, password)
       .then(() => setUser(getUser()))
-      .catch((err) => window.alert("wrong username or password"));
+      .catch((err) => {
+        console.log(err);
+        window.alert("wrong username or password");
+      });
   };
 
   return (

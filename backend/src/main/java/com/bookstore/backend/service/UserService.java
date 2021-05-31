@@ -15,4 +15,8 @@ public interface UserService {
   Set<User> getUsers();
 
   List<BuyerStat> getGoldenBuyers(LocalDate start, LocalDate end);
+
+  void disableUser(Integer id);
+
+  void enableUser(Integer id);
 }

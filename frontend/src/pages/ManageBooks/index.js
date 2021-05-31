@@ -10,7 +10,7 @@ import {
   updateBook as updateBookApi,
 } from "../../services/api";
 
-export default function Manage() {
+export default function ManageBooks() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {

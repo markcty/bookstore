@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,5 +51,15 @@ public class UserController {
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
     return userService.getGoldenBuyers(start.toLocalDate(), end.toLocalDate());
+  }
+
+  @DeleteMapping("/admin/disableUser")
+  public void disableUser(@RequestParam Integer id) {
+    userService.disableUser(id);
+  }
+
+  @GetMapping("/admin/enableUser")
+  public void enableUser(@RequestParam Integer id) {
+    userService.enableUser(id);
   }
 }

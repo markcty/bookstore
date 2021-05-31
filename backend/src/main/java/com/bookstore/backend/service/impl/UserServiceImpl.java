@@ -13,8 +13,10 @@ import com.bookstore.backend.entity.User;
 import com.bookstore.backend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -61,6 +63,24 @@ public class UserServiceImpl implements UserService {
     }
     buyers.sort((a, b) -> b.getBooksBought() - a.getBooksBought());
     return buyers;
+  }
+
+  @Override
+  public void disableUser(Integer id) {
+    var user = userDao.getUser(id);
+    if (!user.isPresent())
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "no such user");
+    user.get().setIsEnabled(0);
+    userDao.updateUser(user.get());
+  }
+
+  @Override
+  public void enableUser(Integer id) {
+    var user = userDao.getUser(id);
+    if (!user.isPresent())
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "no such user");
+    user.get().setIsEnabled(1);
+    userDao.updateUser(user.get());
   }
 
 }

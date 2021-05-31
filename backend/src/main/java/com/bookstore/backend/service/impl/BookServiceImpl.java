@@ -43,6 +43,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void updateBook(Book book) {
+        if (book.getIsDeleted() == null)
+            book.setIsDeleted(0);
         bookDao.updateBook(book);
     }
 

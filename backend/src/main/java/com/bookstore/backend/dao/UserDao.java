@@ -13,4 +13,6 @@ public interface UserDao {
   Optional<User> getUser(Integer userId);
 
   Set<User> getUsers();
+
+  void updateUser(User user);
 }
