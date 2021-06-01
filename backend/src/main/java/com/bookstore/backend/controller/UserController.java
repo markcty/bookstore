@@ -33,14 +33,6 @@ public class UserController {
     userService.register(body.get("username"), body.get("password"));
   }
 
-  @GetMapping("/login")
-  public User login() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String username = authentication.getName();
-    var user = userService.getUser(username);
-    return user;
-  }
-
   @GetMapping("/admin/users")
   public Set<User> getUsers() {
     return userService.getUsers();

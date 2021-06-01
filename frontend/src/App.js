@@ -40,8 +40,8 @@ export default function App() {
             <Register user={user} setUser={setUser} />
           </Route>
           <Route path={"/search"} component={Search} />
-          <PrivateRoute path={"/admin/books"} component={ManageBooks} />
-          <PrivateRoute path={"/admin/users"} component={ManageUsers} />
+          <PrivateRoute path={"/admin/manage/books"} component={ManageBooks} />
+          <PrivateRoute path={"/admin/manage/users"} component={ManageUsers} />
           <PrivateRoute path={"/orders"} component={Orders} />
           <PrivateRoute path={"/thanks"} component={Thanks} />
           <Route exact path={"/"} component={Home} />

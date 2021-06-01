@@ -62,6 +62,7 @@ export default function ManageUsers() {
     getAllUsers().then((users) => setUsers(users));
   }, []);
 
+  console.log(users);
   return (
     <Content className={"page"}>
       <Row justify={"center"}>

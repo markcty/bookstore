@@ -36,9 +36,13 @@ function Header({ user, setUser }) {
         </Link>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item>
-        <span>Profile</span>
-      </Menu.Item>
+      {user && user.isAdmin && (
+        <Menu.Item>
+          <Link to={"/admin/manage/users"}>
+            <span>Manage Users</span>
+          </Link>
+        </Menu.Item>
+      )}
       {user && user.isAdmin && (
         <Menu.Item>
           <Link to={"/admin/manage/books"}>
