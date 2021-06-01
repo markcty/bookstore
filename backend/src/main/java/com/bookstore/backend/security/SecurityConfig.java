@@ -24,11 +24,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
-  private AuthUserDetailsService jwtUserDetailsService;
+  private AuthUserDetailsService userDetailsService;
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(jwtUserDetailsService);
+    auth.userDetailsService(userDetailsService);
   }
 
   @Override
