@@ -9,13 +9,20 @@ const http = axios.create({
 
 export function login(username, password) {
   return new Promise((resolve, reject) => {
-    http
-      .get("/login", { auth: { username: username, password: password } })
+    let formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+    http({
+      method: "post",
+      url: "/login",
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
       .then((res) => {
         Cookies.set("user", JSON.stringify(res.data));
         resolve(res);
       })
-      .catch((err) => reject(err));
+      .catch((err) => reject(err.response.data));
   });
 }
 
