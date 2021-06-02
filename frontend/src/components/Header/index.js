@@ -50,6 +50,13 @@ function Header({ user, setUser }) {
           </Link>
         </Menu.Item>
       )}
+      {user && user.isAdmin && (
+        <Menu.Item>
+          <Link to={"/admin/manage/orders"}>
+            <span>Manage Orders</span>
+          </Link>
+        </Menu.Item>
+      )}
       <Menu.Item>
         <span
           onClick={() => {

@@ -17,6 +17,7 @@ import { PrivateRoute } from "./utils/privateRoute";
 import Thanks from "./pages/Thanks";
 import Register from "./pages/Register";
 import ManageUsers from "./pages/MangeUsers";
+import ManageOrders from "./pages/MangeOrders";
 
 const { Footer } = Layout;
 
@@ -42,6 +43,10 @@ export default function App() {
           <Route path={"/search"} component={Search} />
           <PrivateRoute path={"/admin/manage/books"} component={ManageBooks} />
           <PrivateRoute path={"/admin/manage/users"} component={ManageUsers} />
+          <PrivateRoute
+            path={"/admin/manage/orders"}
+            component={ManageOrders}
+          />
           <PrivateRoute path={"/orders"} component={Orders} />
           <PrivateRoute path={"/thanks"} component={Thanks} />
           <Route exact path={"/"} component={Home} />

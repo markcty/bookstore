@@ -4,16 +4,16 @@ import Search from "antd/lib/input/Search";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import OrderTable from "../../components/OrderTable";
-import { getOrders } from "../../services/api";
+import { getAllOrders } from "../../services/api";
 
 const { RangePicker } = DatePicker;
 
-export default function Orders() {
+export default function ManageOrders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    getOrders().then((values) => {
-      let data = values.data.map((order) => {
+    getAllOrders().then((values) => {
+      let data = values.map((order) => {
         return {
           key: order.id,
           orderId: order.id,

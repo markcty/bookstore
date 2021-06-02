@@ -164,3 +164,12 @@ export function enableUser(id) {
       .catch((err) => reject(err));
   });
 }
+
+export function getAllOrders() {
+  return new Promise((resolve, reject) => {
+    http
+      .get("/admin/orders")
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err));
+  });
+}

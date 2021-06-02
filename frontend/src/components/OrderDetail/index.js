@@ -15,7 +15,7 @@ export default function OrderDetail({ orderItems }) {
       title: "Title",
       dataIndex: "title",
       render: (title, record) => (
-        <Link to={`book/${record.bookId}`}>{title}</Link>
+        <Link to={`/book/${record.bookId}`}>{title}</Link>
       ),
     },
     {
