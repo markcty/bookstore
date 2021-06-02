@@ -1,5 +1,6 @@
-import { Breadcrumb, Col, DatePicker, Row } from "antd";
+import { Col, DatePicker, Row } from "antd";
 import { Content } from "antd/es/layout/layout";
+import Search from "antd/lib/input/Search";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import OrderTable from "../../components/OrderTable";
@@ -33,6 +34,8 @@ export default function Orders() {
     moment("1-1-2099", "MM-DD-YYYY"),
   ]);
 
+  const [searchText, setSearchText] = useState("");
+
   return (
     <Content className={"page"}>
       <Row justify={"center"}>
@@ -42,9 +45,12 @@ export default function Orders() {
               span={24}
               style={{ display: "flex", justifyContent: "space-between" }}
             >
-              <Breadcrumb>
-                <Breadcrumb.Item>All Orders</Breadcrumb.Item>
-              </Breadcrumb>
+              <Search
+                placeholder="input book title or author or ISBN"
+                allowClear
+                onSearch={(v) => setSearchText(v.toLowerCase())}
+                style={{ width: 300 }}
+              />
               <RangePicker
                 onChange={(range) => {
                   setDateRange(range);
@@ -52,7 +58,11 @@ export default function Orders() {
               />
             </Col>
             <Col span={24}>
-              <OrderTable orders={orders} dateRange={dateRange} />
+              <OrderTable
+                orders={orders}
+                dateRange={dateRange}
+                searchText={searchText}
+              />
             </Col>
           </Row>
         </Col>

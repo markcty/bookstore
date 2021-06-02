@@ -1,7 +1,7 @@
 import { Table } from "antd";
 import OrderDetail from "../OrderDetail";
 
-export default function OrderTable({ orders, dateRange }) {
+export default function OrderTable({ orders, dateRange, searchText }) {
   const columns = [
     {
       title: "Id",
@@ -45,13 +45,25 @@ export default function OrderTable({ orders, dateRange }) {
       title: "Operation",
     },
   ];
+
   return (
     <Table
-      dataSource={orders.filter(
-        (order) =>
-          dateRange[0].isSameOrBefore(order.purchaseDate) &&
-          order.purchaseDate.isSameOrBefore(dateRange[1])
-      )}
+      dataSource={orders.filter((order) => {
+        if (
+          !(
+            dateRange[0].isSameOrBefore(order.purchaseDate) &&
+            order.purchaseDate.isSameOrBefore(dateRange[1])
+          )
+        )
+          return false;
+        const orderItems = order.orderItems;
+        let exists = false;
+        orderItems.forEach((orderItem) => {
+          if (orderItem.book.title.toLowerCase().includes(searchText))
+            exists = true;
+        });
+        return exists;
+      })}
       expandable={{
         expandedRowRender: (record) => (
           <OrderDetail orderItems={record.orderItems} />
