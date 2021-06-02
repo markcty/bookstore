@@ -47,6 +47,6 @@ export function register(username, password) {
     http
       .post("/register", { username: username, password: password })
       .then((res) => resolve(res))
-      .catch((err) => reject(err));
+      .catch((err) => reject(err.response.data.message));
   });
 }

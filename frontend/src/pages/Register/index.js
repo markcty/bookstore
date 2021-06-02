@@ -17,10 +17,7 @@ function Register({ user, setUser }) {
         window.alert("Register succeed! Please login now. Welcome!");
         history.push("/login");
       })
-      .catch(() => window.alert("register failed"));
-    // login(username, password)
-    //   .then(() => setUser(getUser()))
-    //   .catch((err) => window.alert("wrong username or password"));
+      .catch((err) => window.alert(err));
   };
 
   return (

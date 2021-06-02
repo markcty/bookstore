@@ -29,6 +29,8 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void register(String username, String password) {
+    if (userDao.getUser(username).isPresent())
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "username duplicated");
     userDao.register(username, passwordEncoder.encode(password));
   }
 

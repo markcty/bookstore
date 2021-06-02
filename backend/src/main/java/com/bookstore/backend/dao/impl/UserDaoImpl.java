@@ -10,9 +10,7 @@ import com.bookstore.backend.entity.User;
 import com.bookstore.backend.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.server.ResponseStatusException;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -27,8 +25,6 @@ public class UserDaoImpl implements UserDao {
 
   @Override
   public void register(String username, String password) {
-    if (userRepository.findByUsername(username).isPresent())
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "username already exists");
     var user = new User();
     user.setIsAdmin(0);
     user.setIsEnabled(1);

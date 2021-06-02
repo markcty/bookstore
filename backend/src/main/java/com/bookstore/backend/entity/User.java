@@ -3,6 +3,7 @@ package com.bookstore.backend.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,7 @@ public class User {
   private Integer isAdmin;
   private Integer isEnabled;
 
-  @OneToOne(mappedBy = "user")
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Cart cart;
 
   @OneToMany(mappedBy = "user")
