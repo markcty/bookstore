@@ -82,7 +82,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             writer.println("Your account is disabled. Please contact Admin.");
         })
         // logout
-        .and().logout().logoutUrl("/api/logout");
+        .and().logout().logoutUrl("/api/logout").logoutSuccessHandler((req, res, auth) -> {
+          var writer = res.getWriter();
+          res.setStatus(HttpServletResponse.SC_OK);
+          res.setContentType("text/html; charset=UTF-8");
+          writer.println("logout succeed!");
+        }).permitAll();
   }
 
   @Bean

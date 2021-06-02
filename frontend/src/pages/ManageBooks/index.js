@@ -108,7 +108,7 @@ export default function ManageBooks() {
           <Row gutter={[32, 16]}>
             <Col
               span={24}
-              style={{ display: "flex", justifyContent: "flex-start" }}
+              style={{ display: "flex", justifyContent: "space-between" }}
             >
               <Button
                 type={"primary"}

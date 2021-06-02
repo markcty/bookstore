@@ -27,8 +27,15 @@ export function login(username, password) {
 }
 
 export function logout() {
-  http.post("/logout");
-  Cookies.remove("user");
+  return new Promise((resolve, reject) => {
+    http
+      .post("/logout")
+      .then((res) => {
+        Cookies.remove("user");
+        resolve(res.data);
+      })
+      .catch((err) => reject(err));
+  });
 }
 
 export function getUser() {

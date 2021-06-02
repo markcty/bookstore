@@ -53,8 +53,12 @@ function Header({ user, setUser }) {
       <Menu.Item>
         <span
           onClick={() => {
-            logout();
-            setUser(null);
+            logout()
+              .then((res) => {
+                window.alert(res);
+                setUser(null);
+              })
+              .catch((err) => window.alert("Failed to logout!"));
           }}
         >
           Log Out
