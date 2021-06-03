@@ -54,7 +54,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookSaleStat> getHotSales(LocalDate start, LocalDate end) {
+    public List<BookSaleStat> getAllSales(LocalDate start, LocalDate end) {
         var startDate = Date.from(start.atStartOfDay(ZoneId.systemDefault()).toInstant());
         var endDate = Date.from(end.atStartOfDay(ZoneId.systemDefault()).toInstant());
 

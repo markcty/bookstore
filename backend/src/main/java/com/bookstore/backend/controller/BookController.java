@@ -51,10 +51,10 @@ public class BookController {
     }
 
     @GetMapping("/admin/sales")
-    public List<BookSaleStat> getHotSales(
+    public List<BookSaleStat> getAllSales(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
-        return bookService.getHotSales(start.toLocalDate(), end.toLocalDate());
+        return bookService.getAllSales(start.toLocalDate(), end.toLocalDate());
     }
 
     @GetMapping("/createBucket")
