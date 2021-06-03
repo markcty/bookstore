@@ -3,7 +3,7 @@ import { Col, DatePicker, Row } from "antd";
 import { Content } from "antd/es/layout/layout";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { getHotSales } from "../../services/api";
+import { getAllSales } from "../../services/api";
 
 const { RangePicker } = DatePicker;
 export default function BookStatistics() {
@@ -15,7 +15,7 @@ export default function BookStatistics() {
   const [statistics, setStatistics] = useState([]);
 
   useEffect(() => {
-    getHotSales(dateRange[0].format(), dateRange[1].format()).then((res) =>
+    getAllSales(dateRange[0].format(), dateRange[1].format()).then((res) =>
       setStatistics(res)
     );
   }, [dateRange]);

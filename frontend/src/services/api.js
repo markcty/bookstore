@@ -118,10 +118,10 @@ export function getOrderDetail(id) {
   });
 }
 
-export function getHotSales(start, end) {
+export function getAllSales(start, end) {
   return new Promise((resolve, reject) => {
     http
-      .get("/admin/hotSales", {
+      .get("/admin/sales", {
         params: {
           start: start,
           end: end,

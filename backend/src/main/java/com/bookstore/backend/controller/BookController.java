@@ -50,7 +50,7 @@ public class BookController {
         bookService.delBook(id);
     }
 
-    @GetMapping("/admin/hotSales")
+    @GetMapping("/admin/sales")
     public List<BookSaleStat> getHotSales(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
