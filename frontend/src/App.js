@@ -18,6 +18,7 @@ import Thanks from "./pages/Thanks";
 import Register from "./pages/Register";
 import ManageUsers from "./pages/MangeUsers";
 import ManageOrders from "./pages/MangeOrders";
+import UserStatistics from "./pages/UserStatistics";
 
 const { Footer } = Layout;
 
@@ -49,6 +50,10 @@ export default function App() {
           />
           <PrivateRoute path={"/orders"} component={Orders} />
           <PrivateRoute path={"/thanks"} component={Thanks} />
+          <PrivateRoute
+            path={"/admin/statistics/users"}
+            component={UserStatistics}
+          />
           <Route exact path={"/"} component={Home} />
         </Switch>
         <Footer

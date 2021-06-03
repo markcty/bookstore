@@ -1,5 +1,6 @@
 package com.bookstore.backend.service.impl;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -52,18 +53,16 @@ public class UserServiceImpl implements UserService {
     var buyers = new ArrayList<BuyerStat>();
     for (var user : users) {
       var orders = user.getOrders();
-      Integer booksBought = 0;
+      BigDecimal moneySpent = new BigDecimal(0);
       for (var order : orders) {
         var date = order.getPurchaseTime();
         if (!(date.after(startDate) && date.before(endDate)))
           continue;
-        for (var item : order.getOrderItems()) {
-          booksBought += item.getQuantity();
-        }
+        moneySpent = moneySpent.add(order.getTotalPrice());
       }
-      buyers.add(new BuyerStat(user.getUsername(), booksBought));
+      buyers.add(new BuyerStat(user.getUsername(), moneySpent));
     }
-    buyers.sort((a, b) -> b.getBooksBought() - a.getBooksBought());
+    buyers.sort((a, b) -> b.getMoneySpent().compareTo(a.getMoneySpent()));
     return buyers;
   }
 

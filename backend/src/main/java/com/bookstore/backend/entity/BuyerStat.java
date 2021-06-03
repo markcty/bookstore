@@ -1,5 +1,7 @@
 package com.bookstore.backend.entity;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -7,5 +9,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class BuyerStat {
   String username;
-  Integer booksBought;
+  BigDecimal moneySpent;
 }

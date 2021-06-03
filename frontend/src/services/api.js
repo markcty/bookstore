@@ -132,6 +132,20 @@ export function getHotSales(start, end) {
   });
 }
 
+export function getGoldenBuyers(start, end) {
+  return new Promise((resolve, reject) => {
+    http
+      .get("/admin/goldenBuyers", {
+        params: {
+          start: start,
+          end: end,
+        },
+      })
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err));
+  });
+}
+
 export function getAllUsers() {
   return new Promise((resolve, reject) => {
     http

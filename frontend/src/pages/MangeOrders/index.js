@@ -29,10 +29,7 @@ export default function ManageOrders() {
     });
   }, []);
 
-  const [dateRange, setDateRange] = useState([
-    moment("1-1-1999", "MM-DD-YYYY"),
-    moment("1-1-2099", "MM-DD-YYYY"),
-  ]);
+  const [dateRange, setDateRange] = useState(null);
 
   const [searchText, setSearchText] = useState("");
 
