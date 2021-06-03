@@ -173,3 +173,18 @@ export function getAllOrders() {
       .catch((err) => reject(err));
   });
 }
+
+export function uploadBookCover(file) {
+  return new Promise((resolve, reject) => {
+    let form = new FormData();
+    form.append("cover", file);
+    http
+      .post("/admin/uploadBookCover", form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err));
+  });
+}
