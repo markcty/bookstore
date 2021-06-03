@@ -127,7 +127,7 @@ export function getHotSales(start, end) {
           end: end,
         },
       })
-      .then((res) => resolve(res))
+      .then((res) => resolve(res.data))
       .catch((err) => reject(err));
   });
 }

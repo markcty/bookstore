@@ -37,32 +37,35 @@ function Header({ user, setUser }) {
       </Menu.Item>
       <Menu.Divider />
       {user && user.isAdmin && (
-        <Menu.Item>
-          <Link to={"/admin/manage/users"}>
-            <span>Manage Users</span>
-          </Link>
-        </Menu.Item>
-      )}
-      {user && user.isAdmin && (
-        <Menu.Item>
-          <Link to={"/admin/manage/books"}>
-            <span>Manage Books</span>
-          </Link>
-        </Menu.Item>
-      )}
-      {user && user.isAdmin && (
-        <Menu.Item>
-          <Link to={"/admin/manage/orders"}>
-            <span>Manage Orders</span>
-          </Link>
-        </Menu.Item>
-      )}
-      {user && user.isAdmin && (
-        <Menu.Item>
-          <Link to={"/admin/statistics/users"}>
-            <span>User Statistics</span>
-          </Link>
-        </Menu.Item>
+        <>
+          <Menu.Item>
+            <Link to={"/admin/manage/users"}>
+              <span>Manage Users</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to={"/admin/manage/books"}>
+              <span>Manage Books</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to={"/admin/manage/orders"}>
+              <span>Manage Orders</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Divider />
+          <Menu.Item>
+            <Link to={"/admin/statistics/users"}>
+              <span>User Statistics</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to={"/admin/statistics/books"}>
+              <span>Book Statistics</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Divider />
+        </>
       )}
       <Menu.Item>
         <span

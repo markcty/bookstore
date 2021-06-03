@@ -19,6 +19,7 @@ import Register from "./pages/Register";
 import ManageUsers from "./pages/MangeUsers";
 import ManageOrders from "./pages/MangeOrders";
 import UserStatistics from "./pages/UserStatistics";
+import BookStatistics from "./pages/BookStatistics";
 
 const { Footer } = Layout;
 
@@ -53,6 +54,10 @@ export default function App() {
           <PrivateRoute
             path={"/admin/statistics/users"}
             component={UserStatistics}
+          />
+          <PrivateRoute
+            path={"/admin/statistics/books"}
+            component={BookStatistics}
           />
           <Route exact path={"/"} component={Home} />
         </Switch>
