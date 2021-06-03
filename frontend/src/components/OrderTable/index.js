@@ -49,13 +49,15 @@ export default function OrderTable({ orders, dateRange, searchText }) {
   return (
     <Table
       dataSource={orders.filter((order) => {
-        if (
-          !(
-            dateRange[0].isSameOrBefore(order.purchaseDate) &&
-            order.purchaseDate.isSameOrBefore(dateRange[1])
+        if (dateRange) {
+          if (
+            !(
+              dateRange[0].isSameOrBefore(order.purchaseDate) &&
+              order.purchaseDate.isSameOrBefore(dateRange[1])
+            )
           )
-        )
-          return false;
+            return false;
+        }
         const orderItems = order.orderItems;
         let exists = false;
         orderItems.forEach((orderItem) => {

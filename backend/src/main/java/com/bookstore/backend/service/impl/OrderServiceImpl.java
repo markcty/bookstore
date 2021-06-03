@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
       var book = item.getBook();
       if (book.getInventory() < item.getQuantity())
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-            "There is not enough inventory for book " + book.getTitle());
+            "There is not enough inventory for book \"" + book.getTitle() + "\"");
       totalPrice = totalPrice.add(book.getPrice().multiply(new BigDecimal(item.getQuantity())));
     }
 

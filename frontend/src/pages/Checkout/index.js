@@ -1,5 +1,5 @@
 /* eslint-disable no-template-curly-in-string */
-import { Button, Col, Form, Input, Layout, Row } from "antd";
+import { Button, Col, Form, Input, Layout, message, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { withRouter, useHistory } from "react-router";
 import CartCard from "../../components/CartCard";
@@ -46,7 +46,9 @@ function Checkout(props) {
     );
 
   const onFinish = (values) => {
-    checkout(values.order).then(() => history.push("/thanks"));
+    checkout(values.order)
+      .then(() => history.push("/thanks"))
+      .catch((msg) => message.error(msg));
   };
 
   const layout = {
@@ -91,7 +93,7 @@ function Checkout(props) {
               <Row gutter={48}>
                 {cartItems.map((item) => {
                   return (
-                    <Col span={24}>
+                    <Col span={24} key={item.id}>
                       <CartCard
                         {...item}
                         key={item.id}

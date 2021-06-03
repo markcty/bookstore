@@ -94,7 +94,7 @@ export function checkout(order) {
       data: order,
     })
       .then((res) => resolve(res))
-      .catch((err) => reject(err));
+      .catch((err) => reject(err.response.data.message));
   });
 }
 
