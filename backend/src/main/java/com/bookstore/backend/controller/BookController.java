@@ -6,6 +6,7 @@ import java.util.List;
 import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.BookSaleStat;
 import com.bookstore.backend.service.BookService;
+import com.bookstore.backend.utils.OssUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api")
@@ -23,6 +26,9 @@ public class BookController {
 
     @Autowired
     BookService bookService;
+
+    @Autowired
+    OssUtils ossUtils;
 
     @GetMapping("/books")
     public List<Book> getBooks() {
@@ -50,4 +56,18 @@ public class BookController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
         return bookService.getHotSales(start.toLocalDate(), end.toLocalDate());
     }
+
+    @GetMapping("/createBucket")
+    public void createBucket() {
+        ossUtils.createBucket();
+    }
+
+    @PostMapping("/admin/uploadBookCover")
+    public String upload(@RequestPart MultipartFile cover) {
+        System.out.println(cover.getOriginalFilename());
+        String url = ossUtils.uploadBookCover(cover);
+        System.out.println(url);
+        return url;
+    }
+
 }
