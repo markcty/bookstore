@@ -20,7 +20,7 @@ public class AuthUserDetail implements UserDetails {
     this.username = username;
     this.password = password;
     this.authorities = authorities;
-    this.isEnabled = isEnabled > 0 ? true : false;
+    this.isEnabled = isEnabled > 0;
   }
 
   @Override
