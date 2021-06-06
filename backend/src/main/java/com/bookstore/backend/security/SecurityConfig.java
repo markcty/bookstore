@@ -1,6 +1,5 @@
 package com.bookstore.backend.security;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 import javax.servlet.http.HttpServletResponse;
