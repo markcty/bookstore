@@ -7,17 +7,24 @@ import { getAllSales } from "../../services/api";
 
 const { RangePicker } = DatePicker;
 export default function BookStatistics() {
-  const [dateRange, setDateRange] = useState([
-    moment("1-1-1999", "MM-DD-YYYY"),
-    moment("1-1-2099", "MM-DD-YYYY"),
-  ]);
+  const [dateRange, setDateRange] = useState(null);
 
   const [statistics, setStatistics] = useState([]);
 
   useEffect(() => {
-    getAllSales(dateRange[0].format(), dateRange[1].format()).then((res) =>
-      setStatistics(res)
-    );
+    const defaultDateRange = [
+      moment("1-1-1999", "MM-DD-YYYY"),
+      moment("1-1-2099", "MM-DD-YYYY"),
+    ];
+    if (!dateRange)
+      getAllSales(
+        defaultDateRange[0].format(),
+        defaultDateRange[1].format()
+      ).then((res) => setStatistics(res));
+    else
+      getAllSales(dateRange[0].format(), dateRange[1].format()).then((res) =>
+        setStatistics(res)
+      );
   }, [dateRange]);
 
   const config = {
