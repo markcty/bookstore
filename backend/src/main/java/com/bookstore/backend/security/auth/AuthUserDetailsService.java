@@ -18,7 +18,7 @@ public class AuthUserDetailsService implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     var user = userDao.getUser(username);
 
-    if (!user.isPresent()) {
+    if (user.isEmpty()) {
       throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
     } else {
       return AuthUserFactory.create(user.get());

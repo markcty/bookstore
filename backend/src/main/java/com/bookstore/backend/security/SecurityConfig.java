@@ -1,6 +1,7 @@
 package com.bookstore.backend.security;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -99,9 +100,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
     configuration.setAllowCredentials(true);
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-    configuration.setAllowedHeaders(Arrays.asList("*"));
-    configuration.setAllowedMethods(Arrays.asList("*"));
+    configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+    configuration.setAllowedHeaders(Collections.singletonList("*"));
+    configuration.setAllowedMethods(Collections.singletonList("*"));
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration(("/**"), configuration);
     return source;
