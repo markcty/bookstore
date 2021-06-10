@@ -7,6 +7,7 @@ import {
   Input,
   Layout,
   Menu,
+  message,
   Popover,
   Row,
 } from "antd";
@@ -72,10 +73,10 @@ function Header({ user, setUser }) {
           onClick={() => {
             logout()
               .then((res) => {
-                window.alert(res);
+                message.success(res);
                 setUser(null);
               })
-              .catch((err) => window.alert("Failed to logout!"));
+              .catch((err) => message.error("Failed to logout!"));
           }}
         >
           Log Out

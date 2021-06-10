@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import { Content } from "antd/es/layout/layout";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Redirect, Link, useHistory, withRouter } from "react-router-dom";
 import { register } from "../../services/auth";
@@ -14,10 +14,10 @@ function Register({ user, setUser }) {
   const onFinish = ({ username, password }) => {
     register(username, password)
       .then(() => {
-        window.alert("Register succeed! Please login now. Welcome!");
+        message.success("Register succeed! Please login now. Welcome!");
         history.push("/login");
       })
-      .catch((err) => window.alert(err));
+      .catch((err) => message.error(err));
   };
 
   return (

@@ -1,4 +1,4 @@
-import { Button, Col, Row } from "antd";
+import { Button, Col, message, Row } from "antd";
 import { Content } from "antd/es/layout/layout";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -14,14 +14,20 @@ export default function Cart() {
   }, []);
 
   const addBook = (bookId) =>
-    addCartItem(bookId).then(() =>
-      getCartItems().then((cartItems) => setCartItems(cartItems))
-    );
+    addCartItem(bookId)
+      .then(() => {
+        message.success("Add succeed");
+        getCartItems().then((cartItems) => setCartItems(cartItems));
+      })
+      .catch((err) => message.error("Add fail"));
 
   const delBook = (bookId) =>
-    delCartItem(bookId).then(() =>
-      getCartItems().then((cartItems) => setCartItems(cartItems))
-    );
+    delCartItem(bookId)
+      .then(() => {
+        message.success("Add succeed");
+        getCartItems().then((cartItems) => setCartItems(cartItems));
+      })
+      .catch((err) => message.error("Add fail"));
 
   return (
     <Content className={"page"}>

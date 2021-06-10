@@ -1,4 +1,4 @@
-import { Button, Col, Row, Space, Table } from "antd";
+import { Button, Col, message, Row, Space, Table } from "antd";
 import { Content } from "antd/es/layout/layout";
 import React, { useEffect, useState } from "react";
 import { disableUser, getAllUsers, enableUser } from "../../services/api";
@@ -30,7 +30,7 @@ export default function ManageUsers() {
             primary
             onClick={() => {
               enableUser(record.id).then(() => {
-                window.alert("Enable succeed!");
+                message.success("Enable succeed!");
                 getAllUsers().then((users) => setUsers(users));
               });
             }}
@@ -43,7 +43,7 @@ export default function ManageUsers() {
             danger
             onClick={() => {
               disableUser(record.id).then(() => {
-                window.alert("Disable succeed!");
+                message.success("Disable succeed!");
                 getAllUsers().then((users) => setUsers(users));
               });
             }}

@@ -1,4 +1,4 @@
-import { Button, Col, Row, Space, Table } from "antd";
+import { Button, Col, message, Row, Space, Table } from "antd";
 import Search from "antd/es/input/Search";
 import { Content } from "antd/es/layout/layout";
 import React, { useEffect, useState } from "react";
@@ -22,7 +22,7 @@ export default function ManageBooks() {
   const updateBook = (bookDetail) => {
     updateBookApi(bookDetail).then(() => {
       getBooks().then((books) => setBooks(books));
-      window.alert("Edit succeed");
+      message.success("Edit succeed");
       setBookId(null);
     });
   };
@@ -30,7 +30,7 @@ export default function ManageBooks() {
   const deleteBook = (bookId) => {
     deleteBookApi(bookId).then(() => {
       getBooks().then((books) => setBooks(books));
-      window.alert("Delete succeed");
+      message.success("Delete succeed");
     });
   };
 

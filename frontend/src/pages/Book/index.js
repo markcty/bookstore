@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Content } from "antd/es/layout/layout";
-import { Button, Col, Row } from "antd";
+import { Button, Col, message, Row } from "antd";
 import "./index.css";
 import { addCartItem, getBook } from "../../services/api";
 import { useHistory, useParams, withRouter } from "react-router-dom";
@@ -32,7 +32,7 @@ function Book({ user }) {
       history.push("/login");
       return;
     }
-    addCartItem(id).then(() => window.alert("Book Added"));
+    addCartItem(id).then(() => message.success("Book Added"));
   };
 
   return (

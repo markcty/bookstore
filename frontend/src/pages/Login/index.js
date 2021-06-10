@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import { Content } from "antd/es/layout/layout";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Redirect, Link } from "react-router-dom";
 import { getUser, login } from "../../services/auth";
@@ -12,7 +12,7 @@ export default function Login({ user, setUser }) {
   const onFinish = ({ username, password }) => {
     login(username, password)
       .then(() => setUser(getUser()))
-      .catch((msg) => window.alert(msg));
+      .catch((msg) => message.error(msg));
   };
 
   return (
