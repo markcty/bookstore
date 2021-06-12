@@ -24,7 +24,7 @@ export default function Cart() {
   const delBook = (bookId) =>
     delCartItem(bookId)
       .then(() => {
-        message.success("Add succeed");
+        message.success("Remove succeed");
         getCartItems().then((cartItems) => setCartItems(cartItems));
       })
       .catch((err) => message.error("Add fail"));
