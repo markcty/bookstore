@@ -26,7 +26,7 @@ public class UserController {
   @Autowired
   UserService userService;
 
-  @PostMapping("/register")
+  @PostMapping("/public/register")
   public void register(@RequestBody Map<String, String> body) {
     userService.register(body.get("username"), body.get("password"));
   }

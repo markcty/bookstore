@@ -2,12 +2,14 @@ package com.bookstore.backend.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.BookSaleStat;
 import com.bookstore.backend.service.BookService;
 import com.bookstore.backend.utils.OssUtils;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,12 +32,17 @@ public class BookController {
     @Autowired
     OssUtils ossUtils;
 
-    @GetMapping("/books")
+    @GetMapping("/public/books")
     public List<Book> getBooks() {
         return bookService.getBooks();
     }
 
-    @GetMapping("/book")
+    @GetMapping("/public/bookPage")
+    public Map<String, Object> getBooks(@RequestParam Integer page, @RequestParam Integer pageSize) {
+        return bookService.getBooks(page, pageSize);
+    }
+
+    @GetMapping("/public/book")
     public Book getBook(@RequestParam Integer id) {
         return bookService.getBookDetail(id);
     }

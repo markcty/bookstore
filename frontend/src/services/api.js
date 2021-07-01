@@ -9,7 +9,7 @@ const http = axios.create({
 export function getBooks() {
   return new Promise((resolve, reject) => {
     http
-      .get("/books")
+      .get("/public/books")
       .then((res) =>
         resolve(
           res.data.map((book) => {
@@ -24,7 +24,16 @@ export function getBooks() {
 export function getBook(id) {
   return new Promise((resolve, reject) => {
     http
-      .get("/book", { params: { id: id } })
+      .get("/public/book", { params: { id: id } })
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err));
+  });
+}
+
+export function getBookPage(page, pageSize) {
+  return new Promise((resolve, reject) => {
+    http
+      .get("/public/bookPage", { params: { page: page, pageSize: pageSize } })
       .then((res) => resolve(res.data))
       .catch((err) => reject(err));
   });

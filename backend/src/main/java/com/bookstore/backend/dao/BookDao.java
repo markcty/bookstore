@@ -13,4 +13,8 @@ public interface BookDao {
   void updateBook(Book book);
 
   void delBook(Integer id);
+
+  List<Book> getBooks(Integer page, Integer pageSize);
+
+  Long getCount();
 }

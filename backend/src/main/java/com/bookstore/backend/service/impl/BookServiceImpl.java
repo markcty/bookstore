@@ -2,10 +2,7 @@ package com.bookstore.backend.service.impl;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.OrderDao;
@@ -13,6 +10,7 @@ import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.BookSaleStat;
 import com.bookstore.backend.service.BookService;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -81,4 +79,13 @@ public class BookServiceImpl implements BookService {
         bookSales.sort((a, b) -> b.getSales() - a.getSales());
         return bookSales;
     }
+
+    @Override
+    public Map<String, Object> getBooks(Integer page, Integer pageSize) {
+        var books=new HashMap<String,Object>();
+        books.put("books",bookDao.getBooks(page,pageSize));
+        books.put("total",bookDao.getCount());
+        return books;
+    }
+
 }
