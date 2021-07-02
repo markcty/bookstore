@@ -9,7 +9,6 @@ import com.bookstore.backend.entity.BookSaleStat;
 import com.bookstore.backend.service.BookService;
 import com.bookstore.backend.utils.OssUtils;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;

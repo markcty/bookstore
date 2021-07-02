@@ -2,8 +2,6 @@ package com.bookstore.backend.dao.impl;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.entity.Book;
@@ -24,7 +22,6 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> getBooks() {
         return bookRepository.findAllByIsDeletedFalse();
-
     }
 
     @Override
@@ -35,7 +32,8 @@ public class BookDaoImpl implements BookDao {
     @Override
     public void delBook(Integer id) {
         var temp = bookRepository.findById(id);
-        if (temp.isEmpty()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such book to delete");
+        if (temp.isEmpty())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such book to delete");
 
         var book = temp.get();
         book.setIsDeleted(1);
