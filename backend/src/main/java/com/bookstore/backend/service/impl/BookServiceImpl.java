@@ -91,4 +91,9 @@ public class BookServiceImpl implements BookService {
         return books;
     }
 
+    @Override
+    public List<Book> getBooks(String title) {
+        return bookDao.getBooks(title);
+    }
+
 }

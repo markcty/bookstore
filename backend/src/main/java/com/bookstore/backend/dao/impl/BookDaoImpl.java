@@ -21,7 +21,7 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public List<Book> getBooks() {
-        return bookRepository.findAllByIsDeletedFalse();
+        return bookRepository.findAllByIsDeleted(0);
     }
 
     @Override
@@ -55,4 +55,10 @@ public class BookDaoImpl implements BookDao {
     public Long getCount() {
         return bookRepository.countBooksByIsDeleted(0);
     }
+
+    @Override
+    public List<Book> getBooks(String title) {
+        return bookRepository.findByTitleContainingAndIsDeleted(title, 0);
+    }
+
 }

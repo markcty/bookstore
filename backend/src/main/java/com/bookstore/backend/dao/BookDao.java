@@ -17,4 +17,6 @@ public interface BookDao {
   List<Book> getBooks(Integer page, Integer pageSize);
 
   Long getCount();
+
+  List<Book> getBooks(String title);
 }

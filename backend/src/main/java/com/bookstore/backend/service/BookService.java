@@ -19,4 +19,6 @@ public interface BookService {
     void delBook(Integer id);
 
     List<BookSaleStat> getAllSales(LocalDate start, LocalDate end);
+
+    List<Book> getBooks(String title);
 }

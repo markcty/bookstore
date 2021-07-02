@@ -10,7 +10,9 @@ import java.util.List;
 public interface BookRepository extends PagingAndSortingRepository<Book, Integer> {
     Long countBooksByIsDeleted(Integer isDeleted);
 
-    List<Book> findAllByIsDeletedFalse();
+    List<Book> findAllByIsDeleted(Integer isDeleted);
 
     List<Book> findAllByIsDeleted(Integer isDeleted, Pageable page);
+
+    List<Book> findByTitleContainingAndIsDeleted(String title, Integer isDeleted);
 }

@@ -76,4 +76,9 @@ public class BookController {
         return url;
     }
 
+    @GetMapping("/public/searchBooks")
+    public List<Book> getBooks(@RequestParam String title) {
+        return bookService.getBooks(title);
+    }
+
 }
