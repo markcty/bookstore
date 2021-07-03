@@ -108,7 +108,7 @@ function Header({ user, setUser }) {
         <Col sm={16} md={9} lg={7} xl={4}>
           <Menu
             className={"menu"}
-            style={{ background: "none", height: 54 }}
+            style={{ background: "none", height: 48 }}
             defaultSelectedKeys={"/"}
             mode="horizontal"
           >
@@ -123,7 +123,7 @@ function Header({ user, setUser }) {
         {/*search large*/}
         <Col xs={0} md={8} lg={10}>
           <Search
-            placeholder="input book title or author"
+            placeholder="input book title"
             allowClear
             style={{ marginTop: 8 }}
             onSearch={(query) => history.push("/search?q=" + query)}

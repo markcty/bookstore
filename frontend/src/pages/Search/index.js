@@ -5,28 +5,22 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import BookCard from "../../components/BookCard";
 import * as queryString from "query-string";
-import { getBooks } from "../../services/api";
+import { searchBooks } from "../../services/api";
 
 function Index(props) {
-  // eslint-disable-next-line no-unused-vars
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    getBooks().then((books) => setBooks(books));
-  }, []);
+    const { q } = queryString.parse(props.location.search);
+    searchBooks(q).then((books) => setBooks(books));
+  }, [props.location.search]);
 
-  const { q } = queryString.parse(props.location.search);
-  const filteredBooks = books.filter(
-    (book) =>
-      book.author.toLowerCase().includes(q.toLowerCase()) ||
-      book.title.toLowerCase().includes(q.toLowerCase())
-  );
   return (
     <Content className={"page"}>
       <Row justify={"center"}>
         <Col xs={22} sm={22} md={20} lg={18} xl={16}>
           <Row className={"bookCards"} gutter={[32, 16]}>
-            {filteredBooks.map((book) => {
+            {books.map((book) => {
               return (
                 <Col key={book.id} xs={24} sm={12} md={6} lg={6} xl={6}>
                   <Link to={`/book/${book.id}`}>

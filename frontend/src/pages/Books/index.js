@@ -1,7 +1,7 @@
 import { Col, Row, Table } from "antd";
 import { Content } from "antd/es/layout/layout";
 import React, { useEffect, useState } from "react";
-import { getBookPage } from "../../services/api";
+import { getBookPage, searchBooks } from "../../services/api";
 import "./index.css";
 import { Link } from "react-router-dom";
 import Search from "antd/es/input/Search";
@@ -34,12 +34,12 @@ const columns = [
   },
 ];
 
+const initPagination = { current: 1, pageSize: 5 };
+
 export default function Books() {
   const [books, setBooks] = useState([]);
 
-  const [searchText, setSearchText] = useState("");
-
-  const [pagination, setPagination] = useState({ current: 1, pageSize: 5 });
+  const [pagination, setPagination] = useState(initPagination);
 
   const [loading, setLoading] = useState(false);
 
@@ -61,6 +61,24 @@ export default function Books() {
     customFetch(pagination);
   };
 
+  const handleSearch = (title) => {
+    if (title.length === 0) {
+      customFetch(initPagination);
+      return;
+    }
+    console.log("handle search");
+    setLoading(true);
+    searchBooks(title.toLowerCase()).then((books) => {
+      setPagination({
+        current: 1,
+        pageSize: books.length,
+        total: books.length,
+      });
+      setLoading(false);
+      setBooks(books);
+    });
+  };
+
   return (
     <Content className={"page"}>
       <Row justify={"center"}>
@@ -71,9 +89,9 @@ export default function Books() {
               style={{ display: "flex", justifyContent: "space-between" }}
             >
               <Search
-                placeholder="input book title or author or ISBN"
+                placeholder="input book title"
                 allowClear
-                onSearch={(v) => setSearchText(v.toLowerCase())}
+                onSearch={handleSearch}
                 style={{ width: 300 }}
               />
             </Col>

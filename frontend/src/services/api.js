@@ -211,3 +211,18 @@ export function uploadBookCover(file) {
       .catch((err) => reject(err));
   });
 }
+
+export function searchBooks(title) {
+  return new Promise((resolve, reject) => {
+    http
+      .get("/public/searchBooks", { params: { title: title } })
+      .then((res) =>
+        resolve(
+          res.data.map((book) => {
+            return { ...book, key: book.id };
+          })
+        )
+      )
+      .catch((err) => reject(err));
+  });
+}
