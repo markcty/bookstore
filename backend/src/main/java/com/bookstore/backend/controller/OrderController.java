@@ -1,5 +1,6 @@
 package com.bookstore.backend.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class OrderController {
 
-  @Autowired
-  OrderService orderService;
+  @Autowired OrderService orderService;
 
   @PostMapping("/checkout")
   public void checkout(@RequestBody Map<String, String> body) {
-    AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    AuthUserDetail user =
+        (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     var userId = user.getId();
     var consignee = body.get("consignee");
     var note = body.get("note");
@@ -36,20 +37,35 @@ public class OrderController {
   }
 
   @GetMapping("/orders")
-  public Set<Order> getOrders() {
-    AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+  public List<Order> getOrders() {
+    AuthUserDetail user =
+        (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     return orderService.getOrders(user.getId());
   }
 
+  @GetMapping("/ordersPage")
+  public List<Order> getOrdersPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
+    AuthUserDetail user =
+        (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    return orderService.getOrdersPage(user.getId(), page, pageSize);
+  }
+
   @GetMapping("/order")
   public Set<OrderItem> getOrderDetail(@RequestParam Integer id) {
-    AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    AuthUserDetail user =
+        (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     return orderService.getOrder(user.getId(), id);
   }
 
   @GetMapping("/admin/orders")
-  public Set<Order> getAllOrders() {
+  public List<Order> getAllOrders() {
     return orderService.getAllOrders();
+  }
+
+  @GetMapping("/admin/ordersPage")
+  public List<Order> getAllOrdersPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
+    return orderService.getAllOrdersPage(page, pageSize);
   }
 }
