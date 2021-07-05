@@ -5,11 +5,16 @@ import BookCard from "../BookCard";
 import { Link } from "react-router-dom";
 import { getBookPage } from "../../services/api";
 
+const initPagination = { current: 1, pageSize: 4 };
+
 export default function PopularBookList() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    getBookPage(0, 4).then((data) => setBooks(data.books));
+    getBookPage({
+      page: initPagination.current - 1,
+      pageSize: initPagination.pageSize,
+    }).then((data) => setBooks(data.books));
   }, []);
 
   return (
