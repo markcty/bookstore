@@ -1,19 +1,75 @@
-import { Col, DatePicker, Row } from "antd";
+import { Col, DatePicker, Row, Table } from "antd";
 import { Content } from "antd/es/layout/layout";
 import Search from "antd/lib/input/Search";
-import moment from "moment";
 import React, { useEffect, useState } from "react";
-import OrderTable from "../../components/OrderTable";
-import { getAllOrders } from "../../services/api";
+import { getAllOrdersPage } from "../../services/api";
+import OrderDetail from "../../components/OrderDetail";
+import moment from "moment";
 
 const { RangePicker } = DatePicker;
 
-export default function ManageOrders() {
+const columns = [
+  {
+    title: "Id",
+    dataIndex: "orderId",
+    key: "orderId",
+    defaultSortOrder: "descend",
+    sortDirections: ["ascend", "descend", "ascend"],
+    sorter: (a, b) => a.orderId - b.orderId,
+  },
+  {
+    title: "Receiver Name",
+    dataIndex: "receiverName",
+    key: "receiverName",
+  },
+  {
+    title: "Phone Number",
+    dataIndex: "phoneNumber",
+    key: "phoneNumber",
+  },
+  {
+    title: "Address",
+    dataIndex: "address",
+    key: "address",
+  },
+  {
+    title: "Total Price",
+    dataIndex: "price",
+    key: "price",
+    sortDirections: ["ascend", "descend", "ascend"],
+    sorter: (a, b) => a.price - b.price,
+  },
+  {
+    title: "Purchase date",
+    dataIndex: "purchaseDate",
+    key: "purchaseDate",
+    sortDirections: ["ascend", "descend", "ascend"],
+    render: (date) => date.format("MMM Do YYYY, h:mm:ss a"),
+    sorter: (a, b) => a.purchaseDate.isAfter(b.purchaseDate),
+  },
+  {
+    title: "Operation",
+  },
+];
+
+const initPagination = { current: 1, pageSize: 5 };
+
+const initDate = null;
+
+export default function Orders() {
   const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    getAllOrders().then((values) => {
-      let data = values.map((order) => {
+  const [pagination, setPagination] = useState(initPagination);
+
+  const [loading, setLoading] = useState(false);
+
+  const customFetch = (pagination) => {
+    setLoading(true);
+    getAllOrdersPage({
+      page: pagination.current - 1,
+      pageSize: pagination.pageSize,
+    }).then((data) => {
+      let temp = data.orders.map((order) => {
         return {
           key: order.id,
           orderId: order.id,
@@ -25,13 +81,24 @@ export default function ManageOrders() {
           orderItems: order.orderItems,
         };
       });
-      setOrders(data);
+      setOrders(temp);
+      setLoading(false);
+      setPagination({ ...pagination, total: data.total });
     });
+  };
+
+  useEffect(() => {
+    customFetch(initPagination);
   }, []);
 
-  const [dateRange, setDateRange] = useState(null);
+  const handleSearch = (title) => {};
 
-  const [searchText, setSearchText] = useState("");
+  const handleDateChange = (range) => {};
+
+  const handlePaginationChange = (pagination) => {
+    setPagination(pagination);
+    customFetch(pagination);
+  };
 
   return (
     <Content className={"page"}>
@@ -45,20 +112,24 @@ export default function ManageOrders() {
               <Search
                 placeholder="input book title"
                 allowClear
-                onSearch={(v) => setSearchText(v.toLowerCase())}
+                onSearch={handleSearch}
                 style={{ width: 300 }}
               />
-              <RangePicker
-                onChange={(range) => {
-                  setDateRange(range);
-                }}
-              />
+              <RangePicker onChange={handleDateChange} />
             </Col>
             <Col span={24}>
-              <OrderTable
-                orders={orders}
-                dateRange={dateRange}
-                searchText={searchText}
+              <Table
+                dataSource={orders}
+                columns={columns}
+                rowKey={(record) => record.key}
+                pagination={pagination}
+                loading={loading}
+                onChange={handlePaginationChange}
+                expandable={{
+                  expandedRowRender: (record) => (
+                    <OrderDetail orderItems={record.orderItems} />
+                  ),
+                }}
               />
             </Col>
           </Row>

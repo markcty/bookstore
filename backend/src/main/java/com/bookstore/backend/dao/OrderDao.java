@@ -16,4 +16,8 @@ public interface OrderDao {
   List<Order> getOrdersPage(User user, Integer page, Integer pageSize);
 
   List<Order> getAllOrdersPage(Integer page, Integer pageSize);
+
+  Long count(User user);
+
+  Long count();
 }

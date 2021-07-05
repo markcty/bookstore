@@ -45,7 +45,8 @@ public class OrderController {
   }
 
   @GetMapping("/ordersPage")
-  public List<Order> getOrdersPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
+  public Map<String, Object> getOrdersPage(
+      @RequestParam Integer page, @RequestParam Integer pageSize) {
     AuthUserDetail user =
         (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -65,7 +66,8 @@ public class OrderController {
   }
 
   @GetMapping("/admin/ordersPage")
-  public List<Order> getAllOrdersPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
+  public Map<String, Object> getAllOrdersPage(
+      @RequestParam Integer page, @RequestParam Integer pageSize) {
     return orderService.getAllOrdersPage(page, pageSize);
   }
 }

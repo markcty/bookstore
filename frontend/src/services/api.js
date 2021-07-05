@@ -30,7 +30,7 @@ export function getBook(id) {
   });
 }
 
-export function getBookPage(page, pageSize) {
+export function getBookPage({ page, pageSize }) {
   return new Promise((resolve, reject) => {
     http
       .get("/public/bookPage", { params: { page: page, pageSize: pageSize } })
@@ -223,6 +223,24 @@ export function searchBooks(title) {
           })
         )
       )
+      .catch((err) => reject(err));
+  });
+}
+
+export function getOrdersPage({ page, pageSize }) {
+  return new Promise((resolve, reject) => {
+    http
+      .get("/ordersPage", { params: { page: page, pageSize: pageSize } })
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err));
+  });
+}
+
+export function getAllOrdersPage({ page, pageSize }) {
+  return new Promise((resolve, reject) => {
+    http
+      .get("/admin/ordersPage", { params: { page: page, pageSize: pageSize } })
+      .then((res) => resolve(res.data))
       .catch((err) => reject(err));
   });
 }

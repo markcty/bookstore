@@ -10,4 +10,6 @@ import java.util.List;
 
 public interface OrderRepository extends PagingAndSortingRepository<Order, Integer> {
   List<Order> findAllByUser(User user, Pageable page);
+
+  Long countAllByUser(User user);
 }

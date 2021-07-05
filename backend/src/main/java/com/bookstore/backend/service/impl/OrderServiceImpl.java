@@ -1,7 +1,9 @@
 package com.bookstore.backend.service.impl;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -111,15 +113,28 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public List<Order> getOrdersPage(Integer userId, Integer page, Integer pageSize) {
+  public Map<String, Object> getOrdersPage(Integer userId, Integer page, Integer pageSize) {
     var temp = userDao.getUser(userId);
     if (temp.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such user");
     var user = temp.get();
-    return orderDao.getOrdersPage(user, page, pageSize);
+
+    var orders = orderDao.getOrdersPage(user, page, pageSize);
+    var total = orderDao.count(user);
+
+    var res = new HashMap<String, Object>();
+    res.put("orders", orders);
+    res.put("total", total);
+    return res;
   }
 
   @Override
-  public List<Order> getAllOrdersPage(Integer page, Integer pageSize) {
-    return orderDao.getAllOrdersPage(page, pageSize);
+  public Map<String, Object> getAllOrdersPage(Integer page, Integer pageSize) {
+    var orders = orderDao.getAllOrdersPage(page, pageSize);
+    var total = orderDao.count();
+
+    var res = new HashMap<String, Object>();
+    res.put("orders", orders);
+    res.put("total", total);
+    return res;
   }
 }

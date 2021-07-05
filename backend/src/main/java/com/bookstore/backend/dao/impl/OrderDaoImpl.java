@@ -47,4 +47,14 @@ public class OrderDaoImpl implements OrderDao {
     return StreamSupport.stream(orderRepository.findAll(p).spliterator(), false)
         .collect(Collectors.toList());
   }
+
+  @Override
+  public Long count(User user) {
+    return orderRepository.countAllByUser(user);
+  }
+
+  @Override
+  public Long count() {
+    return orderRepository.count();
+  }
 }

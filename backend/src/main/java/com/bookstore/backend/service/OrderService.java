@@ -1,6 +1,7 @@
 package com.bookstore.backend.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.bookstore.backend.entity.Order;
@@ -15,7 +16,7 @@ public interface OrderService {
 
   List<Order> getAllOrders();
 
-  List<Order> getOrdersPage(Integer userId, Integer page, Integer pageSize);
+  Map<String, Object> getOrdersPage(Integer userId, Integer page, Integer pageSize);
 
-  List<Order> getAllOrdersPage(Integer page, Integer pageSize);
+  Map<String, Object> getAllOrdersPage(Integer page, Integer pageSize);
 }

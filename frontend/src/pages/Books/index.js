@@ -45,7 +45,10 @@ export default function Books() {
 
   const customFetch = (pagination) => {
     setLoading(true);
-    getBookPage(pagination.current - 1, pagination.pageSize).then((data) => {
+    getBookPage({
+      page: pagination.current - 1,
+      pageSize: pagination.pageSize,
+    }).then((data) => {
       setBooks(data.books);
       setLoading(false);
       setPagination({ ...pagination, total: data.total });
@@ -53,7 +56,7 @@ export default function Books() {
   };
 
   useEffect(() => {
-    customFetch({ current: 1, pageSize: 5 });
+    customFetch(initPagination);
   }, []);
 
   const handleChange = (pagination) => {
