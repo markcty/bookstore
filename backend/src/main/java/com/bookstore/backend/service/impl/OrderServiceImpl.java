@@ -1,16 +1,14 @@
 package com.bookstore.backend.service.impl;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.CartDao;
 import com.bookstore.backend.dao.OrderDao;
 import com.bookstore.backend.dao.UserDao;
+import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderItem;
 import com.bookstore.backend.service.OrderService;
@@ -135,6 +133,35 @@ public class OrderServiceImpl implements OrderService {
     var res = new HashMap<String, Object>();
     res.put("orders", orders);
     res.put("total", total);
+    return res;
+  }
+
+  @Override
+  public List<Order> getOrdersByBookTitle(Integer userId, String title) {
+    var temp = userDao.getUser(userId);
+    if (temp.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such user");
+    var orders = temp.get().getOrders();
+
+    return getOrdersContainingBookTitle(orders, title);
+  }
+
+  @Override
+  public List<Order> getAllOrdersByBookTitle(String title) {
+    var orders = orderDao.getAllOrders();
+    return getOrdersContainingBookTitle(orders, title);
+  }
+
+  private List<Order> getOrdersContainingBookTitle(List<Order> orders, String title) {
+    title = title.toLowerCase(Locale.ROOT);
+    var res = new ArrayList<Order>();
+    for (var order : orders) {
+      var items = order.getOrderItems();
+      for (var item : items)
+        if (item.getBook().getTitle().toLowerCase(Locale.ROOT).contains(title)) {
+          res.add(order);
+          break;
+        }
+    }
     return res;
   }
 }

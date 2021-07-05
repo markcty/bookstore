@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderItem;
 import com.bookstore.backend.security.auth.AuthUserDetail;
@@ -53,6 +54,14 @@ public class OrderController {
     return orderService.getOrdersPage(user.getId(), page, pageSize);
   }
 
+  @GetMapping("/getOrdersByBookTitle")
+  public List<Order> getOrdersByBookTitle(@RequestParam String title) {
+    AuthUserDetail user =
+        (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    return orderService.getOrdersByBookTitle(user.getId(), title);
+  }
+
   @GetMapping("/order")
   public Set<OrderItem> getOrderDetail(@RequestParam Integer id) {
     AuthUserDetail user =
@@ -69,5 +78,10 @@ public class OrderController {
   public Map<String, Object> getAllOrdersPage(
       @RequestParam Integer page, @RequestParam Integer pageSize) {
     return orderService.getAllOrdersPage(page, pageSize);
+  }
+
+  @GetMapping("/admin/getOrdersByBookTitle")
+  public List<Order> getAllOrdersByBookTitle(@RequestParam String title) {
+    return orderService.getAllOrdersByBookTitle(title);
   }
 }

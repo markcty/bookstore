@@ -244,3 +244,12 @@ export function getAllOrdersPage({ page, pageSize }) {
       .catch((err) => reject(err));
   });
 }
+
+export function getOrdersByBookTitle(title) {
+  return new Promise((resolve, reject) => {
+    http
+      .get("/getOrdersByBookTitle", { params: { title: title } })
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err));
+  });
+}

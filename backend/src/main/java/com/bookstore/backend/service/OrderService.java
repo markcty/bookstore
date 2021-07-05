@@ -19,4 +19,8 @@ public interface OrderService {
   Map<String, Object> getOrdersPage(Integer userId, Integer page, Integer pageSize);
 
   Map<String, Object> getAllOrdersPage(Integer page, Integer pageSize);
+
+  List<Order> getOrdersByBookTitle(Integer userId, String title);
+
+  List<Order> getAllOrdersByBookTitle(String title);
 }

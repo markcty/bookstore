@@ -15,7 +15,7 @@ const columns = [
     key: "orderId",
     defaultSortOrder: "descend",
     sortDirections: ["ascend", "descend", "ascend"],
-    sorter: (a, b) => a.orderId - b.orderId,
+    // sorter: (a, b) => a.orderId - b.orderId,
   },
   {
     title: "Receiver Name",
@@ -37,7 +37,7 @@ const columns = [
     dataIndex: "price",
     key: "price",
     sortDirections: ["ascend", "descend", "ascend"],
-    sorter: (a, b) => a.price - b.price,
+    // sorter: (a, b) => a.price - b.price,
   },
   {
     title: "Purchase date",
@@ -45,7 +45,7 @@ const columns = [
     key: "purchaseDate",
     sortDirections: ["ascend", "descend", "ascend"],
     render: (date) => date.format("MMM Do YYYY, h:mm:ss a"),
-    sorter: (a, b) => a.purchaseDate.isAfter(b.purchaseDate),
+    // sorter: (a, b) => a.purchaseDate.isAfter(b.purchaseDate),
   },
   {
     title: "Operation",

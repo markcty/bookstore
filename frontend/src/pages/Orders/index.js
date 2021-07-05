@@ -2,7 +2,7 @@ import { Col, DatePicker, Row, Table } from "antd";
 import { Content } from "antd/es/layout/layout";
 import Search from "antd/lib/input/Search";
 import React, { useEffect, useState } from "react";
-import { getOrdersPage } from "../../services/api";
+import { getOrdersByBookTitle, getOrdersPage } from "../../services/api";
 import OrderDetail from "../../components/OrderDetail";
 import moment from "moment";
 
@@ -15,7 +15,7 @@ const columns = [
     key: "orderId",
     defaultSortOrder: "descend",
     sortDirections: ["ascend", "descend", "ascend"],
-    sorter: (a, b) => a.orderId - b.orderId,
+    // sorter: (a, b) => a.orderId - b.orderId,
   },
   {
     title: "Receiver Name",
@@ -37,7 +37,7 @@ const columns = [
     dataIndex: "price",
     key: "price",
     sortDirections: ["ascend", "descend", "ascend"],
-    sorter: (a, b) => a.price - b.price,
+    // sorter: (a, b) => a.price - b.price,
   },
   {
     title: "Purchase date",
@@ -45,7 +45,7 @@ const columns = [
     key: "purchaseDate",
     sortDirections: ["ascend", "descend", "ascend"],
     render: (date) => date.format("MMM Do YYYY, h:mm:ss a"),
-    sorter: (a, b) => a.purchaseDate.isAfter(b.purchaseDate),
+    // sorter: (a, b) => a.purchaseDate.isAfter(b.purchaseDate),
   },
   {
     title: "Operation",
@@ -63,7 +63,7 @@ export default function Orders() {
 
   const [loading, setLoading] = useState(false);
 
-  const customFetch = (pagination) => {
+  const fetchPage = (pagination) => {
     setLoading(true);
     getOrdersPage({
       page: pagination.current - 1,
@@ -88,16 +88,39 @@ export default function Orders() {
   };
 
   useEffect(() => {
-    customFetch(initPagination);
+    fetchPage(initPagination);
   }, []);
 
-  const handleSearch = (title) => {};
+  const handleSearch = (title) => {
+    if (title === "") {
+      fetchPage(initPagination);
+      return;
+    }
+    setLoading(true);
+    getOrdersByBookTitle(title).then((data) => {
+      setLoading(false);
+      let temp = data.map((order) => {
+        return {
+          key: order.id,
+          orderId: order.id,
+          receiverName: order.consignee,
+          address: order.address,
+          phoneNumber: order.phoneNumber,
+          price: order.totalPrice,
+          purchaseDate: moment(order.purchaseTime),
+          orderItems: order.orderItems,
+        };
+      });
+      setOrders(temp);
+      setPagination({ page: 1, pageSize: data.length, total: data.length });
+    });
+  };
 
   const handleDateChange = (range) => {};
 
   const handlePaginationChange = (pagination) => {
     setPagination(pagination);
-    customFetch(pagination);
+    fetchPage(pagination);
   };
 
   return (
