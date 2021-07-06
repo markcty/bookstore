@@ -253,3 +253,17 @@ export function getOrdersByBookTitle(title) {
       .catch((err) => reject(err));
   });
 }
+
+export function getUserOrdersBetweenDate(start, end) {
+  return new Promise((resolve, reject) => {
+    http
+      .get("/getUserOrdersBetweenDate", {
+        params: {
+          start: start,
+          end: end,
+        },
+      })
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err));
+  });
+}

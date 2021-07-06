@@ -1,5 +1,6 @@
 package com.bookstore.backend.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,4 +24,6 @@ public interface OrderService {
   List<Order> getOrdersByBookTitle(Integer userId, String title);
 
   List<Order> getAllOrdersByBookTitle(String title);
+
+  List<Order> getUserOrdersBetweenDate(Integer userId, LocalDate start, LocalDate end);
 }

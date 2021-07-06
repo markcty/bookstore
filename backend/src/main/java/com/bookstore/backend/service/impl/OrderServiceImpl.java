@@ -1,6 +1,9 @@
 package com.bookstore.backend.service.impl;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -8,7 +11,6 @@ import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.CartDao;
 import com.bookstore.backend.dao.OrderDao;
 import com.bookstore.backend.dao.UserDao;
-import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderItem;
 import com.bookstore.backend.service.OrderService;
@@ -149,6 +151,23 @@ public class OrderServiceImpl implements OrderService {
   public List<Order> getAllOrdersByBookTitle(String title) {
     var orders = orderDao.getAllOrders();
     return getOrdersContainingBookTitle(orders, title);
+  }
+
+  @Override
+  public List<Order> getUserOrdersBetweenDate(Integer userId, LocalDate start, LocalDate end) {
+    var startDate = java.sql.Date.from(start.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    var endDate = Date.from(end.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+    var temp = userDao.getUser(userId);
+    if (temp.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such user");
+    var user = temp.get();
+
+    var orders = user.getOrders();
+    return orders.stream()
+        .filter(
+            order ->
+                order.getPurchaseTime().after(startDate) && order.getPurchaseTime().before(endDate))
+        .collect(Collectors.toList());
   }
 
   private List<Order> getOrdersContainingBookTitle(List<Order> orders, String title) {

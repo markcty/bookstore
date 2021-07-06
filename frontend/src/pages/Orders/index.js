@@ -2,7 +2,11 @@ import { Col, DatePicker, Row, Table } from "antd";
 import { Content } from "antd/es/layout/layout";
 import Search from "antd/lib/input/Search";
 import React, { useEffect, useState } from "react";
-import { getOrdersByBookTitle, getOrdersPage } from "../../services/api";
+import {
+  getOrdersByBookTitle,
+  getOrdersPage,
+  getUserOrdersBetweenDate,
+} from "../../services/api";
 import OrderDetail from "../../components/OrderDetail";
 import moment from "moment";
 
@@ -54,8 +58,6 @@ const columns = [
 
 const initPagination = { current: 1, pageSize: 5 };
 
-const initDate = null;
-
 export default function Orders() {
   const [orders, setOrders] = useState([]);
 
@@ -63,25 +65,28 @@ export default function Orders() {
 
   const [loading, setLoading] = useState(false);
 
+  const customizeOrders = (orders) => {
+    return orders.map((order) => {
+      return {
+        key: order.id,
+        orderId: order.id,
+        receiverName: order.consignee,
+        address: order.address,
+        phoneNumber: order.phoneNumber,
+        price: order.totalPrice,
+        purchaseDate: moment(order.purchaseTime),
+        orderItems: order.orderItems,
+      };
+    });
+  };
+
   const fetchPage = (pagination) => {
     setLoading(true);
     getOrdersPage({
       page: pagination.current - 1,
       pageSize: pagination.pageSize,
     }).then((data) => {
-      let temp = data.orders.map((order) => {
-        return {
-          key: order.id,
-          orderId: order.id,
-          receiverName: order.consignee,
-          address: order.address,
-          phoneNumber: order.phoneNumber,
-          price: order.totalPrice,
-          purchaseDate: moment(order.purchaseTime),
-          orderItems: order.orderItems,
-        };
-      });
-      setOrders(temp);
+      setOrders(customizeOrders(data.orders));
       setLoading(false);
       setPagination({ ...pagination, total: data.total });
     });
@@ -89,6 +94,7 @@ export default function Orders() {
 
   useEffect(() => {
     fetchPage(initPagination);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSearch = (title) => {
@@ -99,24 +105,25 @@ export default function Orders() {
     setLoading(true);
     getOrdersByBookTitle(title).then((data) => {
       setLoading(false);
-      let temp = data.map((order) => {
-        return {
-          key: order.id,
-          orderId: order.id,
-          receiverName: order.consignee,
-          address: order.address,
-          phoneNumber: order.phoneNumber,
-          price: order.totalPrice,
-          purchaseDate: moment(order.purchaseTime),
-          orderItems: order.orderItems,
-        };
-      });
-      setOrders(temp);
+      setOrders(customizeOrders(data));
       setPagination({ page: 1, pageSize: data.length, total: data.length });
     });
   };
 
-  const handleDateChange = (range) => {};
+  const handleDateChange = (range) => {
+    if (!range) {
+      fetchPage(initPagination);
+      return;
+    }
+    setLoading(true);
+    getUserOrdersBetweenDate(range[0].format(), range[1].format()).then(
+      (data) => {
+        setLoading(false);
+        setOrders(customizeOrders(data));
+        setPagination({ page: 1, pageSize: data.length, total: data.length });
+      }
+    );
+  };
 
   const handlePaginationChange = (pagination) => {
     setPagination(pagination);

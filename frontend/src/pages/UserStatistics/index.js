@@ -5,6 +5,11 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { getGoldenBuyers } from "../../services/api";
 
+const defaultDateRange = [
+  moment("1-1-1999", "MM-DD-YYYY"),
+  moment("1-1-2099", "MM-DD-YYYY"),
+];
+
 const { RangePicker } = DatePicker;
 export default function UserStatistics() {
   const [dateRange, setDateRange] = useState(null);
@@ -12,10 +17,6 @@ export default function UserStatistics() {
   const [statistics, setStatistics] = useState([]);
 
   useEffect(() => {
-    const defaultDateRange = [
-      moment("1-1-1999", "MM-DD-YYYY"),
-      moment("1-1-2099", "MM-DD-YYYY"),
-    ];
     if (!dateRange)
       getGoldenBuyers(
         defaultDateRange[0].format(),

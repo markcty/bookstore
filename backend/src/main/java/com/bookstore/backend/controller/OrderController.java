@@ -1,5 +1,6 @@
 package com.bookstore.backend.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,6 +12,7 @@ import com.bookstore.backend.security.auth.AuthUserDetail;
 import com.bookstore.backend.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -83,5 +85,15 @@ public class OrderController {
   @GetMapping("/admin/getOrdersByBookTitle")
   public List<Order> getAllOrdersByBookTitle(@RequestParam String title) {
     return orderService.getAllOrdersByBookTitle(title);
+  }
+
+  @GetMapping("/getUserOrdersBetweenDate")
+  public List<Order> getUserOrdersBetweenDate(
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
+    AuthUserDetail user =
+        (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    return orderService.getUserOrdersBetweenDate(
+        user.getId(), start.toLocalDate(), end.toLocalDate());
   }
 }
