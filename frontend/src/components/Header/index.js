@@ -24,6 +24,8 @@ const { Search } = Input;
 
 function Header({ user, setUser }) {
   let history = useHistory();
+  let isAdmin = false;
+  if (user && user.isAdmin) isAdmin = true;
   const loginMenu = (
     <Menu>
       <Menu.Item>
@@ -37,7 +39,7 @@ function Header({ user, setUser }) {
         </Link>
       </Menu.Item>
       <Menu.Divider />
-      {user && user.isAdmin && (
+      {isAdmin && (
         <>
           <Menu.Item>
             <Link to={"/admin/manage/users"}>
@@ -76,7 +78,7 @@ function Header({ user, setUser }) {
                 message.success(res);
                 setUser(null);
               })
-              .catch((err) => message.error("Failed to logout!"));
+              .catch(() => message.error("Failed to logout!"));
           }}
         >
           Log Out

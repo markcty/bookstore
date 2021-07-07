@@ -22,11 +22,9 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class UserServiceImpl implements UserService {
 
-  @Autowired
-  private UserDao userDao;
+  @Autowired private UserDao userDao;
 
-  @Autowired
-  PasswordEncoder passwordEncoder;
+  @Autowired PasswordEncoder passwordEncoder;
 
   @Override
   public void register(String username, String password) {
@@ -56,8 +54,7 @@ public class UserServiceImpl implements UserService {
       BigDecimal moneySpent = new BigDecimal(0);
       for (var order : orders) {
         var date = order.getPurchaseTime();
-        if (!(date.after(startDate) && date.before(endDate)))
-          continue;
+        if (!(date.after(startDate) && date.before(endDate))) continue;
         moneySpent = moneySpent.add(order.getTotalPrice());
       }
       buyers.add(new BuyerStat(user.getUsername(), moneySpent));
@@ -69,8 +66,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public void disableUser(Integer id) {
     var user = userDao.getUser(id);
-    if (!user.isPresent())
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "no such user");
+    if (user.isEmpty()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "no such user");
     user.get().setIsEnabled(0);
     userDao.updateUser(user.get());
   }
@@ -78,10 +74,8 @@ public class UserServiceImpl implements UserService {
   @Override
   public void enableUser(Integer id) {
     var user = userDao.getUser(id);
-    if (!user.isPresent())
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "no such user");
+    if (user.isEmpty()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "no such user");
     user.get().setIsEnabled(1);
     userDao.updateUser(user.get());
   }
-
 }
