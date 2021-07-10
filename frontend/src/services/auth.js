@@ -45,7 +45,7 @@ export function getUser() {
 export function register(username, password) {
   return new Promise((resolve, reject) => {
     http
-      .post("/register", { username: username, password: password })
+      .post("/public/register", { username: username, password: password })
       .then((res) => resolve(res))
       .catch((err) => reject(err.response.data.message));
   });
