@@ -70,9 +70,7 @@ public class BookController {
 
     @PostMapping("/admin/uploadBookCover")
     public String upload(@RequestPart MultipartFile cover) {
-        System.out.println(cover.getOriginalFilename());
         String url = ossUtils.uploadBookCover(cover);
-        System.out.println(url);
         return url;
     }
 
