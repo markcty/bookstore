@@ -1,9 +1,7 @@
 package com.bookstore.backend.entity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,8 +19,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "user")
-@JsonIgnoreProperties(
-    value = {"handler", "hibernateLazyInitializer", "fieldHandler", "cart", "orders"})
+@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer", "fieldHandler", "cart", "orders" })
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
   @Id
@@ -31,7 +28,8 @@ public class User {
 
   private String username;
 
-  @JsonIgnore private String password;
+  @JsonIgnore
+  private String password;
   private Integer isAdmin;
   private Integer isEnabled;
 
