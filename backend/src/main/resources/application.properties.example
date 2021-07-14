@@ -12,7 +12,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialec
 spring.jpa.properties.hibernate.globally_quoted_identifiers=true
 spring.jpa.properties.hibernate.jdbc.time_zone=UTC
 spring.jpa.open-in-view=true
-spring.jackson.default-property-inclusion=non_null
+spring.jackson.default-property-inclusion=non-null
 # oss
 spring.cloud.alicloud.access-key=******
 spring.cloud.alicloud.secret-key=******
