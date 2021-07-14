@@ -35,4 +35,4 @@ build/
 backup
 
 
-./main/resouces/application.properties
+./src/main/resouces/application.properties
