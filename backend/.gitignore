@@ -33,3 +33,6 @@ build/
 .vscode/
 
 backup
+
+
+./main/resouces/application.properties
